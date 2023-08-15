@@ -1,13 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Provider } from 'react-redux';
+import store from "./store/store";
+// import React from 'react'
 
 const App = () => {
   return (
+    <Provider store={store}> 
     <View>
       <Text style={styles.text} >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, totam.
       </Text>
     </View>
+    </Provider>
   )
 }
 
