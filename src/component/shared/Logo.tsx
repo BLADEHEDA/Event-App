@@ -26,6 +26,4 @@ text:{
 text1:{
     color:'#FD5B3C',
 }
-
-
 })
