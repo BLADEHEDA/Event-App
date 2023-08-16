@@ -1,3 +1,4 @@
+
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 import Logo from '../component/shared/Logo'
@@ -41,11 +42,22 @@ const Login = () => {
     { marginTop:7 }  
     }
     />
+
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import Logo from '../component/shared/Logo'
+
+const Login = () => {
+  return (
+    <View>
+        <Logo/>  
+
     </View>
   )
 }
 
 export default Login
+
 
 const styles = StyleSheet.create({
     container:{
@@ -78,3 +90,4 @@ const styles = StyleSheet.create({
        borderRadius:5
     }
 })
+const styles = StyleSheet.create({})
