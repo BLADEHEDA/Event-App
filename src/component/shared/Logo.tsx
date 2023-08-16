@@ -16,10 +16,6 @@ text:{
     color:'black',
     fontSize:40,
     fontWeight:'600',
-    // flexDirection:'row',
-    // justifyContent: 'center',
-    // borderColor:'black',
-    // borderWidth:5,
     marginTop:5,
     textAlign:'center'
 },
