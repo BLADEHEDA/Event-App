@@ -4,7 +4,7 @@ import React from 'react'
 const Navigation = () => {
   return (
     <View>
-      <Text>Navigation</Text>
+      <Text>Navigations</Text>
     </View>
   )
 }
