@@ -107,6 +107,15 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 
+//     //subjected to changes
+//       implementation fileTree(dir: "libs", include: ["*.jar"])
+//   //noinspection GradleDynamicVersion
+//   implementation "com.facebook.react:react-native:+"  // From node_modules
+
+//   implementation project(':react-native-vector-icons')
+// // end of changes 
+
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
         exclude group:'com.squareup.okhttp3', module:'okhttp'
@@ -123,23 +132,14 @@ dependencies {
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 // apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services' // <- Add this line
-// subjected to changes
-project.ext.vectoricons = [
-    iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf' ] // Name of the font files you want to copy
-]
 
-apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle");
-// supplementary changes
-apply plugin: 'com.android.application'
+// // subjected to changes 
+// apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
+// // new changes
+// project.ext.vectoricons = [
+//     iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf' ] // Name of the font files you want to copy
+// ]
 
-android {
-  ...
-}
+// apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle");
 
-dependencies {
-  implementation fileTree(dir: "libs", include: ["*.jar"])
-  //noinspection GradleDynamicVersion
-  implementation "com.facebook.react:react-native:+"  // From node_modules
-
-  implementation project(':react-native-vector-icons')
-}
+// // end of changes

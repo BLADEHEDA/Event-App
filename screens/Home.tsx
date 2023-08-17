@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Button from '../component/shared/Button'
-import Logo from '../component/shared/Logo'
+import Button from '../src/component/shared/Button'
+import Logo from '../src/component/shared/Logo'
 
 const Home = () => {
   return (   
@@ -13,7 +13,7 @@ const Home = () => {
         synchronize your events without stress
         </Text>
         <View style={styles.imagecontainer}>
-            <Image source={require('../Assets/illustration.jpg') } style={styles.image} />
+            <Image source={require('../src/Assets/illustration.jpg') } style={styles.image} />
         </View>
 
       <Button
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     container:{
         marginTop:50,
         paddingHorizontal:15,
-        color:'black'
+        backgroundColor:'white'
     },
     logo:{
         marginBottom:20,

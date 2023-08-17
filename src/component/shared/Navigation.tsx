@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faMugSaucer } from '@fortawesome/free-solid-svg-icons/faMugSaucer'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const Navigation = () => {
   return (
@@ -11,7 +12,8 @@ const Navigation = () => {
       <Text style={styles.text}>Navigations</Text>
         <Text>
         {/* <FontAwesomeIcon icon={faCoffee} size={48} color="black" /> */}
-        <Icon name="rocket" size={30} color="#900" />
+        {/* <Icon name="rocket" size={30} color="#900" /> */} 
+        <AntDesign name='stepbackward' style={{ color:'red',fontSize:20  }} />
       </Text>
     </View>
   )

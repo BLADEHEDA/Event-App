@@ -1,17 +1,17 @@
-
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
-import Logo from '../component/shared/Logo'
-import Button from '../component/shared/Button'
+import Logo from '../src/component/shared/Logo'
+import Button from '../src/component/shared/Button'
+
 
 const Login = () => {
   return (
     <View style={styles.container} >
-        <View style={styles.logo} >  
+     <View style={styles.logo} >  
         <Logo/>
-        </View>
-        {/* form for input fiedls */}
-        <View>
+    </View>
+         {/* form for input fiedls */}
+         <View>
             <Text style={styles.text1}>Login  to your Account</Text>
             {/* Email input */}
             <View style={styles.form}>
@@ -33,61 +33,48 @@ const Login = () => {
                 placeholderTextColor="gray"
                 ></TextInput>
             </View>
-            
-        </View>
-   
+               
     <Button
     text="Sign in"
     style={
     { marginTop:7 }  
     }
     />
-
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import Logo from '../component/shared/Logo'
-
-const Login = () => {
-  return (
-    <View>
-        <Logo/>  
-
+        </View>
     </View>
   )
 }
 
 export default Login
 
-
 const styles = StyleSheet.create({
-    container:{
-        marginTop:70,
-        paddingHorizontal:15
-    },
-    logo:{
-        marginBottom:70
-    },
-    text1:{
-        color:'black',
-        fontWeight:'600',
-        fontSize:22,
-        textAlign:'center',
-        marginBottom:70
-    },
-    text2:{
-        color:'black',
-        fontWeight:'400',
-        fontSize:20,
-    },
-    input:{
-        color:'black',
-        borderColor:'black',
-        borderWidth:1,
-       marginBottom:15,
-       fontSize:18,
-       paddingVertical:7,
-       paddingLeft:5,
-       borderRadius:5
-    }
+  container:{
+    marginTop:70,
+    paddingHorizontal:15
+},
+logo:{
+    marginBottom:70
+},
+text1:{
+    color:'black',
+    fontWeight:'600',
+    fontSize:22,
+    textAlign:'center',
+    marginBottom:70
+},
+text2:{
+    color:'black',
+    fontWeight:'400',
+    fontSize:20,
+},
+input:{
+    color:'black',
+    borderColor:'black',
+    borderWidth:1,
+   marginBottom:15,
+   fontSize:18,
+   paddingVertical:7,
+   paddingLeft:5,
+   borderRadius:5
+}
 })
-const styles = StyleSheet.create({})
