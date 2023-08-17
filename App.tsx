@@ -5,6 +5,8 @@ import Logo from './src/component/shared/Logo';
 import Login from './src/screens/Login';
 import Button from './src/component/shared/Button';
 import Home from './src/screens/Home';
+import Navigation from './src/component/shared/Navigation';
+import CreateEvemt from './src/screens/CreateEvemt';
 // import React from 'react'
 
 const App = () => {
@@ -12,7 +14,9 @@ const App = () => {
     // <Provider store={store}> 
     <View style={styles.container} >
       {/* <Login/> */}
-      <Home/>
+      {/* <Home/> */}
+      {/* <Navigation/> */}
+      <CreateEvemt/>
     </View>
     // </Provider>
   )
@@ -24,7 +28,7 @@ const styles = StyleSheet.create({
   container:{
     backgroundColor:'white',
     height:'100%',
-color:'black'
+    color:'black'
   }
 
 })
