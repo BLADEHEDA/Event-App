@@ -4,13 +4,14 @@ import store from "./store/store";
 import Logo from './src/component/shared/Logo';
 import Login from './screens/Login';
 import Button from './src/component/shared/Button';
-import Home from './screens/Home';
+// import Home from './screens/Home';
 import Navigation from './src/component/shared/Navigation';
-import CreateEvemt from './screens/CreateEvemt';
 import CreateMember from './screens/CreateMember';
 import Event from './src/screens/Event';
 import Member from './src/screens/Member';
 import EventDetails from './src/screens/EventDetails';
+import CreateEvemt from './src/screens/CreateEvemt';
+import Home from './src/screens/Home';
 
 
 // import React from 'react'
@@ -21,12 +22,12 @@ const App = () => {
     // <ScrollView>  
     <View style={styles.container} >
       {/* <Login/> */}
-      {/* <Home/> */}
+      <Home/>
       {/* <Navigation/> */}
       {/* <CreateEvemt/> */}
       {/* <Event/> */}
       {/* <Member/> */}
-      <EventDetails/>
+      {/* <EventDetails/> */}
       {/* <CreateMember/> */}
     </View>
     // </ScrollView>

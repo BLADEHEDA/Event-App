@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
-import Button from '../src/component/shared/Button'
-import Person from '../src/component/Person'
+import Button from '../component/shared/Button'
+import Person from '../component/Person'
 
 const CreateEvemt = () => {
   return (
@@ -41,22 +41,22 @@ const CreateEvemt = () => {
             <TextInput style={styles.input}></TextInput>
         </View>
         <View>
-        <Button
-            text="Add participants"
-            style={
-            { marginTop:7,
-                marginBottom:10
-            }  
-            }
+            <Button
+             text="Add participants"
+             style={
+             { marginTop:7,
+                 marginBottom:10
+             }  
+             }
             />
         </View>
     {/* to hide and show the participants  */}
     <View style={styles.show} >
     <Person
-    name='blade'
+      name='blade'
     />
-        <Person
-    name='blade'
+      <Person
+      name='blade'
     />
 </View>
 
