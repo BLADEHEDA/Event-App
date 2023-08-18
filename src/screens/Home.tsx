@@ -1,32 +1,33 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Button from '../src/component/shared/Button'
-import Logo from '../src/component/shared/Logo'
+import Button from '../component/shared/Button'
+import Login from './Login'
+import Logo from '../component/shared/Logo'
 
 const Home = () => {
   return (   
     <View style={styles.container}>
            <View style={styles.logo} >  
+        {/* <Logo/> */}
         <Logo/>
         </View>
         <Text style={styles.text} >
         synchronize your events without stress
         </Text>
         <View style={styles.imagecontainer}>
-            <Image source={require('../src/Assets/illustration.jpg') } style={styles.image} />
+            <Image source={require('../Assets/illustration.jpg') } style={styles.image} />
         </View>
-
-      <Button
-    text="New Event"
-    style={
-    { marginTop:7 }  
-    }
+    <Button
+      text="New Event"
+      style={
+        { marginTop:10 }  
+        }
     />
         <Button
-    text="Add Members"
-    style={
-    { marginTop:10 }  
-    }
+      text="Add Members"
+      style={
+        { marginTop:10 }  
+        }
     />
   
     </View>

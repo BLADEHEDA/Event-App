@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View,ScrollView,TextInput } from 'react-native'
 import React from 'react'
-import Button from '../src/component/shared/Button'
+import Button from '../component/shared/Button'
+// import Button from '../src/component/shared/Button'
 
 const CreateMember = () => {
   return (
@@ -30,13 +31,21 @@ events
             <TextInput style={styles.input}></TextInput>
         </View>
         <View>
-  <Button
+  {/* <Button
     text="Add participants"
     style={
     { marginTop:7,
         marginBottom:10
     }  
     }
+    /> */}
+    <Button
+      text="Add participants"
+      style={
+      { marginTop:7,
+          marginBottom:10
+      }  
+      }
     />
 
 
