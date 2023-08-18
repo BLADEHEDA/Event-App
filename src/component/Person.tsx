@@ -21,11 +21,6 @@ const [checked, setChecked] = React.useState(false);
       </View>
 
       <View style={styles.checkboxContainer}>
-        {/* <CheckBox
-          boxType="square"
-          value={agree}
-          onValueChange={() => setAgree(!agree)}
-        /> */}
               {/* <Checkbox
             status={checked ? 'checked' : 'unchecked'}
             onPress={() => {
