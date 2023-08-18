@@ -1,36 +1,36 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import { Provider } from 'react-redux';
-import store from "./store/store";
 import Logo from './src/component/shared/Logo';
-import Login from './screens/Login';
-import Button from './src/component/shared/Button';
-// import Home from './screens/Home';
+import Login from './src/screens/Login';
+import Home from './src/screens/Home';
 import Navigation from './src/component/shared/Navigation';
-import CreateMember from './screens/CreateMember';
+import CreateEvemt from './src/screens/CreateEvemt';
 import Event from './src/screens/Event';
+import Button from './src/component/shared/Button';
+// import CreateMember from './screens/CreateMember';
 import Member from './src/screens/Member';
 import EventDetails from './src/screens/EventDetails';
-import CreateEvemt from './src/screens/CreateEvemt';
-import Home from './src/screens/Home';
+import CreateMember from './src/screens/CreateMember';
 
-
-// import React from 'react'
 
 const App = () => {
   return (
-    // <Provider store={store}> 
-    // <ScrollView>  
-    <View style={styles.container} >
+   
+    <View>
+         {/* <Provider store={store}>  */}
+          {/* <ScrollView>   */}
+     <View style={styles.container} >
       {/* <Login/> */}
-      <Home/>
-      {/* <Navigation/> */}
-      {/* <CreateEvemt/> */}
-      {/* <Event/> */}
-      {/* <Member/> */}
-      {/* <EventDetails/> */}
-      {/* <CreateMember/> */}
+      {/* <Home/> */}
+    {/* <Navigation/>  */}
+     {/* <CreateEvemt/>  */}
+       {/* <Event/>  */}
+     {/* <Member/>  */}
+   {/* <EventDetails/> */}
+     {/* <CreateMember/> */}
+  </View>
+   {/* </ScrollView> */}
     </View>
-    // </ScrollView>
   )
 }
 

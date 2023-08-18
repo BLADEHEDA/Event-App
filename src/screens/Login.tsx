@@ -1,7 +1,9 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
-import Logo from '../src/component/shared/Logo'
-import Button from '../src/component/shared/Button'
+// import Logo from '../src/component/shared/Logo'
+// import Button from '../src/component/shared/Button'
+import Logo from '../component/shared/Logo'
+import Button from '../component/shared/Button'
 
 
 const Login = () => {
@@ -33,12 +35,15 @@ const Login = () => {
                 placeholderTextColor="gray"
                 ></TextInput>
             </View>
-               
+{/*                
     <Button
-    text="Sign in"
-    style={
-    { marginTop:7 }  
-    }
+   
+    /> */}
+    <Button
+     text="Sign in"
+     style={
+     { marginTop:7 }  
+     }
     />
         </View>
     </View>

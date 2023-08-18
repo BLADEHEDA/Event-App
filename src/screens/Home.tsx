@@ -1,7 +1,5 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-// import Button from '../src/component/shared/Button'
-// import Logo from '../src/component/shared/Logo'
 import Button from '../component/shared/Button'
 import Login from './Login'
 import Logo from '../component/shared/Logo'
