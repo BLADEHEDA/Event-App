@@ -8,6 +8,10 @@ import Home from './screens/Home';
 import Navigation from './src/component/shared/Navigation';
 import CreateEvemt from './screens/CreateEvemt';
 import CreateMember from './screens/CreateMember';
+import Event from './src/screens/Event';
+import Member from './src/screens/Member';
+
+
 // import React from 'react'
 
 const App = () => {
@@ -19,7 +23,9 @@ const App = () => {
       {/* <Home/> */}
       {/* <Navigation/> */}
       {/* <CreateEvemt/> */}
-      <CreateMember/>
+      {/* <Event/> */}
+      <Member/>
+      {/* <CreateMember/> */}
     </View>
     // </ScrollView>
   )

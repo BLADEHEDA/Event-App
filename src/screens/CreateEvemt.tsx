@@ -1,46 +1,57 @@
-import { StyleSheet, Text, View,ScrollView,TextInput } from 'react-native'
+import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 import Button from '../src/component/shared/Button'
 import Person from '../src/component/Person'
 
-const CreateMember = () => {
+const CreateEvemt = () => {
   return (
-    <ScrollView>   
-    <View style={styles.container}>
-      <Text style={styles.head}>Create Members</Text>  
-      <Text style={styles.text}>create memebrs to take part in your 
-events         
+    <ScrollView style={styles.container}>   
+      <Text style={styles.head}>Create an Event</Text>  
+      <Text style={styles.text}>create events and get your participants joined on time 
     </Text>  
     {/* form  */}
     <View>
         <View>
-            <Text style={styles.text1}>Name : </Text>
+            <Text style={styles.text1}>Title</Text>
             <TextInput style={styles.input}></TextInput>
         </View>
         <View>
-            <Text style={styles.text1}>Email :</Text>
-            <TextInput style={styles.input}></TextInput>
+            <Text style={styles.text1}>Description :</Text>
+        <TextInput
+        style={styles.textArea}
+        multiline
+        numberOfLines={4} // Adjust the number of visible lines
+        placeholder="Enter your text here..."
+      />
         </View>
         <View>
-            <Text style={styles.text1}>Phone :</Text>
+            <Text style={styles.text1}>Start Date</Text>
             <TextInput style={styles.input}></TextInput>
         </View>
-    {/* place for images  */}
         <View> 
-            <Text style={styles.text1}>Avatar</Text>
+            <Text style={styles.text1}>Event Date</Text>
+            <TextInput style={styles.input}></TextInput>
+        </View>
+        <View> 
+            <Text style={styles.text1}>Start Time</Text>
+            <TextInput style={styles.input}></TextInput>
+        </View>
+        <View> 
+            <Text style={styles.text1}>End Time</Text>
             <TextInput style={styles.input}></TextInput>
         </View>
         <View>
-  <Button
-    text="Add participants"
-    style={
-    { marginTop:7,
-        marginBottom:10
-    }  
-    }
-    />
+        <Button
+            text="Add participants"
+            style={
+            { marginTop:7,
+                marginBottom:10
+            }  
+            }
+            />
+        </View>
     {/* to hide and show the participants  */}
-<View style={styles.show} >
+    <View style={styles.show} >
     <Person
     name='blade'
     />
@@ -49,7 +60,8 @@ events
     />
 </View>
 
-      <Button
+
+        <Button
     text="Create Event"
     style={
     { marginTop:7,
@@ -57,14 +69,12 @@ events
     }  
     }
     />
-        </View>
-    </View>
     </View>
     </ScrollView>
   )
 }
 
-export default CreateMember
+export default CreateEvemt
 
 const styles = StyleSheet.create({
     container:{
@@ -117,6 +127,6 @@ textArea: {
     borderColor:'black',
     // height:100,
     color:'black',
-  }
+  },
     
 })
