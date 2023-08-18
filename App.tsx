@@ -10,6 +10,7 @@ import CreateEvemt from './screens/CreateEvemt';
 import CreateMember from './screens/CreateMember';
 import Event from './src/screens/Event';
 import Member from './src/screens/Member';
+import EventDetails from './src/screens/EventDetails';
 
 
 // import React from 'react'
@@ -24,7 +25,8 @@ const App = () => {
       {/* <Navigation/> */}
       {/* <CreateEvemt/> */}
       {/* <Event/> */}
-      <Member/>
+      {/* <Member/> */}
+      <EventDetails/>
       {/* <CreateMember/> */}
     </View>
     // </ScrollView>
