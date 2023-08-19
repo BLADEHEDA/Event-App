@@ -6,35 +6,30 @@ const person = require('../Assets/person.jpg');
 
 const Person = () => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
-  const [agree, setAgree] = useState(false); // Initialize checkbox state
-// subjected to changes 
-const [checked, setChecked] = React.useState(false);
-  return (
-    <View style={styles.container}>
-      <View>
-        <View style={styles.left}>
-          <Image style={styles.image} source={person} />
-        </View>
-        <View>
-          <Text style={styles.text}>blade</Text>
-          <Text style={styles.text}>blablabla@gmail.com</Text>
-        </View>
-      </View>
+  // alert(toggleCheckBox)
 
-      <View style={styles.checkboxContainer}>
-              {/* <Checkbox
-            status={checked ? 'checked' : 'unchecked'}
-            onPress={() => {
-               setChecked(!checked);
-            }}
-            color={'green'}
-            uncheckColor={'red'}
-         /> */}
-          <CheckBox
-    disabled={false}
-    value={toggleCheckBox}
-    onValueChange={(newValue) => setToggleCheckBox(newValue)}
-  />
+  return (
+    <View style={styles.containerx}>
+      <View style={styles.container}>
+        <View style={styles.container1}> 
+          <View style={styles.left}>
+            <Image style={styles.image} source={person} />
+          </View>
+          <View>
+            <Text style={styles.text}>blade</Text>
+            <Text style={styles.text}>blablabla@gmail.com</Text>
+          </View>
+        </View>
+
+{/* third */}
+        <View style={styles.checkboxContainer}>
+                  <CheckBox
+            disabled={false}
+            value={toggleCheckBox}
+            onValueChange={(newValue) => setToggleCheckBox(newValue)}
+            tintColors={{ true: 'blue', false: 'black' }} // Set the tint colors
+          />
+              </View>
       </View>
     </View>
   );
@@ -47,6 +42,12 @@ const styles = StyleSheet.create({
     color: 'black',
     flexDirection: 'row',
     marginVertical: 5,
+    justifyContent:'space-between'
+  },
+  container1: {
+    color: 'black',
+    flexDirection: 'row',
+    // marginVertical: 5,
   },
   image: {
     width: 50,
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   checkboxContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
 });
