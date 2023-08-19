@@ -21,13 +21,12 @@ const Person = () => {
           </View>
         </View>
 
-{/* third */}
         <View style={styles.checkboxContainer}>
                   <CheckBox
             disabled={false}
             value={toggleCheckBox}
             onValueChange={(newValue) => setToggleCheckBox(newValue)}
-            tintColors={{ true: 'blue', false: 'black' }} // Set the tint colors
+            tintColors={{ true: 'blue', false: 'black' }} 
           />
               </View>
       </View>
@@ -41,13 +40,12 @@ const styles = StyleSheet.create({
   container: {
     color: 'black',
     flexDirection: 'row',
-    marginVertical: 5,
-    justifyContent:'space-between'
+    marginVertical: 10,
+    justifyContent:'space-between',
   },
   container1: {
     color: 'black',
     flexDirection: 'row',
-    // marginVertical: 5,
   },
   image: {
     width: 50,
