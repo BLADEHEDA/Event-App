@@ -1,10 +1,11 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react'; // Import useState
-// import { Checkbox } from 'react-native-paper';
+import CheckBox from '@react-native-community/checkbox';
 
 const person = require('../Assets/person.jpg');
 
 const Person = () => {
+  const [toggleCheckBox, setToggleCheckBox] = useState(false)
   const [agree, setAgree] = useState(false); // Initialize checkbox state
 // subjected to changes 
 const [checked, setChecked] = React.useState(false);
@@ -29,6 +30,11 @@ const [checked, setChecked] = React.useState(false);
             color={'green'}
             uncheckColor={'red'}
          /> */}
+          <CheckBox
+    disabled={false}
+    value={toggleCheckBox}
+    onValueChange={(newValue) => setToggleCheckBox(newValue)}
+  />
       </View>
     </View>
   );

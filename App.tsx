@@ -22,7 +22,7 @@ const App = () => {
      <View style={styles.container} >
       {/* <Login/> */}
       {/* <Home/> */}
-    {/* <Navigation/>  */}
+    <Navigation/> 
      {/* <CreateEvemt/>  */}
        {/* <Event/>  */}
      {/* <Member/>  */}
