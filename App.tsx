@@ -23,7 +23,7 @@ const App = () => {
       {/* <Login/> */}
       {/* <Home/> */}
     <Navigation/> 
-     {/* <CreateEvemt/>  */}
+     <CreateEvemt/> 
        {/* <Event/>  */}
      {/* <Member/>  */}
    {/* <EventDetails/> */}

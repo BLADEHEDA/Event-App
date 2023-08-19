@@ -70,6 +70,8 @@ const styles = StyleSheet.create({
     right: 0,
     justifyContent: 'flex-end', // Align content at the bottom
     alignItems: 'center',
-    marginBottom: 10, // Adjust this margin as needed
+    marginTop: 10, // Adjust this margin as needed
+    backgroundColor:'white',
+    zIndex:999
   },
 })
