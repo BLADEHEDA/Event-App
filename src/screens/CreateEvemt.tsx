@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     },
 input:{
     color:'black',
-    borderColor:'black',
+    borderColor:'#6B6767',
     borderWidth:1,
    marginBottom:15,
    fontSize:18,
@@ -116,7 +116,7 @@ textArea: {
     borderRadius:5,
     borderWidth: 1,
     color:'black',
-    borderColor: 'black',
+    borderColor: '#6B6767',
     padding: 8,
     fontSize:18,
     textAlignVertical: 'top', // Align text to the top of the input
@@ -125,7 +125,8 @@ textArea: {
     borderRadius:5,
     borderWidth: 1,
     borderColor:'black',
-    // height:100,
+    borderColor: '#6B6767',
+  paddingHorizontal:5,
     color:'black',
   },
     
