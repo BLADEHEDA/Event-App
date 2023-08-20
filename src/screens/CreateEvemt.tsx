@@ -1,9 +1,15 @@
-import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react'
 import Button from '../component/shared/Button'
 import Person from '../component/Person'
+import DatePicker from 'react-native-date-picker'
 
 const CreateEvemt = () => {
+  const [date, setDate] = useState(new Date())
+  const [open, setOpen] = useState(false)
+  const openDatepicker =()=>{
+    setOpen(true)
+  }
   return (
     <ScrollView style={styles.container}>   
       <Text style={styles.head}>Create an Event</Text>  
@@ -22,24 +28,47 @@ const CreateEvemt = () => {
         multiline
         numberOfLines={4} // Adjust the number of visible lines
         placeholder="Enter your text here..."
+      ></TextInput>
+        </View>
+        {/* picker implementtion */}
+        <View  style={styles.datePicker}>
+          <View style={styles.date}>
+              <Button
+        text="Start Datet"
+        onPress={openDatepicker}
+        style={
+        { marginTop:7,
+        }  
+        }
+        />
+          </View>
+          <View style={styles.date}>
+          <Button
+        text="End Datet"
+        onPress={openDatepicker}
+        style={
+        { marginTop:7,
+            marginBottom:20,
+        }  
+        }
+        />
+          </View>
+        </View>
+    {/* 2nd picker  */}
+    <DatePicker
+        modal
+        open={open}
+        date={date}
+        onConfirm={(date) => {
+          setOpen(false)
+          setDate(date)
+        }}
+        onCancel={() => {
+          setOpen(false)
+        }}
       />
-        </View>
-        <View>
-            <Text style={styles.text1}>Start Date</Text>
-            <TextInput style={styles.input}></TextInput>
-        </View>
-        <View> 
-            <Text style={styles.text1}>Event Date</Text>
-            <TextInput style={styles.input}></TextInput>
-        </View>
-        <View> 
-            <Text style={styles.text1}>Start Time</Text>
-            <TextInput style={styles.input}></TextInput>
-        </View>
-        <View> 
-            <Text style={styles.text1}>End Time</Text>
-            <TextInput style={styles.input}></TextInput>
-        </View>
+
+        {/* end of changes  */}
         <View>
             <Button
              text="Add participants"
@@ -129,5 +158,13 @@ textArea: {
   paddingHorizontal:5,
     color:'black',
   },
+  datePicker:{
+    flexDirection:'row',
+    justifyContent:'space-between'
+  },
+  date:{
+    width:'49%'
+  }
+
     
 })
