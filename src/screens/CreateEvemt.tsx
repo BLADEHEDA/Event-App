@@ -8,6 +8,8 @@ import moment from 'moment'; // Import the moment library
 const CreateEvemt = () => {   
   const [startDate, setStartDate] = useState(new Date())
   const [open, setOpen] = useState(false)
+  const [show,setShow]= useState(false)
+  const [show1,setShow1]= useState(false)
   const [endDate, setendDate] = useState(new Date())
   const [open1, setOpen1] = useState(false)
   // format the date to be readable 
@@ -19,9 +21,11 @@ const CreateEvemt = () => {
 
   const openStartDatepicker =()=>{
     setOpen(true);    
+    setShow(true)
   }
   const openEndDatepicker =()=>{
     setOpen1(true); 
+    setShow1(true)
   }
   // to be changes 
   // const formattedDateTime = moment(selectedDateTime).format('dddd, D MMMM YYYY [at] HH:mm');
@@ -76,9 +80,7 @@ const CreateEvemt = () => {
         date={startDate}
         onConfirm={(date,time) => {   
           setStartDate(date)
-          setStartTime(time)
           setFormattedStartDate(moment(date).format('dddd, D MMMM YYYY [at] HH:mm'));
-          setFormattedStartTime(moment(time).format('HH:mm'));
           setOpen(false)
         }}
         onCancel={() => {
@@ -99,14 +101,15 @@ const CreateEvemt = () => {
           setOpen(false)
         }}
       />   
-       {/* startTime, setStartTime  setFormattedStartDate */}
 
       <View>
-      <Text style={styles.datevalue}>{formattedStartDate}</Text>
-      <Text style={styles.datevalue}>{formattedEndDate} </Text>
+      {show ? <Text style={styles.datevalue}>{formattedStartDate}</Text> : null}
+      {show1 ?<Text style={styles.datevalue}>{formattedEndDate} </Text> : null}
+    
+    
       </View>
 
-        {/* end of changes  */}
+        {/* end of changes  */} 
         <View>
             <Button
              text="Add participants"
