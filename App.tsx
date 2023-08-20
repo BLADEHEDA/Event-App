@@ -23,11 +23,11 @@ const App = () => {
       {/* <Login/> */}
       {/* <Home/> */}
     <Navigation/> 
-     <CreateEvemt/> 
+     {/* <CreateEvemt/>  */}
        {/* <Event/>  */}
      {/* <Member/>  */}
    {/* <EventDetails/> */}
-     {/* <CreateMember/> */}
+     <CreateMember/>
   </View>
    {/* </ScrollView> */}
     </View>
