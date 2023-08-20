@@ -80,6 +80,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        // sunjecetd to changes 
+          vectorDrawables.useSupportLibrary = true 
+        // end 
     }
     signingConfigs {
         debug {

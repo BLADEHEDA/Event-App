@@ -1,64 +1,79 @@
-import { StyleSheet, Text, View,ScrollView,TextInput } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
+import React, { useState, useCallback } from 'react';
 import Button from '../component/shared/Button'
-// import Button from '../src/component/shared/Button'
+import ImagePicker from 'react-native-image-crop-picker';
 
 const CreateMember = () => {
-  return (
-    <ScrollView>   
-    <View style={styles.container}>
-      <Text style={styles.head}>Create Members</Text>  
-      <Text style={styles.text}>create memebrs to take part in your 
-events         
-    </Text>  
-    {/* form  */}
-    <View>
-        <View>
-            <Text style={styles.text1}>Name : </Text>
-            <TextInput style={styles.input}></TextInput>
-        </View>
-        <View>
-            <Text style={styles.text1}>Email :</Text>
-            <TextInput style={styles.input}></TextInput>
-        </View>
-        <View>
-            <Text style={styles.text1}>Phone :</Text>
-            <TextInput style={styles.input}></TextInput>
-        </View>
-    {/* place for images  */}
-        <View> 
-            <Text style={styles.text1}>Avatar</Text>
-            <TextInput style={styles.input}></TextInput>
-        </View>
-        <View>
-  {/* <Button
-    text="Add participants"
-    style={
-    { marginTop:7,
-        marginBottom:10
-    }  
-    }
-    /> */}
-    <Button
-      text="Add participants"
-      style={
-      { marginTop:7,
-          marginBottom:10
-      }  
-      }
-    />
+    const imageUpload = require("../Assets/upload.png")
+    const [selectedImage, setSelectedImage] = useState(null);
+// handle the stae for the image preview 
+    const handleImagePicker = async () => {
+        try {
+            const image = await ImagePicker.openPicker({
+                width: 400,
+                height: 400,
+                cropping: false,
+            });
 
+            setSelectedImage(image);
+        } catch (error) {
+            console.log("Image picker error:", error);
+        }
+    };
 
-     </View>
-    </View>
-    </View>
-    </ScrollView>
-  )
+    return (
+        <ScrollView style={styles.containerorign}>
+            <View style={styles.container}>
+                <Text style={styles.head}>Create Members</Text>
+                <Text style={styles.text}>create members to take part in your events</Text>
+                <View>
+                    <View>
+                        <Text style={styles.text1}>Name :</Text>
+                        <TextInput style={styles.input}></TextInput>
+                    </View>
+                    <View>
+                        <Text style={styles.text1}>Email :</Text>
+                        <TextInput style={styles.input}></TextInput>
+                    </View>
+                    <View>
+                        <Text style={styles.text1}>Phone :</Text>
+                        <TextInput style={styles.input}></TextInput>
+                    </View>
+                </View>
+                <View style={styles.flexcont}>
+                    <View style={styles.flexcont1}>
+                        <Text style={styles.text1}>Avatar</Text>
+                    </View>
+                    <View style={styles.flexcont2}>
+                        <TouchableOpacity onPress={handleImagePicker}>
+                            <Image source={imageUpload} style={styles.clickImage} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                {/* Image preview  displays*/}
+                {selectedImage && (
+                    <View style={styles.imagePreviewContainer}>
+                        <Image source={{ uri: selectedImage.path }} style={styles.imagePreview} />
+                    </View>
+                )}
+                <View>
+                    <Button
+                        text="Add participants"
+                        style={{
+                            marginTop: 7,
+                            marginBottom: 10
+                        }}
+                    />
+                </View>
+            </View>
+        </ScrollView>
+    )
 }
 
-export default CreateMember
-
 const styles = StyleSheet.create({
+        containerorign:{
+    marginBottom:50
+        },
     container:{
         paddingHorizontal:15
     },
@@ -102,7 +117,29 @@ textArea: {
     padding: 8,
     fontSize:18,
     textAlignVertical: 'top', // Align text to the top of the input
-  }
-  
-    
-})
+  },
+  clickImage:{
+    width: 50,
+    height: 35,
+    marginVertical:5,
+  },
+
+  flexcont:{
+    flexDirection:'row',
+  },
+  flexcont1:{
+    marginTop:10,
+    marginRight:10
+  },
+    imagePreviewContainer: {
+        marginVertical: 10,
+    },
+    imagePreview: {
+        width: '100%',
+        height: 200,
+        resizeMode: 'cover',
+        borderRadius: 10,
+    },
+});
+
+export default CreateMember;
