@@ -3,13 +3,28 @@ import React, { useState } from 'react'
 import Button from '../component/shared/Button'
 import Person from '../component/Person'
 import DatePicker from 'react-native-date-picker'
+import moment from 'moment'; // Import the moment library
 
-const CreateEvemt = () => {
-  const [date, setDate] = useState(new Date())
+const CreateEvemt = () => {   
+  const [startDate, setStartDate] = useState(new Date())
   const [open, setOpen] = useState(false)
-  const openDatepicker =()=>{
-    setOpen(true)
+  const [endDate, setendDate] = useState(new Date())
+  const [open1, setOpen1] = useState(false)
+  // format the date to be readable 
+  const [formattedStartDate, setFormattedStartDate] = useState('')
+  const [formattedEndDate, setFormattedEndDate] = useState('')
+  // format the time to readable
+  const [formattedStartTime, setFormattedStartTime] = useState('')
+  const [formattedEndTime, setFormattedEndTime] = useState('')
+
+  const openStartDatepicker =()=>{
+    setOpen(true);    
   }
+  const openEndDatepicker =()=>{
+    setOpen1(true); 
+  }
+  // to be changes 
+  // const formattedDateTime = moment(selectedDateTime).format('dddd, D MMMM YYYY [at] HH:mm');
   return (
     <ScrollView style={styles.container}>   
       <Text style={styles.head}>Create an Event</Text>  
@@ -34,18 +49,18 @@ const CreateEvemt = () => {
         <View  style={styles.datePicker}>
           <View style={styles.date}>
               <Button
-        text="Start Datet"
-        onPress={openDatepicker}
+        text="Start Date"
+        onPress={openStartDatepicker}
         style={
         { marginTop:7,
         }  
-        }
+        }     
         />
           </View>
           <View style={styles.date}>
           <Button
-        text="End Datet"
-        onPress={openDatepicker}
+        text="End Date"
+        onPress={openEndDatepicker}
         style={
         { marginTop:7,
             marginBottom:20,
@@ -54,19 +69,42 @@ const CreateEvemt = () => {
         />
           </View>
         </View>
-    {/* 2nd picker  */}
-    <DatePicker
+        {/* start date date picker  */}
+            <DatePicker
         modal
         open={open}
-        date={date}
-        onConfirm={(date) => {
+        date={startDate}
+        onConfirm={(date,time) => {   
+          setStartDate(date)
+          setStartTime(time)
+          setFormattedStartDate(moment(date).format('dddd, D MMMM YYYY [at] HH:mm'));
+          setFormattedStartTime(moment(time).format('HH:mm'));
           setOpen(false)
-          setDate(date)
         }}
         onCancel={() => {
           setOpen(false)
         }}
       />
+    {/* End date date picker   */}
+    <DatePicker
+        modal
+        open={open1}
+        date={endDate}
+        onConfirm={(date) => {
+          setOpen1(false)
+          setendDate(date)
+          setFormattedEndDate(moment(date).format('dddd, D MMMM YYYY [at] HH:mm'));
+        }}
+        onCancel={() => {
+          setOpen(false)
+        }}
+      />   
+       {/* startTime, setStartTime  setFormattedStartDate */}
+
+      <View>
+      <Text style={styles.datevalue}>{formattedStartDate}</Text>
+      <Text style={styles.datevalue}>{formattedEndDate} </Text>
+      </View>
 
         {/* end of changes  */}
         <View>
@@ -94,7 +132,6 @@ const CreateEvemt = () => {
     text="Create Event"
     style={
     { marginTop:7,
-        marginBottom:20
     }  
     }
     />
@@ -164,6 +201,17 @@ textArea: {
   },
   date:{
     width:'49%'
+  },
+  datevalue:{
+    borderRadius:5,
+    borderWidth: 1,
+    borderColor:'black',
+    borderColor: '#6B6767',
+    color:'black',
+    marginBottom:7,
+    paddingVertical:5,
+    fontSize:16,
+    paddingHorizontal:5
   }
 
     
