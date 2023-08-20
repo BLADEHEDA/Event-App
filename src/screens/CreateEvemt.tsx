@@ -12,13 +12,12 @@ const CreateEvemt = () => {
   const [show1,setShow1]= useState(false)
   const [endDate, setendDate] = useState(new Date())
   const [open1, setOpen1] = useState(false)
+
   // format the date to be readable 
   const [formattedStartDate, setFormattedStartDate] = useState('')
   const [formattedEndDate, setFormattedEndDate] = useState('')
-  // format the time to readable
-  const [formattedStartTime, setFormattedStartTime] = useState('')
-  const [formattedEndTime, setFormattedEndTime] = useState('')
 
+  // hide and show the mddals and time field 
   const openStartDatepicker =()=>{
     setOpen(true);    
     setShow(true)
