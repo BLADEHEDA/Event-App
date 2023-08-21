@@ -35,16 +35,16 @@ const App = () => {
         component={Event}
         options={{ headerShown: false }}
         /> */}
-           {/* <Stack.Screen 
+           <Stack.Screen 
         name="CreateMember" 
         component={CreateMember}
         options={{ headerShown: false }}
-        /> */}
-         <Stack.Screen 
+        />
+         {/* <Stack.Screen 
         name="Member" 
         component={Member}
         options={{ headerShown: false }}
-        />
+        /> */}
              {/* <Stack.Screen 
         name="Login" 
         component={Login}
@@ -58,7 +58,7 @@ const App = () => {
         /> */}
         
         </Stack.Navigator>
-    {/* <Navigation/>  */}
+    {/* <Navigation/> */}
   </NavigationContainer>
   )
 }

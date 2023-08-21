@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity, Image,
 import React, { useState, useCallback } from 'react';
 import Button from '../component/shared/Button'
 import ImagePicker from 'react-native-image-crop-picker';
+import Navigation from '../component/shared/Navigation';
 
 const CreateMember = () => {
     const imageUpload = require("../Assets/upload.png")
@@ -22,7 +23,8 @@ const CreateMember = () => {
     };
 
     return (
-        <ScrollView style={styles.containerorign}>
+        <View style={styles.container}>
+        <ScrollView style={styles.scrollView}>
             <View style={styles.container}>
                 <Text style={styles.head}>Create Members</Text>
                 <Text style={styles.text}>create members to take part in your events</Text>
@@ -67,15 +69,21 @@ const CreateMember = () => {
                 </View>
             </View>
         </ScrollView>
+        <View style={styles.navigationContainer}>
+        <Navigation/>
+      </View>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
-        containerorign:{
-    marginBottom:50
-        },
-    container:{
-        paddingHorizontal:15
+    container: {
+        flex: 1,
+        backgroundColor: 'white',
+    },
+    scrollView: {
+        paddingHorizontal: 15,
+        marginBottom: 60, // Adjust the marginBottom to make space for the button and Navigation
     },
     head:{
         color:'black',
@@ -140,6 +148,16 @@ textArea: {
         resizeMode: 'cover',
         borderRadius: 10,
     },
+    navigationContainer: {
+        position: 'absolute',
+        left: 0,
+        bottom: 0,
+        right: 0,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        zIndex: 999,
+      },
 });
 
 export default CreateMember;

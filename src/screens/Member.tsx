@@ -54,6 +54,17 @@ const styles = StyleSheet.create({
     marginTop: 25,
     paddingHorizontal: 15,
   },
+  navigationContainer: {
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    right: 0,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    zIndex: 999,
+  },
+  
   mainText: {
     color: 'black',
     fontSize: 25,
@@ -78,14 +89,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
   },
-  navigationContainer: {
-    position: 'absolute',
-    left: 0,
-    bottom: 0,
-    right: 0,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    zIndex: 999,
-  },
+
 });
