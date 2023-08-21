@@ -46,9 +46,9 @@ const Event = () => {
     <View><BtnPlus/></View>
   </View>
   </ScrollView>
-  <View style={styles.navigationContainer}>
+  {/* <View style={styles.navigationContainer}>
         <Navigation/>
-      </View>
+      </View> */}
   </View>
 
   )

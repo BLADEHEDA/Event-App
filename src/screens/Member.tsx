@@ -5,8 +5,9 @@ import BtnPlus from '../component/shared/BtnPlus';
 import MemeberComponent from '../component/shared/MemeberComponent';
 import Navigation from '../component/shared/Navigation';
 
-const Member = () => {
+const Member = ({ navigation }) => {
   const search = require('../Assets/search.png');
+
 
   return (
     <View style={styles.container}>
@@ -35,9 +36,9 @@ const Member = () => {
         </View>
       </SafeAreaView>
 
-      <View style={styles.navigationContainer}>
-        <Navigation />
-      </View>
+      {/* <View style={styles.navigationContainer}>
+      <Navigation navigation={navigation} />
+      </View> */}
     </View>
   );
 };
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     zIndex: 999,
   },
-  
+
   mainText: {
     color: 'black',
     fontSize: 25,
