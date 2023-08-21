@@ -40,21 +40,22 @@ const App = () => {
         component={CreateMember}
         options={{ headerShown: false }}
         /> */}
-         {/* <Stack.Screen 
+         <Stack.Screen 
         name="Member" 
         component={Member}
         options={{ headerShown: false }}
-        /> */}
+        />
              {/* <Stack.Screen 
         name="Login" 
         component={Login}
         options={{ headerShown: false }}
         /> */}
-                 <Stack.Screen 
+
+                 {/* <Stack.Screen 
         name="EventDetails" 
         component={EventDetails}
         options={{ headerShown: false }}
-        />
+        /> */}
         
         </Stack.Navigator>
     {/* <Navigation/>  */}

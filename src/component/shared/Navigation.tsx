@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end', // Align content at the bottom
     alignItems: 'center',
     // marginTop: 100, // Adjust this margin as needed
-    backgroundColor:'white',
+    // backgroundColor:'#F5F5F5',
     zIndex:999
   },
 })
