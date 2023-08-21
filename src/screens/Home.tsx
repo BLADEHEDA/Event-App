@@ -4,7 +4,11 @@ import Button from '../component/shared/Button'
 import Login from './Login'
 import Logo from '../component/shared/Logo'
 
-const Home = () => {
+const Home = ({navigation}) => {
+  const handleEvent=()=>{
+    navigation.navigate('createEvent')
+    // navigation.navigate('Profile', {name: 'Jane'})
+  }
   return (   
     <View style={styles.container}>
            <View style={styles.logo} >  
@@ -18,6 +22,7 @@ const Home = () => {
             <Image source={require('../Assets/illustration.jpg') } style={styles.image} />
         </View>
     <Button
+      onPress={handleEvent}
       text="New Event"
       style={
         { marginTop:10 }  
@@ -38,7 +43,7 @@ export default Home
 
 const styles = StyleSheet.create({
     container:{
-        marginTop:50,
+        paddingTop:50,
         paddingHorizontal:15,
         backgroundColor:'white'
     },
