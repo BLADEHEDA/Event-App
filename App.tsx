@@ -30,16 +30,16 @@ const App = () => {
         component={CreateEvemt}
         options={{ headerShown: false }}
         /> */}
-               {/* <Stack.Screen 
+               <Stack.Screen 
         name="Event" 
         component={Event}
         options={{ headerShown: false }}
-        /> */}
-           <Stack.Screen 
+        />
+           {/* <Stack.Screen 
         name="CreateMember" 
         component={CreateMember}
         options={{ headerShown: false }}
-        />
+        /> */}
          {/* <Stack.Screen 
         name="Member" 
         component={Member}
