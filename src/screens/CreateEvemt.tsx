@@ -20,6 +20,21 @@ const CreateEvemt = () => {
   // format the date to be readable 
   const [formattedStartDate, setFormattedStartDate] = useState('')
   const [formattedEndDate, setFormattedEndDate] = useState('')
+  
+  // define the states for the from 
+  const [title,setTitle]= useState('')
+  const [description, setDescription] = useState('');
+  const [showPerson , setShowPerson]= useState(false)
+  const [errors,setErrors]=useState({})
+  const [formstartDate, setFormstartDate]= useState('')
+  const [formendDate, setFormendDate]= useState('')
+  const [participant ,setParticipant]= useState('')
+  // const []= useState('')
+
+  // hide and show the modal 
+  const showpersorn =()=>{
+    setShowPerson(true)
+  }
 
   // hide and show the mddals and time field 
   const openStartDatepicker =()=>{
@@ -30,8 +45,35 @@ const CreateEvemt = () => {
     setOpen1(true); 
     setShow1(true)
   }
-  // to be changes 
-  // const formattedDateTime = moment(selectedDateTime).format('dddd, D MMMM YYYY [at] HH:mm');
+
+// vallidate the forms 
+
+const handleSubmit=()=>{
+const newErrors={}
+
+  // validate the title irel a
+  if(!title){
+    newErrors.title ='Enter a Title'
+  }
+
+  // validate the description field 
+  if(!description){
+    newErrors.description ='Enter a Description'
+  }
+  // validate the startdate 
+  if(!formstartDate){
+    newErrors.formstartDate='Enter startdate'
+  }
+  if(!formendDate){
+    newErrors.formendDate ='Enter enddate'
+  }
+  // validate the availability of participants 
+  
+  console.log(title);
+  console.log(description);
+  
+  setErrors(newErrors);
+}
   return (
     
     <View>      
@@ -41,18 +83,27 @@ const CreateEvemt = () => {
     </Text>  
     {/* form  */}
     <View>
-        <View>
+    <View style={styles.textinput}>
             <Text style={styles.text1}>Title</Text>
-            <TextInput style={styles.input}></TextInput>
+            <TextInput 
+            style={styles.input}
+            value={title}
+            onChangeText={setTitle}
+            ></TextInput>
+            {errors.title && <Text style={styles.error}>{errors.title} </Text> }
         </View>
-        <View>
+
+        <View style={styles.textinput}>
             <Text style={styles.text1}>Description :</Text>
         <TextInput
         style={styles.textArea}
         multiline
         numberOfLines={4} // Adjust the number of visible lines
         placeholder="Enter your text here..."
+        value={description}
+        onChangeText={setDescription}
       ></TextInput>
+      {errors.description && <Text style={styles.error}>{errors.description}</Text> }
         </View>
         {/* picker implementtion */}
         <View  style={styles.datePicker}>
@@ -97,7 +148,7 @@ const CreateEvemt = () => {
         modal
         open={open1}
         date={endDate}
-        onConfirm={(date) => {
+        onConfirm={(date,time) => {
           setOpen1(false)
           setendDate(date)
           setFormattedEndDate(moment(date).format('dddd, D MMMM YYYY [at] HH:mm'));
@@ -117,6 +168,7 @@ const CreateEvemt = () => {
         {/* end of changes  */} 
         <View>
             <Button
+            onPress={showpersorn }
              text="Add participants"
              style={
              { marginTop:7,
@@ -126,17 +178,20 @@ const CreateEvemt = () => {
             />
         </View>
     {/* to hide and show the participants  */}
-    <View style={styles.show} >
+
+{showPerson && ( <View style={styles.show} >
     <Person
       name='blade'
     />
       <Person
       name='blade'
     />
-</View>
+</View>)
+}
 
 
         <Button
+        onPress={ handleSubmit}
     text="Create Event"
     style={
     { marginTop:7,
@@ -182,14 +237,13 @@ input:{
     color:'black',
     borderColor:'#6B6767',
     borderWidth:1,
-   marginBottom:15,
+  //  marginBottom:15,
    fontSize:18,
    paddingVertical:7,
    paddingLeft:5,
    borderRadius:5
 },
 textArea: {
-    marginBottom:15,
     borderRadius:5,
     borderWidth: 1,
     color:'black',
@@ -223,7 +277,15 @@ textArea: {
     paddingVertical:5,
     fontSize:16,
     paddingHorizontal:5
-  }
+  },
+  error: {
+    color: 'red',
+    fontSize: 13,
+    marginTop: 2,
+},
+textinput:{
+  marginBottom: 15,
+}
 
     
 })
