@@ -4,7 +4,12 @@ import Logo from '../component/shared/Logo'
 import Button from '../component/shared/Button'
 
 
-const Login = () => {
+const Login = ({navigation}) => {
+
+    const handleLogin =()=>{
+        navigation.navigate('Navigation')
+        // navigation.navigate('Profile', {name: 'Jane'})
+      }
   return (
     <View style={styles.container} >
      <View style={styles.logo} >  
@@ -38,6 +43,7 @@ const Login = () => {
    
     /> */}
     <Button
+    onPress={handleLogin}
      text="Sign in"
      style={
      { marginTop:7 }  
@@ -52,8 +58,9 @@ export default Login
 
 const styles = StyleSheet.create({
   container:{
-    marginTop:70,
-    paddingHorizontal:15
+    paddingTop:70,
+    paddingHorizontal:15,
+    backgroundColor:"white"
 },
 logo:{
     marginBottom:70

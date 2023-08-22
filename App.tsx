@@ -15,59 +15,80 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+
 const Stack = createNativeStackNavigator();
+
+// this lines are subjected tochanges
+export function HomeStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen 
+       name="Home" 
+       component={Home}
+       options={{ headerShown: false }}
+       />
+               <Stack.Screen 
+       name="Event" 
+       component={Event}
+       options={{ headerShown: false }}
+       /> 
+          <Stack.Screen 
+       name="CreateMember" 
+       component={CreateMember}
+       options={{ headerShown: false }}
+       />
+            <Stack.Screen 
+       name="createEvent" 
+        component={CreateEvemt}
+       options={{ headerShown: false }}
+       /> 
+        <Stack.Screen 
+       name="Member" 
+       component={Member}
+       options={{ headerShown: false }}
+       />
+
+                <Stack.Screen 
+       name="EventDetails" 
+       component={EventDetails}
+       options={{ headerShown: false }}
+       /> 
+       </Stack.Navigator>
+  );
+}
+
+// another change
 
 const App = () => {
   return (
-    <NavigationContainer style={styles.container}>
-     <Stack.Navigator>
-     <Stack.Screen 
-        name="Navigation" 
-        component={Navigation}
-        options={{ headerShown: false }}
-        />
-        
-     {/* <Stack.Screen 
-        name="Login" 
-        component={Login}
-        options={{ headerShown: false }}
-        /> */}
-       {/* <Stack.Screen 
-        name="Home" 
-        component={Home}
-        options={{ headerShown: false }}
-        /> */}
-                <Stack.Screen 
-        name="Event" 
-        component={Event}
-        options={{ headerShown: false }}
-        /> 
-           <Stack.Screen 
-        name="CreateMember" 
-        component={CreateMember}
-        options={{ headerShown: false }}
-        />
-             <Stack.Screen 
-        name="createEvent" 
-         component={CreateEvemt}
-        options={{ headerShown: false }}
-        /> 
-         <Stack.Screen 
-        name="Member" 
-        component={Member}
-        options={{ headerShown: false }}
-        />
 
-                 <Stack.Screen 
-        name="EventDetails" 
-        component={EventDetails}
-        options={{ headerShown: false }}
-        />
-   
-        
-        </Stack.Navigator>
-        {/* <Navigation/> */}
-  </NavigationContainer>
+    <NavigationContainer style={styles.container}>
+      {/* <HomeStack/> */}
+   {/* <Navigation/>  */}
+   <Stack.Navigator>
+   {/* <Stack.Screen 
+       name="EventDetails" 
+       component={EventDetails}
+       options={{ headerShown: false }}
+       />  */}
+           <Stack.Screen 
+       name="Login" 
+       component={Login}
+       options={{ 
+        headerShown: false, 
+      }}
+       /> 
+           <Stack.Screen 
+       name="Navigation" 
+       component={Navigation}
+       options={{ 
+        headerShown: false, 
+      }}
+       /> 
+  </Stack.Navigator>
+    </NavigationContainer>
+
+  
   )
 }
 

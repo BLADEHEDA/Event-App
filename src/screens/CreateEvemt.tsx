@@ -5,6 +5,9 @@ import Person from '../component/Person'
 import DatePicker from 'react-native-date-picker'
 import moment from 'moment'; // Import the moment library
 import Navigation from '../component/shared/Navigation'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
 
 const CreateEvemt = () => {   
   const [startDate, setStartDate] = useState(new Date())
@@ -30,6 +33,7 @@ const CreateEvemt = () => {
   // to be changes 
   // const formattedDateTime = moment(selectedDateTime).format('dddd, D MMMM YYYY [at] HH:mm');
   return (
+    
     <View>      
     <ScrollView style={styles.container}>   
       <Text style={styles.head}>Create an Event</Text>  
