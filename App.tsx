@@ -66,12 +66,13 @@ const App = () => {
       {/* <HomeStack/> */}
    {/* <Navigation/>  */}
    <Stack.Navigator>
-   {/* <Stack.Screen 
-       name="EventDetails" 
-       component={EventDetails}
+
+       <Stack.Screen 
+       name="createEvent" 
+        component={CreateEvemt}
        options={{ headerShown: false }}
-       />  */}
-           <Stack.Screen 
+       /> 
+           {/* <Stack.Screen 
        name="Login" 
        component={Login}
        options={{ 
@@ -84,7 +85,7 @@ const App = () => {
        options={{ 
         headerShown: false, 
       }}
-       /> 
+       />  */}
   </Stack.Navigator>
     </NavigationContainer>
 
