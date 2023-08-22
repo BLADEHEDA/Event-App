@@ -26,6 +26,9 @@ const CreateEvemt = () => {
   const [description, setDescription] = useState('');
   const [showPerson , setShowPerson]= useState(false)
   const [errors,setErrors]=useState({})
+  const [formstartDate, setFormstartDate]= useState('')
+  const [formendDate, setFormendDate]= useState('')
+  const [participant ,setParticipant]= useState('')
   // const []= useState('')
 
   // hide and show the modal 
@@ -57,6 +60,15 @@ const newErrors={}
   if(!description){
     newErrors.description ='Enter a Description'
   }
+  // validate the startdate 
+  if(!formstartDate){
+    newErrors.formstartDate='Enter startdate'
+  }
+  if(!formendDate){
+    newErrors.formendDate ='Enter enddate'
+  }
+  // validate the availability of participants 
+  
   console.log(title);
   console.log(description);
   
