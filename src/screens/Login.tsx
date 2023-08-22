@@ -31,13 +31,12 @@ const Login = ({ navigation }) => {
 
         // Clear any previous errors
         setErrors({});
-
+            // route when successful 
+            navigation.navigate('Navigation');  
+            // setEmail('')
+            // setPassword('')
         console.log(email);
         console.log(password);
-    }
-
-    const handleLogin = () => {
-        navigation.navigate('Navigation');
     }
 
     return (
