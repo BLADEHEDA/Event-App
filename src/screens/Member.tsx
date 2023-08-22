@@ -35,10 +35,6 @@ const Member = ({ navigation }) => {
           <BtnPlus />
         </View>
       </SafeAreaView>
-
-      {/* <View style={styles.navigationContainer}>
-      <Navigation navigation={navigation} />
-      </View> */}
     </View>
   );
 };

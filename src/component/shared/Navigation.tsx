@@ -25,7 +25,7 @@ const Navigation = () => {
       }
       }
       >
-                       <Tab.Screen 
+               <Tab.Screen 
               name="Home" 
               component={HomeStack}
             options={{

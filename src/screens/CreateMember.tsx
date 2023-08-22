@@ -22,6 +22,7 @@ const CreateMember = () => {
         }
     };
 
+
     return (
         <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
@@ -69,9 +70,6 @@ const CreateMember = () => {
                 </View>
             </View>
         </ScrollView>
-        <View style={styles.navigationContainer}>
-        <Navigation/>
-      </View>
         </View>
     )
 }
@@ -148,16 +146,6 @@ textArea: {
         resizeMode: 'cover',
         borderRadius: 10,
     },
-    navigationContainer: {
-        position: 'absolute',
-        left: 0,
-        bottom: 0,
-        right: 0,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        backgroundColor: 'white',
-        zIndex: 999,
-      },
 });
 
 export default CreateMember;

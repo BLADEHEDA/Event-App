@@ -5,13 +5,17 @@ import Login from './Login'
 import Logo from '../component/shared/Logo'
 
 const Home = ({navigation}) => {
+  // navigate to the createEvent page 
   const handleEvent=()=>{
     navigation.navigate('createEvent')
-    // navigation.navigate('Profile', {name: 'Jane'})
+  }
+  // Navigate to the createMemebrs page 
+  const handleMembrs=()=>{
+    navigation.navigate('CreateMember')
   }
   return (   
     <View style={styles.container}>
-           <View style={styles.logo} >  
+           <View style={styles.logo} >
         {/* <Logo/> */}
         <Logo/>
         </View>
@@ -29,13 +33,13 @@ const Home = ({navigation}) => {
         }
     />
         <Button
+        onPress={handleMembrs}
       text="Add Members"
       style={
         { marginTop:10 }  
         }
     />
-  
-    </View>
+ </View>
   )
 }
 

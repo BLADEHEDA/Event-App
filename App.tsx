@@ -18,7 +18,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Stack = createNativeStackNavigator();
 
-// this lines are subjected tochanges
+// define the screens which would have the Tabs displayed on it 
 export function HomeStack() {
   return (
     <Stack.Navigator>
