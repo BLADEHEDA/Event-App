@@ -44,6 +44,10 @@ const CreateMember = () => {
         if (!phoneRegex.test(phone)) {
             newErrors.phone = 'Enter a valid phone number';
         }
+        // validate the image and ensure an imaghe is choosn
+            if(!selectedImage){
+                newErrors.selectedImage='Choose an Image'
+            }
 
         setErrors(newErrors);
 
@@ -61,7 +65,7 @@ const CreateMember = () => {
                     <Text style={styles.head}>Create Members</Text>
                     <Text style={styles.text}>Create members to take part in your events</Text>
                     <View>
-                        <View style={styles.textinpu1}>
+                        <View style={styles.textinput}>
                             <Text style={styles.text1}>Name :</Text>
                             <TextInput
                                 style={[styles.input, errors.name && styles.inputError]}
@@ -70,7 +74,7 @@ const CreateMember = () => {
                             />
                             {errors.name && <Text style={styles.error}>{errors.name}</Text>}
                         </View>
-                        <View>
+                        <View style={styles.textinput}>
                             <Text style={styles.text1}>Email :</Text>
                             <TextInput
                                 style={[styles.input, errors.email && styles.inputError]}
@@ -79,7 +83,7 @@ const CreateMember = () => {
                             />
                             {errors.email && <Text style={styles.error}>{errors.email}</Text>}
                         </View>
-                        <View>
+                        <View style={styles.textinput}>
                             <Text style={styles.text1}>Phone :</Text>
                             <TextInput
                                 style={[styles.input, errors.phone && styles.inputError]}
@@ -100,6 +104,8 @@ const CreateMember = () => {
                             </TouchableOpacity>
                         </View>
                     </View>
+                    {errors.selectedImage && <Text style={styles.error}>{errors.selectedImage}</Text>}
+                    {/* <View>  </View> */}
                     {selectedImage && (
                         <View style={styles.imagePreviewContainer}>
                             <Image source={{ uri: selectedImage.path }} style={styles.imagePreview} />
@@ -165,9 +171,9 @@ const styles = StyleSheet.create({
         fontSize: 13,
         marginTop: 2,
     },
-    inputError: {
-        borderColor: 'red',
-    },
+    // inputError: {
+    //     borderColor: 'red',
+    // },
     clickImage: {
         width: 50,
         height: 35,
