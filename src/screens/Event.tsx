@@ -1,14 +1,16 @@
-import { SafeAreaView, StyleSheet, Text, View,Image, TextInput } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View,Image, TextInput,ScrollView } from 'react-native'
 import React from 'react'
 import EventComponent from '../component/EventComponent'
 import BtnPlus from '../component/shared/BtnPlus'
+import Navigation from '../component/shared/Navigation'
 
 
 const Event = () => {
     const search = require('../Assets/search.png')
 
   return (
-    <SafeAreaView style={styles.container}>  
+    <View style={styles.container}>
+      <ScrollView style={styles.scrollView}>
     <View>
       <View style={styles.main} >
 
@@ -43,13 +45,16 @@ const Event = () => {
       </View> 
     <View><BtnPlus/></View>
   </View>
-  </SafeAreaView>
+  </ScrollView>
+  </View>
+
   )
 }
 
 export default Event
 
 const styles = StyleSheet.create({
+  
     mainText:{
         color:'black',
         fontSize:25,
@@ -63,9 +68,24 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginBottom:20
     },
-    container:{
-        marginTop:35,
-        paddingHorizontal:15
+    container: {
+      flex: 1,
+      backgroundColor: 'white',
+      marginTop:35,
+    },
+    scrollView: {
+      paddingHorizontal: 15,
+      marginBottom: 60, // Adjust the marginBottom to make space for the button and Navigation
+    },
+    navigationContainer: {
+      position: 'absolute',
+      left: 0,
+      bottom: 0,
+      right: 0,
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+      backgroundColor: 'white',
+      zIndex: 999,
     },
     search:{
         height:20,

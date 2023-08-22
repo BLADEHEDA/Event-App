@@ -1,83 +1,127 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import Logo from '../component/shared/Logo'
 import Button from '../component/shared/Button'
 
+const Login = ({ navigation }) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errors, setErrors] = useState({});
 
-const Login = () => {
-  return (
-    <View style={styles.container} >
-     <View style={styles.logo} >  
-        <Logo/>
-    </View>
-         {/* form for input fiedls */}
-         <View>
-            <Text style={styles.text1}>Login  to your Account</Text>
-            {/* Email input */}
-            <View style={styles.form}>
-                <Text style={styles.text2}>Email :</Text>
-                <TextInput 
-                style={styles.input}
-                placeholder='Enter Email'
-                placeholderTextColor="gray"
-                keyboardType="email-address" 
-                autoCapitalize="none"
-                ></TextInput>
+    const handleSubmit = () => {
+        const newErrors = {};
+
+        // Validate Email
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (!emailRegex.test(email)) {
+            newErrors.email = 'Invalid email';
+        }
+        // validate password 
+        if (password.length < 5) {
+            newErrors.password = 'Password must be at least 5 characters';
+        }
+
+        // Update the errors state
+        setErrors(newErrors);
+
+        // If there are errors, don't proceed
+        if (Object.keys(newErrors).length > 0) {
+            return;
+        }
+
+        // Clear any previous errors
+        setErrors({});
+            // route when successful 
+            navigation.navigate('Navigation');  
+            // setEmail('')
+            // setPassword('')
+        console.log(email);
+        console.log(password);
+    }
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.logo}>
+                <Logo />
             </View>
-                {/* password input */}
+            <View>
+                <Text style={styles.text1}>Login to your Account</Text>
+                <View style={[styles.form, errors.email && styles.inputError]}>
+                    <Text style={styles.text2}>Email :</Text>
+                    <TextInput
+                        style={[styles.input, errors.email && styles.inputError]}
+                        placeholder='Enter Email'
+                        placeholderTextColor="gray"
+                        keyboardType="email-address"
+                        autoCapitalize="none"
+                        value={email}
+                        onChangeText={setEmail}
+                    />
+                    {errors.email && <Text style={styles.error}>{errors.email}</Text>}
+                </View>
                 <View style={styles.form}>
-                <Text style={styles.text2}>Password :</Text>
-                <TextInput 
-                style={styles.input}
-                placeholder='Enter password'
-                placeholderTextColor="gray"
-                ></TextInput>
+                    <Text style={styles.text2}>Password :</Text>
+                    <TextInput
+                        style={[styles.input, errors.password && styles.inputError]}
+                        placeholder='Enter password'
+                        placeholderTextColor="gray"
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry={true}
+                    />
+                    {errors.password && <Text style={styles.error}>{errors.password}</Text>}
+                </View>
+                <Button
+                    onPress={handleSubmit}
+                    text="Sign in"
+                    style={{ marginTop: 7 }}
+                />
             </View>
-{/*                
-    <Button
-   
-    /> */}
-    <Button
-     text="Sign in"
-     style={
-     { marginTop:7 }  
-     }
-    />
         </View>
-    </View>
-  )
+    );
 }
 
-export default Login
+export default Login;
 
 const styles = StyleSheet.create({
-  container:{
-    marginTop:70,
-    paddingHorizontal:15
-},
-logo:{
-    marginBottom:70
-},
-text1:{
-    color:'black',
-    fontWeight:'600',
-    fontSize:22,
-    textAlign:'center',
-    marginBottom:70
-},
-text2:{
-    color:'black',
-    fontWeight:'400',
-    fontSize:20,
-},
-input:{
-    color:'black',
-    borderColor:'black',
-    borderWidth:1,
-   marginBottom:15,
-   fontSize:18,
-   paddingVertical:7,
-   paddingLeft:5,
-   borderRadius:5
-}
-})
+    container: {
+        paddingTop: 70,
+        paddingHorizontal: 15,
+        backgroundColor: "white"
+    },
+    logo: {
+        marginBottom: 70
+    },
+    text1: {
+        color: 'black',
+        fontWeight: '600',
+        fontSize: 22,
+        textAlign: 'center',
+        marginBottom: 70
+    },
+    text2: {
+        color: 'black',
+        fontWeight: '400',
+        fontSize: 20,
+    },
+    form: {
+        marginBottom: 15,
+    },
+    input: {
+        color: 'black',
+        borderColor: 'black',
+        borderWidth: 1,
+        fontSize: 18,
+        paddingVertical: 7,
+        paddingLeft: 5,
+        borderRadius: 5
+    },
+    error: {
+        color: 'red',
+        fontSize: 13,
+        marginTop: 2,
+    },
+    inputError: {
+        borderColor: 'red',
+    }
+});
