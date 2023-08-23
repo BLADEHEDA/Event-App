@@ -65,8 +65,8 @@ const CreateMember = () => {
             const addmewMemebr = [...members,newMember]
             setMembers(addmewMemebr);
 
-            console.log(addmewMemebr);
-            
+            console.log(members);
+            alert('Member successfully added')
 
             // console.log('Name:', name);
             // console.log('Email:', email);
