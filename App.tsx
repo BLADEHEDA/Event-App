@@ -65,12 +65,12 @@ const App = () => {
     <NavigationContainer style={styles.container}>
    <Stack.Navigator>
 
-   <Stack.Screen 
+   {/* <Stack.Screen 
        name="CreateMember" 
        component={CreateMember}
        options={{ headerShown: false }}
-       /> 
-           {/* <Stack.Screen 
+       />  */}
+          <Stack.Screen 
        name="Login" 
        component={Login}
        options={{ 
@@ -83,7 +83,7 @@ const App = () => {
        options={{ 
         headerShown: false, 
       }}
-       />  */}
+       />  
   </Stack.Navigator>
     </NavigationContainer>
 

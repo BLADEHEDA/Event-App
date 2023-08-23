@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Button from '../component/shared/Button'
 import ImagePicker from 'react-native-image-crop-picker';
 
-const CreateMember = () => {
+const CreateMember = ({navigation}) => {
     const imageUpload = require("../Assets/upload.png");
     const [selectedImage, setSelectedImage] = useState(null);
     const [name, setName] = useState('');  
@@ -67,6 +67,7 @@ const CreateMember = () => {
 
             console.log(members);
             alert('Member successfully added')
+            navigation.navigate('Member')
 
             // console.log('Name:', name);
             // console.log('Email:', email);
