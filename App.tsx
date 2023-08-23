@@ -1,5 +1,4 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import { Provider } from 'react-redux';
 import Logo from './src/component/shared/Logo';
 import Login from './src/screens/Login';
 import Home from './src/screens/Home';
@@ -60,7 +59,7 @@ export function HomeStack() {
 
 const App = () => {
   return (
-
+  
     <NavigationContainer style={styles.container}>
    <Stack.Navigator>
 
@@ -84,7 +83,8 @@ const App = () => {
       }}
        />  
   </Stack.Navigator>
-    </NavigationContainer>
+  </NavigationContainer>
+
 
   
   )
