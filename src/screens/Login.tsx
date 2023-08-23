@@ -2,6 +2,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
 import Logo from '../component/shared/Logo'
 import Button from '../component/shared/Button'
+import auth from '@react-native-firebase/auth';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -28,11 +29,32 @@ const Login = ({ navigation }) => {
         if (Object.keys(newErrors).length > 0) {
             return;
         }
-
-        // Clear any previous errors
+        
+        // authenticate the user 
+        auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
+         // Clear any previous errors
         setErrors({});
-            // route when successful 
-            navigation.navigate('Navigation');  
+            alert('You have logged in successfully')
+        // route when successful 
+        navigation.navigate('Navigation');  
+          console.log('User account created & signed in!');
+        })
+        .catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            console.log('That email address is already in use!');
+            alert('That email address is already in use! ')
+          }
+      
+          if (error.code === 'auth/invalid-email') {
+            console.log('That email address is invalid!');
+            alert('That email address is invalid! ')
+          }
+      
+          console.error(error);
+        });
+
             // setEmail('')
             // setPassword('')
         console.log(email);
