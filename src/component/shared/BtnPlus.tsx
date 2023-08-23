@@ -24,8 +24,6 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    // borderColor:'black',
-    // borderWidth:1,
   },
   btnText: {
     fontSize: 30,

@@ -7,7 +7,6 @@ import Navigation from './src/component/shared/Navigation';
 import CreateEvemt from './src/screens/CreateEvemt';
 import Event from './src/screens/Event';
 import Button from './src/component/shared/Button';
-// import CreateMember from './screens/CreateMember';
 import Member from './src/screens/Member';
 import EventDetails from './src/screens/EventDetails';
 import CreateMember from './src/screens/CreateMember';
@@ -65,12 +64,12 @@ const App = () => {
     <NavigationContainer style={styles.container}>
    <Stack.Navigator>
 
-   <Stack.Screen 
+   {/* <Stack.Screen 
        name="CreateMember" 
        component={CreateMember}
        options={{ headerShown: false }}
-       /> 
-           {/* <Stack.Screen 
+       />  */}
+          <Stack.Screen 
        name="Login" 
        component={Login}
        options={{ 
@@ -83,7 +82,7 @@ const App = () => {
        options={{ 
         headerShown: false, 
       }}
-       />  */}
+       />  
   </Stack.Navigator>
     </NavigationContainer>
 

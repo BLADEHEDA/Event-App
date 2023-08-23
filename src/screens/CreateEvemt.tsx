@@ -105,6 +105,12 @@ const newErrors={}
       ></TextInput>
       {errors.description && <Text style={styles.error}>{errors.description}</Text> }
         </View>
+        <View>
+      {show ? <Text style={styles.datevalue}>{formattedStartDate}</Text> : null}
+      {show1 ?<Text style={styles.datevalue}>{formattedEndDate} </Text> : null}
+    
+    
+      </View>
         {/* picker implementtion */}
         <View  style={styles.datePicker}>
           <View style={styles.date}>
@@ -157,13 +163,6 @@ const newErrors={}
           setOpen(false)
         }}
       />   
-
-      <View>
-      {show ? <Text style={styles.datevalue}>{formattedStartDate}</Text> : null}
-      {show1 ?<Text style={styles.datevalue}>{formattedEndDate} </Text> : null}
-    
-    
-      </View>
 
         {/* end of changes  */} 
         <View>
