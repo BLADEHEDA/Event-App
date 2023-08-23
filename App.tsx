@@ -7,7 +7,6 @@ import Navigation from './src/component/shared/Navigation';
 import CreateEvemt from './src/screens/CreateEvemt';
 import Event from './src/screens/Event';
 import Button from './src/component/shared/Button';
-// import CreateMember from './screens/CreateMember';
 import Member from './src/screens/Member';
 import EventDetails from './src/screens/EventDetails';
 import CreateMember from './src/screens/CreateMember';
