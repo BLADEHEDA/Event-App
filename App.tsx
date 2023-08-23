@@ -63,13 +63,11 @@ const App = () => {
   return (
 
     <NavigationContainer style={styles.container}>
-      {/* <HomeStack/> */}
-   {/* <Navigation/>  */}
    <Stack.Navigator>
 
-       <Stack.Screen 
-       name="createEvent" 
-        component={CreateEvemt}
+   <Stack.Screen 
+       name="CreateMember" 
+       component={CreateMember}
        options={{ headerShown: false }}
        /> 
            {/* <Stack.Screen 

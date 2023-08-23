@@ -6,10 +6,11 @@ import ImagePicker from 'react-native-image-crop-picker';
 const CreateMember = () => {
     const imageUpload = require("../Assets/upload.png");
     const [selectedImage, setSelectedImage] = useState(null);
-    const [name, setName] = useState('');
+    const [name, setName] = useState('');  
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [errors, setErrors] = useState({});
+    const [members,setMembers]= useState([])
 
     const handleImagePicker = async () => {
         try {
@@ -52,9 +53,24 @@ const CreateMember = () => {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
-            console.log('Name:', name);
-            console.log('Email:', email);
-            console.log('Phone:', phone);
+
+            // create a new memeber and to the list 
+            const newMember ={
+                id: Math.floor(Math.random() * 1000),
+                name, 
+                email,
+                phone,
+                selectedImage: selectedImage.path 
+            }
+            const addmewMemebr = [...members,newMember]
+            setMembers(addmewMemebr);
+
+            console.log(members);
+            alert('Member successfully added')
+
+            // console.log('Name:', name);
+            // console.log('Email:', email);
+            // console.log('Phone:', phone);
         }
     };
 
