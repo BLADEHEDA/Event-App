@@ -12,7 +12,6 @@ const Person = () => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
   console.log(toggleCheckBox);
   
-
   return (
     <View style={styles.containerx}>
       <View style={styles.container}>
