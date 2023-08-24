@@ -64,7 +64,7 @@ const CreateMember = ({navigation}) => {
                             // const reference = storage().ref(`Avatar/${selectedImage.path}`);
                             const reference = storage().ref(`Avatar/${selectedImage.mime}`);
                             await reference.putFile(selectedImage.path);
-                            const url = await storage().ref(`Avatar/${selectedImage.mime}`).getDownloadURL();
+                            const url = await reference.getDownloadURL();
                             alert('Image successfully uploadeo ')
                             alert(url);
                             
