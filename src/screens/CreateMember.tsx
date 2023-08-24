@@ -61,35 +61,32 @@ const CreateMember = ({navigation}) => {
         if (Object.keys(newErrors).length === 0) {
                     try {
                         if (selectedImage) {  
-                            // const reference = storage().ref(`Avatar/${selectedImage.path}`);
                             const reference = storage().ref(`Avatar/${selectedImage.mime}`);
                             await reference.putFile(selectedImage.path);
                             const url = await reference.getDownloadURL();
                             alert('Image successfully uploadeo ')
                             alert(url);
-                            
+
+                             // define a meeber object 
+                            const newMember ={
+                            id: Math.floor(Math.random() * 1000),
+                            name, 
+                            email,
+                            phone,
+                            selectedImage :url,
+                        };
+                                        
+                        const addmewMemebr = [...members,newMember]
+                        setMembers(addmewMemebr);
+
+                        console.log(members);
+                        alert(members)
+
                         }
                     } catch (error) {
-                        console.error('Error uploading image:', error);
-                        // Handle error here or show an error alert
+                        console.error('Error uploading image:', error);t
                         alert('yo bro it is not going  ')
                     }
-                    
-   // create a new memeber and to the list 
-            const newMember ={
-                id: Math.floor(Math.random() * 1000),
-                name, 
-                email,
-                phone,
-                selectedImage 
-            }
-            const addmewMemebr = [...members,newMember]
-            setMembers(addmewMemebr);
-
-            console.log(members);;
-            console.log(selectedImage);
-
-
         }
 
     };
