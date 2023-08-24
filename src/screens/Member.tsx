@@ -9,6 +9,7 @@ const Member = ({ navigation }) => {
   const search = require('../Assets/search.png');
 
 
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaContainer}>

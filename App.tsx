@@ -63,11 +63,11 @@ const App = () => {
     <NavigationContainer style={styles.container}>
    <Stack.Navigator>
 
-   {/* <Stack.Screen 
+   <Stack.Screen 
        name="CreateMember" 
        component={CreateMember}
        options={{ headerShown: false }}
-       />  */}
+       /> 
           <Stack.Screen 
        name="Login" 
        component={Login}
