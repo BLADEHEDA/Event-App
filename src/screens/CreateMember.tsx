@@ -5,6 +5,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import { utils } from '@react-native-firebase/app';
 import storage from '@react-native-firebase/storage';
 import uuid from 'uuid';
+import firestore from '@react-native-firebase/firestore';
 
 
 
@@ -74,6 +75,15 @@ const CreateMember = ({navigation}) => {
                             phone,
                             selectedImage :url,
                         };
+                        // uploaded the members to the firestore 
+                        firestore()
+                        .collection('Member')
+                        .add(newMember)
+                        .then(() => {
+                            alert('member added')
+                            console.log('User added!');
+                        });
+
                                         
                         const addmewMemebr = [...members,newMember]
                         setMembers(addmewMemebr);
@@ -81,7 +91,7 @@ const CreateMember = ({navigation}) => {
                         console.log(members);
                         }
                     } catch (error) {
-                        console.error('Error uploading image:', error);t
+                        console.error('Error uploading image:', error);
                         alert('yo bro it is not going  ')
                     }
         }
