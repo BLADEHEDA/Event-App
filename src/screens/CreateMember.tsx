@@ -1,12 +1,23 @@
 import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity, Image } from 'react-native'
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from '../component/shared/Button'
 import ImagePicker from 'react-native-image-crop-picker';
 import { utils } from '@react-native-firebase/app';
 import storage from '@react-native-firebase/storage';
 import uuid from 'uuid';
 import firestore from '@react-native-firebase/firestore';
-
+// subjected to changes
+import {
+    BallIndicator,
+    BarIndicator,
+    DotIndicator,
+    MaterialIndicator,
+    PacmanIndicator,
+    PulseIndicator,
+    SkypeIndicator,
+    UIActivityIndicator,
+    WaveIndicator,
+  } from 'react-native-indicators';
 
 
 const CreateMember = ({navigation}) => {
@@ -17,6 +28,12 @@ const CreateMember = ({navigation}) => {
     const [phone, setPhone] = useState('');
     const [errors, setErrors] = useState({});
     const [members,setMembers]= useState([])
+    const [loading,setLoading] = useState(false)
+
+    // subjeccted to changes 
+
+    // end of changes 
+  
 
     const handleImagePicker = async () => {
         try {
@@ -62,10 +79,11 @@ const CreateMember = ({navigation}) => {
         if (Object.keys(newErrors).length === 0) {
                     try {
                         if (selectedImage) {  
+                            setLoading(true)
                             const reference = storage().ref(`Avatar/${selectedImage.mime}`);
                             await reference.putFile(selectedImage.path);
                             const url = await reference.getDownloadURL();
-                            alert('Image successfully uploadeo ')
+                            // alert('Image successfully uploadeo ')
 
                              // define a meeber object 
                             const newMember ={
@@ -83,8 +101,8 @@ const CreateMember = ({navigation}) => {
                             alert('member added')
                             console.log('User added!');
                         });
-
-                                        
+                            setLoading(false)
+                                         
                         const addmewMemebr = [...members,newMember]
                         setMembers(addmewMemebr);
 
@@ -151,6 +169,12 @@ const CreateMember = ({navigation}) => {
                             <Image source={{ uri: selectedImage.path }} style={styles.imagePreview} />
                         </View>
                     )}
+                    {/* subjected to changes */}
+          
+
+                 { loading &&  <BallIndicator color='blue' />}
+                    {/* end of  chanegs  */}
+
                     <View>
                         <Button
                             onPress={handleSubmit}
@@ -238,7 +262,12 @@ const styles = StyleSheet.create({
     // 
     textinput:{
         marginBottom: 15,
-    }
+    },
+    loaderContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20, // Adjust this margin as needed
+      },
 });
 
 export default CreateMember;
