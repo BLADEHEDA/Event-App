@@ -65,7 +65,6 @@ const CreateMember = ({navigation}) => {
                             await reference.putFile(selectedImage.path);
                             const url = await reference.getDownloadURL();
                             alert('Image successfully uploadeo ')
-                            alert(url);
 
                              // define a meeber object 
                             const newMember ={
@@ -80,8 +79,6 @@ const CreateMember = ({navigation}) => {
                         setMembers(addmewMemebr);
 
                         console.log(members);
-                        alert(members)
-
                         }
                     } catch (error) {
                         console.error('Error uploading image:', error);t

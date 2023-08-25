@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View, Image } from 'react-native'
 import Logo from './src/component/shared/Logo';
 import Login from './src/screens/Login';
 import Home from './src/screens/Home';
@@ -63,11 +63,11 @@ const App = () => {
     <NavigationContainer style={styles.container}>
    <Stack.Navigator>
 
-   <Stack.Screen 
+   {/* <Stack.Screen 
        name="CreateMember" 
        component={CreateMember}
        options={{ headerShown: false }}
-       /> 
+       />  */}
           <Stack.Screen 
        name="Login" 
        component={Login}

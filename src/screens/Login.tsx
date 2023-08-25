@@ -149,16 +149,19 @@
 //     }
 // });
 
-import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity,Image } from 'react-native';
 import React, { useState } from 'react';
 import Logo from '../component/shared/Logo';
 import Button from '../component/shared/Button';
 import auth from '@react-native-firebase/auth';
+import EyeHideIcon from '../Assets/hide.png'; 
+import EyeShowIcon from '../Assets/view.png';
+
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+    const [showPassword, setShowPassword] = useState(false); 
     const [errors, setErrors] = useState({});
 
     const handleSubmit = () => {
@@ -236,18 +239,23 @@ const Login = ({ navigation }) => {
                     <Text style={styles.text2}>Password :</Text>
                     <View style={styles.passwordInputContainer}>
                         <TextInput
-                            style={[styles.input, styles.passwordInput]}
+                            style={[styles.input1, styles.passwordInput]}
                             placeholder='Enter password'
                             placeholderTextColor='gray'
                             value={password}
                             onChangeText={setPassword}
                             secureTextEntry={!showPassword}
                         />
+
                         <TouchableOpacity
-                            style={styles.showHideButton}
-                            onPress={() => setShowPassword(!showPassword)}>
-                            <Text style={styles.showHideButtonText}>{showPassword ? 'Hide' : 'Show'}</Text>
-                        </TouchableOpacity>
+                        style={styles.showHideButton}
+                        onPress={() => setShowPassword(!showPassword)}>
+                        <Image
+                            source={showPassword ? EyeHideIcon : EyeShowIcon}
+                            style={styles.showHideIcon}
+                        />
+                    </TouchableOpacity>
+
                     </View>
                     {errors.password && <Text style={styles.error}>{errors.password}</Text>}
                 </View>
@@ -295,9 +303,16 @@ const styles = StyleSheet.create({
     passwordInputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+
+        color: 'black',
+        borderColor: 'black',
+        borderWidth: 1,
+        paddingLeft: 5,
+        borderRadius: 5,
     },
     passwordInput: {
         flex: 1,
+        fontSize: 18,
     },
     showHideButton: {
         padding: 5,
@@ -313,4 +328,9 @@ const styles = StyleSheet.create({
     inputError: {
         borderColor: 'red',
     },
+    showHideIcon: {
+        width: 24, // Adjust the width and height as needed
+        height: 24,
+    },
+    
 });
