@@ -1,13 +1,17 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react'; // Import useState
 import CheckBox from '@react-native-community/checkbox';
+import { useAppSelector,useAppDispatch } from '../../store/Slices/hooks';
+import { checkboxToggle } from '../../store/Slices/personSlice';
 
 const person = require('../Assets/person.jpg');
 
 const Person = () => {
+  const dispatch =useAppDispatch();
+  // const toggleCheckBox =useAppSelector(state =>state.person.isSelected  )
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
-  // alert(toggleCheckBox)
-
+  console.log(toggleCheckBox);
+  
   return (
     <View style={styles.containerx}>
       <View style={styles.container}>
@@ -26,6 +30,7 @@ const Person = () => {
             disabled={false}
             value={toggleCheckBox}
             onValueChange={(newValue) => setToggleCheckBox(newValue)}
+            // onValueChange={(newValue) => dispatch(checkboxToggle(newValue))}
             tintColors={{ true: 'blue', false: 'black' }} 
           />
               </View>

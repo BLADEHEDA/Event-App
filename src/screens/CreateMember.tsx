@@ -2,6 +2,12 @@ import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity, Image 
 import React, { useState } from 'react';
 import Button from '../component/shared/Button'
 import ImagePicker from 'react-native-image-crop-picker';
+import { utils } from '@react-native-firebase/app';
+import storage from '@react-native-firebase/storage';
+import uuid from 'uuid';
+import firestore from '@react-native-firebase/firestore';
+
+
 
 const CreateMember = ({navigation}) => {
     const imageUpload = require("../Assets/upload.png");
@@ -18,6 +24,7 @@ const CreateMember = ({navigation}) => {
                 width: 400,
                 height: 400,
                 cropping: false,
+                mediaType: 'photo',
             });
 
             setSelectedImage(image);
@@ -26,7 +33,7 @@ const CreateMember = ({navigation}) => {
         }
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const newErrors = {};
 
         // Validate Name
@@ -53,26 +60,42 @@ const CreateMember = ({navigation}) => {
         setErrors(newErrors);
 
         if (Object.keys(newErrors).length === 0) {
+                    try {
+                        if (selectedImage) {  
+                            const reference = storage().ref(`Avatar/${selectedImage.mime}`);
+                            await reference.putFile(selectedImage.path);
+                            const url = await reference.getDownloadURL();
+                            alert('Image successfully uploadeo ')
 
-            // create a new memeber and to the list 
-            const newMember ={
-                id: Math.floor(Math.random() * 1000),
-                name, 
-                email,
-                phone,
-                selectedImage: selectedImage.path 
-            }
-            const addmewMemebr = [...members,newMember]
-            setMembers(addmewMemebr);
+                             // define a meeber object 
+                            const newMember ={
+                            id: Math.floor(Math.random() * 1000),
+                            name, 
+                            email,
+                            phone,
+                            selectedImage :url,
+                        };
+                        // uploaded the members to the firestore 
+                        firestore()
+                        .collection('Member')
+                        .add(newMember)
+                        .then(() => {
+                            alert('member added')
+                            console.log('User added!');
+                        });
 
-            console.log(members);
-            alert('Member successfully added')
-            navigation.navigate('Member')
+                                        
+                        const addmewMemebr = [...members,newMember]
+                        setMembers(addmewMemebr);
 
-            // console.log('Name:', name);
-            // console.log('Email:', email);
-            // console.log('Phone:', phone);
+                        console.log(members);
+                        }
+                    } catch (error) {
+                        console.error('Error uploading image:', error);
+                        alert('yo bro it is not going  ')
+                    }
         }
+
     };
 
     return (

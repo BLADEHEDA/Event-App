@@ -1,5 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import { Provider } from 'react-redux';
+import { ScrollView, StyleSheet, Text, View, Image } from 'react-native'
 import Logo from './src/component/shared/Logo';
 import Login from './src/screens/Login';
 import Home from './src/screens/Home';
@@ -21,7 +20,7 @@ const Stack = createNativeStackNavigator();
 export function HomeStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen 
+      {/* <Stack.Screen 
        name="Home" 
        component={Home}
        options={{ headerShown: false }}
@@ -30,7 +29,7 @@ export function HomeStack() {
        name="Event" 
        component={Event}
        options={{ headerShown: false }}
-       /> 
+       />  */}
           <Stack.Screen 
        name="CreateMember" 
        component={CreateMember}
@@ -60,15 +59,15 @@ export function HomeStack() {
 
 const App = () => {
   return (
-
+  
     <NavigationContainer style={styles.container}>
    <Stack.Navigator>
 
-   {/* <Stack.Screen 
+   <Stack.Screen 
        name="CreateMember" 
        component={CreateMember}
        options={{ headerShown: false }}
-       />  */}
+       /> 
           <Stack.Screen 
        name="Login" 
        component={Login}
@@ -84,7 +83,8 @@ const App = () => {
       }}
        />  
   </Stack.Navigator>
-    </NavigationContainer>
+  </NavigationContainer>
+
 
   
   )
