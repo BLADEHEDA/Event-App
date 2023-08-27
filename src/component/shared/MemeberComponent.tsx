@@ -12,11 +12,11 @@ const MemberComponent: React.FC<MemberComponentProps> = (props) => {
   return (
     <View style={styles.main}>
       <View>
-        <Image style={styles.image} source={person} />
+        <Image style={styles.image} source={{ uri: props.person }} />
       </View>
       <View style={styles.texts}>
         <Text style={styles.text}>{props.name} yo</Text>
-        <Text style={styles.text}>{props.email} yep bro</Text>
+        <Text style={styles.text}>{props.email}</Text>
       </View>
     </View>
   );

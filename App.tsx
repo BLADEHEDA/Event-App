@@ -20,7 +20,7 @@ const Stack = createNativeStackNavigator();
 export function HomeStack() {
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen 
+      <Stack.Screen 
        name="Home" 
        component={Home}
        options={{ headerShown: false }}
@@ -29,7 +29,7 @@ export function HomeStack() {
        name="Event" 
        component={Event}
        options={{ headerShown: false }}
-       />  */}
+       /> 
           <Stack.Screen 
        name="CreateMember" 
        component={CreateMember}
@@ -62,12 +62,13 @@ const App = () => {
   
     <NavigationContainer style={styles.container}>
    <Stack.Navigator>
+    
 
    <Stack.Screen 
-       name="CreateMember" 
-       component={CreateMember}
+       name="Member" 
+       component={Member}
        options={{ headerShown: false }}
-       /> 
+       />
           <Stack.Screen 
        name="Login" 
        component={Login}

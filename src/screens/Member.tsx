@@ -1,13 +1,34 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Image, TextInput } from 'react-native';
 import EventComponent from '../component/EventComponent';
 import BtnPlus from '../component/shared/BtnPlus';
 import MemeberComponent from '../component/shared/MemeberComponent';
 import Navigation from '../component/shared/Navigation';
+import firestore from '@react-native-firebase/firestore';
 
 const Member = ({ navigation }) => {
   const search = require('../Assets/search.png');
+// subjected to changes 
+// fetch data from the store 
+  const [members, setMembers] = useState([]); // State to store fetched members
 
+  const handleFetch = async () => {
+    try {
+      const memberCollection = await firestore().collection('Member').get();
+      const memberData = memberCollection.docs.map((doc) => doc.data());
+      console.log(memberData);
+      
+      setMembers(memberData); // Set fetched members to state
+      console.log(members);
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect( ()=>{
+    handleFetch()
+  },[])
 
 
   return (
@@ -29,8 +50,17 @@ const Member = ({ navigation }) => {
             autoCapitalize="none"
           />
         </View>
-        <View style={styles.events}>
-          <MemeberComponent />
+          {/* render the data  */}
+          <View style={styles.events}>
+          {/* Render the data using MemberComponent */}
+          {members.map((member, index) => (
+            <MemeberComponent
+              key={index}
+              name={member.name} 
+              email={member.email}
+              person={member.selectedImage}
+            />
+          ))}
         </View>
         <View>
           <BtnPlus />

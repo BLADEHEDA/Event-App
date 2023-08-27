@@ -5,6 +5,7 @@ import Button from '../component/shared/Button';
 import auth from '@react-native-firebase/auth';
 import EyeHideIcon from '../Assets/hide.png'; 
 import EyeShowIcon from '../Assets/view.png';
+import {BallIndicator} from 'react-native-indicators';
 
 
 const Login = ({ navigation }) => {
@@ -12,6 +13,7 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false); 
     const [errors, setErrors] = useState({});
+    const [loading,setLoading] = useState(false)
 
     const handleSubmit = () => {
         const newErrors = {};
@@ -35,6 +37,7 @@ const Login = ({ navigation }) => {
         }
 
         // Authenticate the user
+        setLoading(true)
         auth()
             .signInWithEmailAndPassword(email, password)
             .then(() => {
@@ -44,6 +47,7 @@ const Login = ({ navigation }) => {
                 // Route when successful
                 navigation.navigate('Navigation');
                 console.log('User account created & signed in!');
+                setLoading(false)
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
@@ -57,6 +61,7 @@ const Login = ({ navigation }) => {
                 }
 
                 console.error(error);
+                setLoading(false)
             });
 
         // Clear email and password
@@ -108,6 +113,13 @@ const Login = ({ navigation }) => {
                     </View>
                     {errors.password && <Text style={styles.error}>{errors.password}</Text>}
                 </View>
+
+         
+                { loading &&         
+                <View style={styles.loader} >  
+                <BallIndicator color='blue' />
+                </View>
+                   }
                 <Button onPress={handleSubmit} text='Sign in' style={{ marginTop: 7 }} />
             </View>
         </View>
@@ -149,19 +161,26 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         borderRadius: 5,
     },
+    input1:{
+        color: 'black',
+        borderColor: 'black',
+        fontSize: 18,
+        paddingVertical: 7,
+        paddingLeft: 5,
+
+    },
     passwordInputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
 
-        color: 'black',
         borderColor: 'black',
         borderWidth: 1,
-        paddingLeft: 5,
         borderRadius: 5,
     },
     passwordInput: {
         flex: 1,
         fontSize: 18,
+        color: 'black',
     },
     showHideButton: {
         padding: 5,
@@ -181,5 +200,8 @@ const styles = StyleSheet.create({
         width: 24, // Adjust the width and height as needed
         height: 24,
     },
+    loader:{
+        marginVertical:20
+    }
     
 });
