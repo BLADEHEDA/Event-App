@@ -4,22 +4,8 @@ import Button from '../component/shared/Button'
 import ImagePicker from 'react-native-image-crop-picker';
 import { utils } from '@react-native-firebase/app';
 import storage from '@react-native-firebase/storage';
-// import uuid from 'uuid';
-import { v4 as uuidv4 } from 'uuid';
-import { uuidGenerator } from 'react-native-uuid-generator'; 
-
 import firestore from '@react-native-firebase/firestore';
-import {
-    BallIndicator,
-    BarIndicator,
-    DotIndicator,
-    MaterialIndicator,
-    PacmanIndicator,
-    PulseIndicator,
-    SkypeIndicator,
-    UIActivityIndicator,
-    WaveIndicator,
-  } from 'react-native-indicators';
+import {BallIndicator} from 'react-native-indicators';
 
 
 const CreateMember = ({navigation}) => {
@@ -31,9 +17,7 @@ const CreateMember = ({navigation}) => {
     const [errors, setErrors] = useState({});
     const [members,setMembers]= useState([])
     const [loading,setLoading] = useState(false)
-
-
-  
+ 
 // handle the upload of the image 
     const handleImagePicker = async () => {
         try {
@@ -69,7 +53,7 @@ const CreateMember = ({navigation}) => {
         if (!phoneRegex.test(phone)) {
             newErrors.phone = 'Enter a valid phone number';
         }
-        // validate the image and ensure an imaghe is choosn
+        // validate the image and ensure an imaghe is choosen
             if(!selectedImage){
                 newErrors.selectedImage='Choose an Image'
             }
@@ -82,12 +66,6 @@ console.log(selectedImage);
                         if (selectedImage) {  
                             setLoading(true)
 
-                        // const reference = storage().ref(`Avatar/${filename}`); // Use the unique filename
-                        // await reference.putFile(selectedImage.path);
-                        // const url = await reference.getDownloadURL();
-
-               // Generate a unique filename using react-native-uuid-generator
-          // Generate a unique filename using timestamp
                 const timestamp = Math.floor(Date.now() / 1000);
                 const filename = `${timestamp}_${selectedImage.filename}`;
 
@@ -111,7 +89,6 @@ console.log(selectedImage);
                             alert('member added')
                         });
                             setLoading(false)
-
                                          
                         const addmewMemebr = [...members,newMember]
                         setMembers(addmewMemebr);          
