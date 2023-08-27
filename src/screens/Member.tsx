@@ -29,7 +29,6 @@ const Member = ({ navigation }) => {
     handleFetch()
   },[])
 
-
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaContainer}>
