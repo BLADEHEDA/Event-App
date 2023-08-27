@@ -82,12 +82,6 @@ console.log(selectedImage);
                         if (selectedImage) {  
                             setLoading(true)
 
-                            // const reference = storage().ref(`Avatar/${selectedImage.mime}`);
-                            // await reference.putFile(selectedImage.path);
-                            // const url = await reference.getDownloadURL();
-                               // Generate a unique filename
-                        // const filename = `${uuid.v4()}_${selectedImage.filename}`;
-
                         // const reference = storage().ref(`Avatar/${filename}`); // Use the unique filename
                         // await reference.putFile(selectedImage.path);
                         // const url = await reference.getDownloadURL();
