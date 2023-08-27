@@ -8,9 +8,8 @@ import firestore from '@react-native-firebase/firestore';
 
 const Member = ({ navigation }) => {
   const search = require('../Assets/search.png');
-// subjected to changes 
 // fetch data from the store 
-  const [members, setMembers] = useState([]); // State to store fetched members
+  const [members, setMembers] = useState([]); 
 
   const handleFetch = async () => {
     try {
@@ -18,7 +17,7 @@ const Member = ({ navigation }) => {
       const memberData = memberCollection.docs.map((doc) => doc.data());
       console.log(memberData);
       
-      setMembers(memberData); // Set fetched members to state
+      setMembers(memberData); 
       console.log(members);
       
     } catch (error) {
@@ -52,7 +51,6 @@ const Member = ({ navigation }) => {
         </View>
           {/* render the data  */}
           <View style={styles.events}>
-          {/* Render the data using MemberComponent */}
           {members.map((member, index) => (
             <MemeberComponent
               key={index}
