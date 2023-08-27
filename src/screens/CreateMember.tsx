@@ -82,12 +82,6 @@ console.log(selectedImage);
                         if (selectedImage) {  
                             setLoading(true)
 
-                        // const reference = storage().ref(`Avatar/${filename}`); // Use the unique filename
-                        // await reference.putFile(selectedImage.path);
-                        // const url = await reference.getDownloadURL();
-
-               // Generate a unique filename using react-native-uuid-generator
-          // Generate a unique filename using timestamp
                 const timestamp = Math.floor(Date.now() / 1000);
                 const filename = `${timestamp}_${selectedImage.filename}`;
 
