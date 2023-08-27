@@ -55,8 +55,6 @@ export function HomeStack() {
   );
 }
 
-// another change
-
 const App = () => {
   return (
   
