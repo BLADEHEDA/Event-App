@@ -5,8 +5,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import { utils } from '@react-native-firebase/app';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
-import {
-    BallIndicator} from 'react-native-indicators';
+import {BallIndicator} from 'react-native-indicators';
 
 
 const CreateMember = ({navigation}) => {
