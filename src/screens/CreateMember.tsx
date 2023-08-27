@@ -4,10 +4,6 @@ import Button from '../component/shared/Button'
 import ImagePicker from 'react-native-image-crop-picker';
 import { utils } from '@react-native-firebase/app';
 import storage from '@react-native-firebase/storage';
-// import uuid from 'uuid';
-import { v4 as uuidv4 } from 'uuid';
-import { uuidGenerator } from 'react-native-uuid-generator'; 
-
 import firestore from '@react-native-firebase/firestore';
 import {
     BallIndicator,
@@ -31,9 +27,7 @@ const CreateMember = ({navigation}) => {
     const [errors, setErrors] = useState({});
     const [members,setMembers]= useState([])
     const [loading,setLoading] = useState(false)
-
-
-  
+ 
 // handle the upload of the image 
     const handleImagePicker = async () => {
         try {
@@ -69,7 +63,7 @@ const CreateMember = ({navigation}) => {
         if (!phoneRegex.test(phone)) {
             newErrors.phone = 'Enter a valid phone number';
         }
-        // validate the image and ensure an imaghe is choosn
+        // validate the image and ensure an imaghe is choosen
             if(!selectedImage){
                 newErrors.selectedImage='Choose an Image'
             }
@@ -105,7 +99,6 @@ console.log(selectedImage);
                             alert('member added')
                         });
                             setLoading(false)
-
                                          
                         const addmewMemebr = [...members,newMember]
                         setMembers(addmewMemebr);          
