@@ -4,9 +4,11 @@ import Button from '../component/shared/Button'
 import ImagePicker from 'react-native-image-crop-picker';
 import { utils } from '@react-native-firebase/app';
 import storage from '@react-native-firebase/storage';
-import uuid from 'uuid';
+// import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
+import { uuidGenerator } from 'react-native-uuid-generator'; 
+
 import firestore from '@react-native-firebase/firestore';
-// subjected to changes
 import {
     BallIndicator,
     BarIndicator,
@@ -30,11 +32,9 @@ const CreateMember = ({navigation}) => {
     const [members,setMembers]= useState([])
     const [loading,setLoading] = useState(false)
 
-    // subjeccted to changes 
 
-    // end of changes 
   
-
+// handle the upload of the image 
     const handleImagePicker = async () => {
         try {
             const image = await ImagePicker.openPicker({
@@ -73,6 +73,7 @@ const CreateMember = ({navigation}) => {
             if(!selectedImage){
                 newErrors.selectedImage='Choose an Image'
             }
+console.log(selectedImage);
 
         setErrors(newErrors);
 
@@ -80,10 +81,25 @@ const CreateMember = ({navigation}) => {
                     try {
                         if (selectedImage) {  
                             setLoading(true)
-                            const reference = storage().ref(`Avatar/${selectedImage.mime}`);
-                            await reference.putFile(selectedImage.path);
-                            const url = await reference.getDownloadURL();
-                            // alert('Image successfully uploadeo ')
+
+                            // const reference = storage().ref(`Avatar/${selectedImage.mime}`);
+                            // await reference.putFile(selectedImage.path);
+                            // const url = await reference.getDownloadURL();
+                               // Generate a unique filename
+                        // const filename = `${uuid.v4()}_${selectedImage.filename}`;
+
+                        // const reference = storage().ref(`Avatar/${filename}`); // Use the unique filename
+                        // await reference.putFile(selectedImage.path);
+                        // const url = await reference.getDownloadURL();
+
+               // Generate a unique filename using react-native-uuid-generator
+          // Generate a unique filename using timestamp
+                const timestamp = Math.floor(Date.now() / 1000);
+                const filename = `${timestamp}_${selectedImage.filename}`;
+
+                const reference = storage().ref(`Avatar/${filename}`);
+                await reference.putFile(selectedImage.path);
+                const url = await reference.getDownloadURL();
 
                              // define a meeber object 
                             const newMember ={
@@ -99,18 +115,19 @@ const CreateMember = ({navigation}) => {
                         .add(newMember)
                         .then(() => {
                             alert('member added')
-                            console.log('User added!');
                         });
                             setLoading(false)
+
                                          
                         const addmewMemebr = [...members,newMember]
-                        setMembers(addmewMemebr);
-
+                        setMembers(addmewMemebr);          
                         console.log(members);
+                        navigation.navigate('Members')
                         }
                     } catch (error) {
                         console.error('Error uploading image:', error);
                         alert('yo bro it is not going  ')
+                        setLoading(false)
                     }
         }
 
@@ -168,12 +185,9 @@ const CreateMember = ({navigation}) => {
                         <View style={styles.imagePreviewContainer}>
                             <Image source={{ uri: selectedImage.path }} style={styles.imagePreview} />
                         </View>
-                    )}
-                    {/* subjected to changes */}
-          
+                    )}      
 
                  { loading &&  <BallIndicator color='blue' />}
-                    {/* end of  chanegs  */}
 
                     <View>
                         <Button
