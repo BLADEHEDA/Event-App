@@ -1,11 +1,12 @@
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../component/shared/Button'
 import Person from '../component/Person'
 import DatePicker from 'react-native-date-picker'
 import moment from 'moment'; // Import the moment library
 import Navigation from '../component/shared/Navigation'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import firestore from '@react-native-firebase/firestore';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,12 +30,38 @@ const CreateEvemt = () => {
   const [formstartDate, setFormstartDate]= useState('')
   const [formendDate, setFormendDate]= useState('')
   const [participant ,setParticipant]= useState('')
+  const [count, setCount] = useState(0);
   // const []= useState('')
 
   // hide and show the modal 
-  const showpersorn =()=>{
+  const showpersorn =async()=>{
+// display the participants 
+    try {
+      const memberCollection = await firestore().collection('Member').get();
+      const participantData = memberCollection.docs.map((doc) => doc.data());
+      console.log(participantData);
+      
+      setParticipant(participantData); 
+      console.log(participant);
+      
+    } catch (error) {
+      console.log(error);
+    }
     setShowPerson(true)
   }
+
+  // callback function to recaive staets from child comonent 
+  const handlePersonCheckboxToggle = (name, value,email) => {
+    // Update the state or perform any other action based on the checkbox toggle
+    console.log(`Checkbox for ${name} email ${email} toggled: ${value}`);
+    if (value === true) {
+      setCount(count+ 1);
+    }
+    else {
+      setCount(count-1);
+    }
+  };
+  console.log('final count ', count);
 
   // hide and show the mddals and time field 
   const openStartDatepicker =()=>{
@@ -73,6 +100,8 @@ const newErrors={}
   console.log(description);
   
   setErrors(newErrors);
+
+
 }
   return (
     
@@ -178,13 +207,17 @@ const newErrors={}
         </View>
     {/* to hide and show the participants  */}
 
-{showPerson && ( <View style={styles.show} >
-    <Person
-      name='blade'
-    />
-      <Person
-      name='blade'
-    />
+{showPerson && ( 
+<View style={styles.show} >
+{participant.map((participants,index)=>(
+  <Person
+  key={index}
+  name={participants.name}
+  email={participants.email}
+  person={participants.selectedImage}
+  onCheckboxToggle={handlePersonCheckboxToggle}
+  />
+) ) }
 </View>)
 }
 

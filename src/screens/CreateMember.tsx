@@ -61,6 +61,7 @@ console.log(selectedImage);
 
         setErrors(newErrors);
 
+        // Add image to cloud storage 
         if (Object.keys(newErrors).length === 0) {
                     try {
                         if (selectedImage) {  
