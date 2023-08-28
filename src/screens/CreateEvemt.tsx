@@ -195,13 +195,17 @@ const newErrors={}
         </View>
     {/* to hide and show the participants  */}
 
-{showPerson && ( <View style={styles.show} >
-    <Person
-      name='blade'
-    />
-      <Person
-      name='blade'
-    />
+{showPerson && ( 
+<View style={styles.show} >
+{participant.map((participants,index)=>(
+  <Person
+  key={index}
+  name={participants.name}
+  email={participants.email}
+  person={participants.selectedImage}
+  // person={member.selectedImage}
+  />
+) ) }
 </View>)
 }
 
