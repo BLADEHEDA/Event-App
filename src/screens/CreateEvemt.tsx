@@ -30,6 +30,7 @@ const CreateEvemt = () => {
   const [formstartDate, setFormstartDate]= useState('')
   const [formendDate, setFormendDate]= useState('')
   const [participant ,setParticipant]= useState('')
+  const [count, setCount] = useState(0);
   // const []= useState('')
 
   // hide and show the modal 
@@ -47,9 +48,20 @@ const CreateEvemt = () => {
       console.log(error);
     }
     setShowPerson(true)
-
-
   }
+
+  // callback function to recaive staets from child comonent 
+  const handlePersonCheckboxToggle = (name, value,email) => {
+    // Update the state or perform any other action based on the checkbox toggle
+    console.log(`Checkbox for ${name} email ${email} toggled: ${value}`);
+    if (value === true) {
+      setCount(count+ 1);
+    }
+    else {
+      setCount(count-1);
+    }
+  };
+  console.log('final count ', count);
 
   // hide and show the mddals and time field 
   const openStartDatepicker =()=>{
@@ -203,7 +215,7 @@ const newErrors={}
   name={participants.name}
   email={participants.email}
   person={participants.selectedImage}
-  // person={member.selectedImage}
+  onCheckboxToggle={handlePersonCheckboxToggle}
   />
 ) ) }
 </View>)

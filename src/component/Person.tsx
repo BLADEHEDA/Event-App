@@ -7,10 +7,15 @@ import { checkboxToggle } from '../../store/Slices/personSlice';
 // const person = require('../Assets/person.jpg');
 
 const Person = (props) => {
+  const { name, email, person, onCheckboxToggle } = props;
   // const dispatch =useAppDispatch();
   // const toggleCheckBox =useAppSelector(state =>state.person.isSelected  )
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
-  // console.log(toggleCheckBox);
+  const handleCheckboxToggle = (newValue) => {
+    setToggleCheckBox(newValue);
+    onCheckboxToggle(name, newValue,email); // Notify parent component about the toggle
+  };
+
    
   return (
     <View style={styles.containerx}>
@@ -29,7 +34,8 @@ const Person = (props) => {
                   <CheckBox
             disabled={false}
             value={toggleCheckBox}
-            onValueChange={(newValue) => setToggleCheckBox(newValue)}
+            // onValueChange={(newValue) => setToggleCheckBox(newValue)}
+            onValueChange={handleCheckboxToggle}
             // onValueChange={(newValue) => dispatch(checkboxToggle(newValue))}
             tintColors={{ true: 'blue', false: 'black' }} 
           />
