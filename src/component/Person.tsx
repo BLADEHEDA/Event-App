@@ -7,11 +7,11 @@ import { checkboxToggle } from '../../store/Slices/personSlice';
 const person = require('../Assets/person.jpg');
 
 const Person = () => {
-  const dispatch =useAppDispatch();
+  // const dispatch =useAppDispatch();
   // const toggleCheckBox =useAppSelector(state =>state.person.isSelected  )
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
-  console.log(toggleCheckBox);
-  
+  // console.log(toggleCheckBox);
+   
   return (
     <View style={styles.containerx}>
       <View style={styles.container}>

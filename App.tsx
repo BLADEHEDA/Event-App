@@ -61,7 +61,11 @@ const App = () => {
     <NavigationContainer style={styles.container}>
    <Stack.Navigator>
     
-
+   <Stack.Screen 
+       name="createEvent" 
+        component={CreateEvemt}
+       options={{ headerShown: false }}
+       /> 
    <Stack.Screen 
        name="Member" 
        component={Member}

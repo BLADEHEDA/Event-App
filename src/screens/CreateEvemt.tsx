@@ -1,11 +1,12 @@
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../component/shared/Button'
 import Person from '../component/Person'
 import DatePicker from 'react-native-date-picker'
 import moment from 'moment'; // Import the moment library
 import Navigation from '../component/shared/Navigation'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import firestore from '@react-native-firebase/firestore';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,8 +33,22 @@ const CreateEvemt = () => {
   // const []= useState('')
 
   // hide and show the modal 
-  const showpersorn =()=>{
+  const showpersorn =async()=>{
+// display the participants 
+    try {
+      const memberCollection = await firestore().collection('Member').get();
+      const participantData = memberCollection.docs.map((doc) => doc.data());
+      console.log(participantData);
+      
+      setParticipant(participantData); 
+      console.log(participant);
+      
+    } catch (error) {
+      console.log(error);
+    }
     setShowPerson(true)
+
+
   }
 
   // hide and show the mddals and time field 
@@ -73,6 +88,8 @@ const newErrors={}
   console.log(description);
   
   setErrors(newErrors);
+
+
 }
   return (
     
