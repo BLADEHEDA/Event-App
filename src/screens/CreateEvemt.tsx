@@ -8,7 +8,6 @@ import Navigation from '../component/shared/Navigation'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import firestore from '@react-native-firebase/firestore';
 
-const Tab = createBottomTabNavigator();
 
 const CreateEvemt = () => {   
   const [startDate, setStartDate] = useState(new Date()) 
@@ -54,7 +53,7 @@ const CreateEvemt = () => {
   const handlePersonCheckboxToggle = (name, value, email) => {
     const updatedCheckedParticipants = [...checkedParticipants];
     // Update the state or perform any other action based on the checkbox toggle
-    // console.log(`N ${name} email ${email} toggled: ${value}`);r
+    console.log(`N ${name} email ${email} toggled: ${value}`);r
     if (value === true) {
       setCount(count + 1);
       // Add the participant to the array 
