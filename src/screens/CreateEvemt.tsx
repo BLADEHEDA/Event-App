@@ -9,7 +9,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import firestore from '@react-native-firebase/firestore';
 
 
-const CreateEvemt = () => {   
+const CreateEvemt = ({navigation} ) => {   
   const [startDate, setStartDate] = useState(new Date()) 
   const [open, setOpen] = useState(false)
   const [show,setShow]= useState(false)
@@ -53,7 +53,7 @@ const CreateEvemt = () => {
   const handlePersonCheckboxToggle = (name, value, email) => {
     const updatedCheckedParticipants = [...checkedParticipants];
     // Update the state or perform any other action based on the checkbox toggle
-    console.log(`N ${name} email ${email} toggled: ${value}`);r
+    console.log(`N ${name} email ${email} toggled: ${value}`);
     if (value === true) {
       setCount(count + 1);
       // Add the participant to the array 
@@ -79,57 +79,104 @@ const CreateEvemt = () => {
     setOpen1(true); 
     setShow1(true)
   }
+  // form validation
+// const handleSubmit = async () => {
+//   const newErrors = {};
 
-// vallidate the forms 
+//   // Validate the title field
+//   if (!title) {
+//     newErrors.title = 'Enter a Title';
+//   }
 
-const handleSubmit= async ()=>{
-const newErrors={}
+//   // Validate the description field
+//   if (!description) {
+//     newErrors.description = 'Enter a Description';
+//   }
+//   // Validate the startdate
+//   if (!formstartDate) {
+//     newErrors.formstartDate = 'Enter startdate';
+//   }
+//   if (!formendDate) {
+//     newErrors.formendDate = 'Enter enddate';
+//   }
 
-  // validate the title irel a
-  if(!title){
-    newErrors.title ='Enter a Title'
+//   // Check if there are any errors
+//   if (Object.keys(newErrors).length > 0) {
+//     setErrors(newErrors);
+//     return; // Exit the function if there are errors
+//   }
+
+//   // Create participant object
+//   const newparticipant = {
+//     id: Math.floor(Math.random() * 1000),
+//     title,
+//     Number_of_participants: count,
+//     description,
+//     startDate,
+//     endDate,
+//     participant: checkedParticipants,
+//   };
+//   setEventList([...eventList, newparticipant]);
+//   console.log(eventList);
+// try{
+//           firestore()
+//           .collection('Event')
+//           .add(newparticipant)
+//           .then(() => {
+//               alert('Event added')
+//               navigation.navigate('Event')
+//               console.log(errors);
+              
+//           });
+//       }
+//       catch(error){
+//         console.log(error);
+//         alert('error dude')
+//         console.log(errors);
+//       }
+// };
+// start of  changes 
+const handleSubmit = async () => {
+  const newErrors = {};
+
+  if (!title) {
+    newErrors.title = 'Enter a Title';
+  }
+  if (!description) {
+    newErrors.description = 'Enter a Description';
+  }
+  alert(Object.keys(newErrors).length)
+  console.log(newErrors.length);
+  if (Object.keys(newErrors).length > 0) {
+    setErrors(newErrors);
+    return;
   }
 
-  // validate the description field 
-  if(!description){
-    newErrors.description ='Enter a Description'
-  }
-  // validate the startdate 
-  if(!formstartDate){
-    newErrors.formstartDate='Enter startdate'
-  }
-  if(!formendDate){
-    newErrors.formendDate ='Enter enddate'
-  }
-  setErrors(newErrors);
-// create participant object 
-const newparticipant ={
-  id: Math.floor(Math.random() * 1000),
-  title,
-  Number_of_participants: count,
-  description,
-  startDate,
-  endDate,
-  participant: checkedParticipants
-}
-          // uploaded the members to the firestore 
-try{
-          firestore()
-          .collection('Event')
-          .add(newparticipant)
-          .then(() => {
-              alert('Event added')
-          });
-      }
-      catch(error){
-        console.log(error);
-        alert('error dude')
-        
-      }
+  const newEvent = {
+    id: Math.floor(Math.random() * 1000),
+    title,
+    Number_of_participants: count,
+    description,
+    startDate,
+    endDate,
+    participant: checkedParticipants,
+  };
 
-setEventList([...eventList,newparticipant] )
-console.log(eventList);
-}
+  try {
+    await firestore().collection('Event').add(newEvent);
+    console.log('Event added successfully');
+    alert('added')
+  }
+  
+  catch (error) {
+    console.error('Error adding event:', error);
+    alert('Error adding event');
+  }
+
+  setEventList([...eventList, newEvent]);
+};
+
+// End of changes 
   return (
     
     <View>      
