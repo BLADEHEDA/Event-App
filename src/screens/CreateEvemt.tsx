@@ -11,7 +11,7 @@ import firestore from '@react-native-firebase/firestore';
 const Tab = createBottomTabNavigator();
 
 const CreateEvemt = () => {   
-  const [startDate, setStartDate] = useState(new Date())
+  const [startDate, setStartDate] = useState(new Date()) 
   const [open, setOpen] = useState(false)
   const [show,setShow]= useState(false)
   const [show1,setShow1]= useState(false)
@@ -54,7 +54,7 @@ const CreateEvemt = () => {
   const handlePersonCheckboxToggle = (name, value, email) => {
     const updatedCheckedParticipants = [...checkedParticipants];
     // Update the state or perform any other action based on the checkbox toggle
-    console.log(`N ${name} email ${email} toggled: ${value}`);
+    // console.log(`N ${name} email ${email} toggled: ${value}`);r
     if (value === true) {
       setCount(count + 1);
       // Add the participant to the array 
@@ -68,8 +68,6 @@ const CreateEvemt = () => {
     }
     }
     setCheckedParticipants(updatedCheckedParticipants);
-  
-    // console.log('Checked Participants:', updatedCheckedParticipants);
     
   };
  
@@ -85,7 +83,7 @@ const CreateEvemt = () => {
 
 // vallidate the forms 
 
-const handleSubmit=()=>{
+const handleSubmit= async ()=>{
 const newErrors={}
 
   // validate the title irel a
@@ -106,12 +104,40 @@ const newErrors={}
   }
   // validate the availability of participants 
   
-  console.log(title);
-  console.log(description);
-  console.log('choosen participants:',checkedParticipants);
+  // console.log(title);
+  // console.log(description);
+  // console.log(startDate);
+  // console.log(endDate);
+  // console.log('choosen participants:',checkedParticipants);
   setErrors(newErrors);
+// create participant object 
+const newparticipant ={
+  id: Math.floor(Math.random() * 1000),
+  title,
+  Number_of_participants: count,
+  description,
+  startDate,
+  endDate,
+  participant: checkedParticipants
+}
+// subjected to changes ,add event to firestore 
+try{
+          // uploaded the members to the firestore 
+          firestore()
+          .collection('Event')
+          .add(newparticipant)
+          .then(() => {
+              alert('Event added')
+          });
+      }
+      catch(error){
+        console.log(error);
+        alert('error dude')
+        
+      }
 
-
+setEventList([...eventList,newparticipant] )
+console.log(eventList);
 }
   return (
     
