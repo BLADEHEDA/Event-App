@@ -29,20 +29,20 @@ const CreateEvemt = () => {
   const [errors,setErrors]=useState({})
   const [formstartDate, setFormstartDate]= useState('')
   const [formendDate, setFormendDate]= useState('')
-  const [participant ,setParticipant]= useState('')
+  const [participant, setParticipant] = useState([]);
   const [count, setCount] = useState(0);
   // const []= useState('')
-
+  const [eventList, setEventList] = useState([]);
+  const [checkedParticipants, setCheckedParticipants] = useState([]);
   // hide and show the modal 
   const showpersorn =async()=>{
 // display the participants 
     try {
       const memberCollection = await firestore().collection('Member').get();
       const participantData = memberCollection.docs.map((doc) => doc.data());
-      console.log(participantData);
       
       setParticipant(participantData); 
-      console.log(participant);
+      // console.log(participant);
       
     } catch (error) {
       console.log(error);
@@ -50,19 +50,29 @@ const CreateEvemt = () => {
     setShowPerson(true)
   }
 
-  // callback function to recaive staets from child comonent 
-  const handlePersonCheckboxToggle = (name, value,email) => {
+  // track changes of the checkbox
+  const handlePersonCheckboxToggle = (name, value, email) => {
+    const updatedCheckedParticipants = [...checkedParticipants];
     // Update the state or perform any other action based on the checkbox toggle
-    console.log(`Checkbox for ${name} email ${email} toggled: ${value}`);
+    console.log(`N ${name} email ${email} toggled: ${value}`);
     if (value === true) {
-      setCount(count+ 1);
+      setCount(count + 1);
+      // Add the participant to the array 
+      updatedCheckedParticipants.push({ name, email });
+    } else {
+      setCount(count - 1);
+          // Remove participant from the array
+    const index = updatedCheckedParticipants.findIndex(participant => participant.email === email);
+    if (index !== -1) {
+      updatedCheckedParticipants.splice(index, 1);
     }
-    else {
-      setCount(count-1);
     }
+    setCheckedParticipants(updatedCheckedParticipants);
+  
+    // console.log('Checked Participants:', updatedCheckedParticipants);
+    
   };
-  console.log('final count ', count);
-
+ 
   // hide and show the mddals and time field 
   const openStartDatepicker =()=>{
     setOpen(true);    
@@ -98,7 +108,7 @@ const newErrors={}
   
   console.log(title);
   console.log(description);
-  
+  console.log('choosen participants:',checkedParticipants);
   setErrors(newErrors);
 
 
