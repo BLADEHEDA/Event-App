@@ -10,8 +10,8 @@ const EventComponent: React.FC<EventComponentProps> = (props) => {
   return (
     <View style={styles.main}>
       <Text style={styles.text}>{props.title}</Text>
-      <Text style={styles.text}>{props.startDate}</Text>
-      <Text style={styles.text}>{props.endDate}</Text>
+      <Text style={styles.text}>Event-StartDate: {props.startDate}</Text>
+      <Text style={styles.text}>Event-EndDate: {props.endDate}</Text>
     </View>
   );
 };

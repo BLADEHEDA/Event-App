@@ -3,22 +3,27 @@ import React, { useEffect, useState } from 'react'
 import EventComponent from '../component/EventComponent'
 import BtnPlus from '../component/shared/BtnPlus'
 import firestore from '@react-native-firebase/firestore';
+import {BallIndicator} from 'react-native-indicators';
 
 const Event = ({navigation}) => {
     const search = require('../Assets/search.png')
     const [event,setEvent]=useState([])
+    const [loading,setLoading] = useState(false)
   const handlenavigate =()=>{
     navigation.navigate('CreateEvemt')
   }
   // fetch the evnts from the store 
   const handleFetch = async()=> {
+    setLoading(true)
   try{
     const eventCollection= await firestore().collection('Event').get();
     const eventData= eventCollection.docs.map((doc) => doc.data());
     console.log(eventData)
     setEvent(eventData)
+    setLoading(false)
   }catch(error){
     console.log(error); 
+    setLoading(false)
   }
 }
  useEffect(()=>{
@@ -45,15 +50,20 @@ const Event = ({navigation}) => {
                 autoCapitalize="none"
                 ></TextInput>
          </View>
+         { loading &&         
+                <View style={styles.loader} >  
+                <BallIndicator color='blue' />
+                </View>
+                   }
+    <View style={styles.events}>  
 
-    <View style={styles.events}>    
     {/* render the Api data  */}
     {event.map((event,index) =>(
         <EventComponent 
         key={index}
         title={event.title}
-      // startDate={event.startDate}
-      // endDate={event.endDate}
+        startDate={event.startDate.toDate().toLocaleString()}
+        endDate={event.endDate.toDate().toLocaleString()}
         />
     ))
     }
