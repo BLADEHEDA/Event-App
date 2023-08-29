@@ -1,12 +1,29 @@
 import { SafeAreaView, StyleSheet, Text, View,Image, TextInput,ScrollView } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import EventComponent from '../component/EventComponent'
 import BtnPlus from '../component/shared/BtnPlus'
-import Navigation from '../component/shared/Navigation'
+import firestore from '@react-native-firebase/firestore';
 
-
-const Event = () => {
+const Event = ({navigation}) => {
     const search = require('../Assets/search.png')
+    const [event,setEvent]=useState([])
+  const handlenavigate =()=>{
+    navigation.navigate('CreateEvemt')
+  }
+  // fetch the evnts from the store 
+  const handleFetch = async()=> {
+  try{
+    const eventCollection= await firestore().collection('Event').get();
+    const eventData= eventCollection.docs.map((doc) => doc.data());
+    console.log(eventData)
+    setEvent(eventData)
+  }catch(error){
+    console.log(error); 
+  }
+}
+ useEffect(()=>{
+  handleFetch()
+ },[])
 
   return (
     <View style={styles.container}>
@@ -30,20 +47,22 @@ const Event = () => {
          </View>
 
     <View style={styles.events}>    
-    <EventComponent 
-    name='bruno mars'
-    email='yobro@gmail.com'
-    />
-       <EventComponent 
-    name='bruno mars'
-    email='yobro@gmail.com'
-    />
-      <EventComponent 
-    name='bruno mars'
-    email='yobro@gmail.com'
-    />
+    {/* render the Api data  */}
+    {event.map((event,index) =>(
+        <EventComponent 
+        key={index}
+        title={event.title}
+      // startDate={event.startDate}
+      // endDate={event.endDate}
+        />
+    ))
+    }
       </View> 
-    <View><BtnPlus/></View>
+    <View>
+      <BtnPlus
+      onPress={handlenavigate}
+      />
+    </View>
   </View>
   </ScrollView>
   </View>

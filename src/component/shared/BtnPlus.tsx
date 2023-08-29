@@ -1,12 +1,12 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 
-const BtnPlus: React.FC = () => {
+const BtnPlus: React.FC = ({onPress}) => {
 
   return (
     <View>
       <View style={styles.container}>
-        <TouchableOpacity style={styles.btnplus}>
+        <TouchableOpacity onPress={onPress}  style={styles.btnplus}>
           <Text style={styles.btnText}>+</Text>
         </TouchableOpacity>
       </View>
