@@ -61,7 +61,7 @@ const App = () => {
     <NavigationContainer style={styles.container}>
    <Stack.Navigator>
     
-   <Stack.Screen 
+   {/* <Stack.Screen 
        name="createEvent" 
         component={CreateEvemt}
        options={{ headerShown: false }}
@@ -70,7 +70,7 @@ const App = () => {
        name="Member" 
        component={Member}
        options={{ headerShown: false }}
-       />
+       /> */}
           <Stack.Screen 
        name="Login" 
        component={Login}

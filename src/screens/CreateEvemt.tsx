@@ -8,10 +8,9 @@ import Navigation from '../component/shared/Navigation'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import firestore from '@react-native-firebase/firestore';
 
-const Tab = createBottomTabNavigator();
 
-const CreateEvemt = () => {   
-  const [startDate, setStartDate] = useState(new Date())
+const CreateEvemt = ({navigation} ) => {   
+  const [startDate, setStartDate] = useState(new Date()) 
   const [open, setOpen] = useState(false)
   const [show,setShow]= useState(false)
   const [show1,setShow1]= useState(false)
@@ -29,20 +28,20 @@ const CreateEvemt = () => {
   const [errors,setErrors]=useState({})
   const [formstartDate, setFormstartDate]= useState('')
   const [formendDate, setFormendDate]= useState('')
-  const [participant ,setParticipant]= useState('')
+  const [participant, setParticipant] = useState([]);
   const [count, setCount] = useState(0);
   // const []= useState('')
-
+  const [eventList, setEventList] = useState([]);
+  const [checkedParticipants, setCheckedParticipants] = useState([]);
   // hide and show the modal 
   const showpersorn =async()=>{
 // display the participants 
     try {
       const memberCollection = await firestore().collection('Member').get();
       const participantData = memberCollection.docs.map((doc) => doc.data());
-      console.log(participantData);
       
       setParticipant(participantData); 
-      console.log(participant);
+      // console.log(participant);
       
     } catch (error) {
       console.log(error);
@@ -50,19 +49,27 @@ const CreateEvemt = () => {
     setShowPerson(true)
   }
 
-  // callback function to recaive staets from child comonent 
-  const handlePersonCheckboxToggle = (name, value,email) => {
+  // track changes of the checkbox
+  const handlePersonCheckboxToggle = (name, value, email) => {
+    const updatedCheckedParticipants = [...checkedParticipants];
     // Update the state or perform any other action based on the checkbox toggle
-    console.log(`Checkbox for ${name} email ${email} toggled: ${value}`);
+    console.log(` ${name} email ${email} toggled: ${value}`);
     if (value === true) {
-      setCount(count+ 1);
+      setCount(count + 1);
+      // Add the participant to the array 
+      updatedCheckedParticipants.push({ name, email });
+    } else {
+      setCount(count - 1);
+          // Remove participant from the array
+    const index = updatedCheckedParticipants.findIndex(participant => participant.email === email);
+    if (index !== -1) {
+      updatedCheckedParticipants.splice(index, 1);
     }
-    else {
-      setCount(count-1);
     }
+    setCheckedParticipants(updatedCheckedParticipants);
+    
   };
-  console.log('final count ', count);
-
+ 
   // hide and show the mddals and time field 
   const openStartDatepicker =()=>{
     setOpen(true);    
@@ -73,36 +80,51 @@ const CreateEvemt = () => {
     setShow1(true)
   }
 
-// vallidate the forms 
+const handleSubmit = async () => {
+  const newErrors = {};
+  if (!title) {
+    newErrors.title = 'Enter a Title';
+  }
+  if (!description) {
+    newErrors.description = 'Enter a Description';
+  }
+  if (count< 1) {
+    newErrors.participant = 'Event must have a participant';
+    console.log(checkedParticipants.length);
+    
+  }
+console.log('count', count);
 
-const handleSubmit=()=>{
-const newErrors={}
-
-  // validate the title irel a
-  if(!title){
-    newErrors.title ='Enter a Title'
+  if (Object.keys(newErrors).length > 0) {
+    setErrors(newErrors);
+    return;
   }
 
-  // validate the description field 
-  if(!description){
-    newErrors.description ='Enter a Description'
+  const newEvent = {
+    id: Math.floor(Math.random() * 1000),
+    title,
+    Number_of_participants: count,
+    description,
+    startDate,
+    endDate,
+    participant: checkedParticipants,
+  };
+
+  try {
+    await firestore().collection('Event').add(newEvent);
+    console.log('Event added successfully');
+    alert('Event created')
   }
-  // validate the startdate 
-  if(!formstartDate){
-    newErrors.formstartDate='Enter startdate'
-  }
-  if(!formendDate){
-    newErrors.formendDate ='Enter enddate'
-  }
-  // validate the availability of participants 
   
-  console.log(title);
-  console.log(description);
-  
-  setErrors(newErrors);
+  catch (error) {
+    console.error('Error adding event:', error);
+    alert('Error adding event');
+  }
 
+  setEventList([...eventList, newEvent]);
+};
 
-}
+// End of changes 
   return (
     
     <View>      
