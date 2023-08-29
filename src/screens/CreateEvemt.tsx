@@ -102,13 +102,6 @@ const newErrors={}
   if(!formendDate){
     newErrors.formendDate ='Enter enddate'
   }
-  // validate the availability of participants 
-  
-  // console.log(title);
-  // console.log(description);
-  // console.log(startDate);
-  // console.log(endDate);
-  // console.log('choosen participants:',checkedParticipants);
   setErrors(newErrors);
 // create participant object 
 const newparticipant ={
@@ -120,9 +113,8 @@ const newparticipant ={
   endDate,
   participant: checkedParticipants
 }
-// subjected to changes ,add event to firestore 
-try{
           // uploaded the members to the firestore 
+try{
           firestore()
           .collection('Event')
           .add(newparticipant)
