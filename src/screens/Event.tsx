@@ -10,7 +10,8 @@ const Event = ({navigation}) => {
     const [event,setEvent]=useState([])
     const [loading,setLoading] = useState(false)
   const handlenavigate =()=>{
-    navigation.navigate('CreateEvemt')
+    // navigation.navigate('CreateEvent')
+    navigation.navigate('createEvent')
   }
   // fetch the evnts from the store 
   const handleFetch = async()=> {
@@ -18,7 +19,7 @@ const Event = ({navigation}) => {
   try{
     const eventCollection= await firestore().collection('Event').get();
     const eventData= eventCollection.docs.map((doc) => doc.data());
-    console.log(eventData)
+    // console.log(eventData)
     setEvent(eventData)
     setLoading(false)
   }catch(error){
@@ -64,6 +65,12 @@ const Event = ({navigation}) => {
         title={event.title}
         startDate={event.startDate.toDate().toLocaleString()}
         endDate={event.endDate.toDate().toLocaleString()}
+        description={event.description}
+        participant={event.participant}
+        Number_of_participants={event.Number_of_participants}
+        onPress={() => {
+          navigation.navigate('EventDetails', { event }); // Navigate with event data
+        }}
         />
     ))
     }

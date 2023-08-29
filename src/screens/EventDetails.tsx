@@ -1,25 +1,28 @@
 import React from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import BtnPlus from '../component/shared/BtnPlus';
 import MemberComponent from '../component/shared/MemeberComponent';
 import Navigation from '../component/shared/Navigation';
 
-const EventDetails = () => {
+const EventDetails = ({ route,navigation }) => {
   const image = require('../Assets/backarrow.png');
   const persons = require('../Assets/multiple.png');
+  const { title, startDate, endDate,description,participant,Number_of_participants } = route.params.event;
+  console.log('particpants ',participant);
   
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeAreaContainer}>
-        <View>
+        <TouchableOpacity
+        onPress={()=>{navigation.navigate('Event')  } }
+        >
           <Image source={image} style={styles.image} />
-        </View>
+        </TouchableOpacity>
         <View style={styles.Eventdetails} >
-    <Text style={styles.texts}>- Event title</Text>
-    <Text style={styles.texts}>- Start date</Text>
-    <Text style={styles.texts}>- End Date</Text>
-    <Text style={styles.texts}>- Start time</Text>
-    <Text style={styles.texts}>- Event description</Text>
+      <Text style={styles.texts}>- {title}</Text>
+      <Text style={styles.texts}>- End Date:{startDate.toDate().toLocaleString()}</Text>
+    <Text style={styles.texts}>- Start Date:{endDate.toDate().toLocaleString()} </Text>
+    <Text style={styles.texts}>- {description} </Text>
     </View>
     <View style={styles.textcontainer}>
         <View >
@@ -28,14 +31,18 @@ const EventDetails = () => {
         <View style={styles.texts2}><BtnPlus/></View>
     </View>
         <View>
-          <MemberComponent />
-          <MemberComponent />
+          {/* sybjected to changes */}
+          { participant.map((participant,index)=>(
+           <MemberComponent
+           key={index}
+           name={participant.name} 
+           email={participant.email}
+          //  person={member.selectedImage}
+         />
+          ))
+          }
         </View>
       </SafeAreaView>
-      
-      <View style={styles.navigationContainer}>
-        <Navigation />
-      </View>
     </View>
   );
 };

@@ -7,6 +7,7 @@ import moment from 'moment'; // Import the moment library
 import Navigation from '../component/shared/Navigation'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import firestore from '@react-native-firebase/firestore';
+import {BallIndicator} from 'react-native-indicators';
 
 
 const CreateEvemt = ({navigation} ) => {   
@@ -30,22 +31,27 @@ const CreateEvemt = ({navigation} ) => {
   const [formendDate, setFormendDate]= useState('')
   const [participant, setParticipant] = useState([]);
   const [count, setCount] = useState(0);
-  // const []= useState('')
+  const [loading,setLoading] = useState(false)
+  const [loading1,setLoading1] = useState(false)
   const [eventList, setEventList] = useState([]);
   const [checkedParticipants, setCheckedParticipants] = useState([]);
+
   // hide and show the modal 
   const showpersorn =async()=>{
 // display the participants 
     try {
+      setLoading(true)
       const memberCollection = await firestore().collection('Member').get();
       const participantData = memberCollection.docs.map((doc) => doc.data());
       
       setParticipant(participantData); 
-      // console.log(participant);
+      setLoading(false)
       
     } catch (error) {
       console.log(error);
+      setLoading(false)
     }
+    setLoading(false)
     setShowPerson(true)
   }
 
@@ -116,6 +122,7 @@ console.log(Object.keys(newErrors).length);
   };
 
   try {
+    setLoading1(true)
     // Use a Promise and a timeout to handle potential errors
     const uploadPromise = firestore().collection('Event').add(newEvent);
     const timeoutPromise = new Promise((resolve, reject) => {
@@ -128,9 +135,12 @@ console.log(Object.keys(newErrors).length);
     setErrors({});
     alert('Event created');
     navigation.navigate('Event');
+  
+    setLoading1(false)
   } catch (error) {
     console.error('Error adding event:', error);
     alert('Error adding event');
+    setLoading1(false)
   }
 
   setEventList([...eventList, newEvent]);
@@ -236,6 +246,11 @@ console.log(Object.keys(newErrors).length);
              }  
              }
             />
+                   { loading &&         
+                <View style={styles.loader} >  
+                <BallIndicator color='blue' />
+                </View>
+                   }
         </View>
     {/* to hide and show the participants  */}
 <View> 
@@ -257,7 +272,11 @@ console.log(Object.keys(newErrors).length);
 </View>
 
 
-
+{ loading1 &&         
+                <View style={styles.loader1} >  
+                <BallIndicator color='blue' />
+                </View>
+                   }
         <Button
         onPress={ handleSubmit}
     text="Create Event"
@@ -353,7 +372,9 @@ textArea: {
 },
 textinput:{
   marginBottom: 15,
+},
+loader1:{
+  marginTop: 7,
 }
-
     
 })
