@@ -93,7 +93,12 @@ const handleSubmit = async () => {
     console.log(checkedParticipants.length);
     
   }
-console.log('count', count);
+  // validate date 
+  if(startDate>=endDate){
+    newErrors.startDate ='Enter valid date'
+  }
+// console.log('count', count);
+console.log(Object.keys(newErrors).length);
 
   if (Object.keys(newErrors).length > 0) {
     setErrors(newErrors);
@@ -165,7 +170,7 @@ console.log('count', count);
         <View>
       {show ? <Text style={styles.datevalue}>{formattedStartDate}</Text> : null}
       {show1 ?<Text style={styles.datevalue}>{formattedEndDate} </Text> : null}
-    
+      {errors.startDate && <Text style={styles.error}>{errors.startDate} </Text> }
     
       </View>
         {/* picker implementtion */}
@@ -221,7 +226,6 @@ console.log('count', count);
         }}
       />   
 
-        {/* end of changes  */} 
         <View>
             <Button
             onPress={showpersorn }
