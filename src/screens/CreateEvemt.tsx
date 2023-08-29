@@ -53,7 +53,7 @@ const CreateEvemt = ({navigation} ) => {
   const handlePersonCheckboxToggle = (name, value, email) => {
     const updatedCheckedParticipants = [...checkedParticipants];
     // Update the state or perform any other action based on the checkbox toggle
-    console.log(`N ${name} email ${email} toggled: ${value}`);
+    console.log(` ${name} email ${email} toggled: ${value}`);
     if (value === true) {
       setCount(count + 1);
       // Add the participant to the array 
@@ -79,74 +79,22 @@ const CreateEvemt = ({navigation} ) => {
     setOpen1(true); 
     setShow1(true)
   }
-  // form validation
-// const handleSubmit = async () => {
-//   const newErrors = {};
 
-//   // Validate the title field
-//   if (!title) {
-//     newErrors.title = 'Enter a Title';
-//   }
-
-//   // Validate the description field
-//   if (!description) {
-//     newErrors.description = 'Enter a Description';
-//   }
-//   // Validate the startdate
-//   if (!formstartDate) {
-//     newErrors.formstartDate = 'Enter startdate';
-//   }
-//   if (!formendDate) {
-//     newErrors.formendDate = 'Enter enddate';
-//   }
-
-//   // Check if there are any errors
-//   if (Object.keys(newErrors).length > 0) {
-//     setErrors(newErrors);
-//     return; // Exit the function if there are errors
-//   }
-
-//   // Create participant object
-//   const newparticipant = {
-//     id: Math.floor(Math.random() * 1000),
-//     title,
-//     Number_of_participants: count,
-//     description,
-//     startDate,
-//     endDate,
-//     participant: checkedParticipants,
-//   };
-//   setEventList([...eventList, newparticipant]);
-//   console.log(eventList);
-// try{
-//           firestore()
-//           .collection('Event')
-//           .add(newparticipant)
-//           .then(() => {
-//               alert('Event added')
-//               navigation.navigate('Event')
-//               console.log(errors);
-              
-//           });
-//       }
-//       catch(error){
-//         console.log(error);
-//         alert('error dude')
-//         console.log(errors);
-//       }
-// };
-// start of  changes 
 const handleSubmit = async () => {
   const newErrors = {};
-
   if (!title) {
     newErrors.title = 'Enter a Title';
   }
   if (!description) {
     newErrors.description = 'Enter a Description';
   }
-  alert(Object.keys(newErrors).length)
-  console.log(newErrors.length);
+  if (count< 1) {
+    newErrors.participant = 'Event must have a participant';
+    console.log(checkedParticipants.length);
+    
+  }
+console.log('count', count);
+
   if (Object.keys(newErrors).length > 0) {
     setErrors(newErrors);
     return;
@@ -165,7 +113,7 @@ const handleSubmit = async () => {
   try {
     await firestore().collection('Event').add(newEvent);
     console.log('Event added successfully');
-    alert('added')
+    alert('Event created')
   }
   
   catch (error) {
