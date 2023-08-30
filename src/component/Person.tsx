@@ -39,7 +39,7 @@ const Person = (props) => {
             // onValueChange={(newValue) => dispatch(checkboxToggle(newValue))}
             tintColors={{ true: 'blue', false: 'black' }} 
           />
-              </View>
+           </View>
       </View>
     </View>
   );

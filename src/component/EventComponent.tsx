@@ -9,8 +9,9 @@ interface EventComponentProps {
 const EventComponent: React.FC<EventComponentProps> = (props) => {
   return (
     <View style={styles.main}>
-      <Text style={styles.text}>{props.name}</Text>
-      <Text style={styles.text}>{props.email}</Text>
+      <Text style={styles.text}>{props.title}</Text>
+      <Text style={styles.text}>Event-StartDate: {props.startDate}</Text>
+      <Text style={styles.text}>Event-EndDate: {props.endDate}</Text>
     </View>
   );
 };

@@ -93,7 +93,12 @@ const handleSubmit = async () => {
     console.log(checkedParticipants.length);
     
   }
-console.log('count', count);
+  // validate date 
+  if(startDate>=endDate){
+    newErrors.startDate ='Enter valid date'
+  }
+// console.log('count', count);
+console.log(Object.keys(newErrors).length);
 
   if (Object.keys(newErrors).length > 0) {
     setErrors(newErrors);
@@ -111,12 +116,19 @@ console.log('count', count);
   };
 
   try {
-    await firestore().collection('Event').add(newEvent);
+    // Use a Promise and a timeout to handle potential errors
+    const uploadPromise = firestore().collection('Event').add(newEvent);
+    const timeoutPromise = new Promise((resolve, reject) => {
+      setTimeout(() => reject('Upload timed out'), 10000); // Timeout after 10 seconds
+    });
+
+    await Promise.race([uploadPromise, timeoutPromise]);
+    
     console.log('Event added successfully');
-    alert('Event created')
-  }
-  
-  catch (error) {
+    setErrors({});
+    alert('Event created');
+    navigation.navigate('Event');
+  } catch (error) {
     console.error('Error adding event:', error);
     alert('Error adding event');
   }
@@ -124,7 +136,6 @@ console.log('count', count);
   setEventList([...eventList, newEvent]);
 };
 
-// End of changes 
   return (
     
     <View>      
@@ -159,7 +170,7 @@ console.log('count', count);
         <View>
       {show ? <Text style={styles.datevalue}>{formattedStartDate}</Text> : null}
       {show1 ?<Text style={styles.datevalue}>{formattedEndDate} </Text> : null}
-    
+      {errors.startDate && <Text style={styles.error}>{errors.startDate} </Text> }
     
       </View>
         {/* picker implementtion */}
@@ -215,7 +226,6 @@ console.log('count', count);
         }}
       />   
 
-        {/* end of changes  */} 
         <View>
             <Button
             onPress={showpersorn }
@@ -228,7 +238,7 @@ console.log('count', count);
             />
         </View>
     {/* to hide and show the participants  */}
-
+<View> 
 {showPerson && ( 
 <View style={styles.show} >
 {participant.map((participants,index)=>(
@@ -240,8 +250,12 @@ console.log('count', count);
   onCheckboxToggle={handlePersonCheckboxToggle}
   />
 ) ) }
-</View>)
+</View>
+)
 }
+{errors.participant && <Text style={styles.error}>{errors.participant} </Text> }
+</View>
+
 
 
         <Button
@@ -311,7 +325,7 @@ textArea: {
     borderWidth: 1,
     borderColor:'black',
     borderColor: '#6B6767',
-  paddingHorizontal:5,
+    paddingHorizontal:5,
     color:'black',
   },
   datePicker:{

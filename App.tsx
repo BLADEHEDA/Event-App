@@ -71,6 +71,16 @@ const App = () => {
        component={Member}
        options={{ headerShown: false }}
        /> */}
+         {/* <Stack.Screen 
+       name="Event" 
+       component={Event}
+       options={{ headerShown: false }}
+       />  */}
+       <Stack.Screen 
+       name="createEvent" 
+        component={CreateEvemt}
+       options={{ headerShown: false }}
+       /> 
           <Stack.Screen 
        name="Login" 
        component={Login}
