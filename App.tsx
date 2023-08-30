@@ -60,11 +60,7 @@ const App = () => {
   
     <NavigationContainer style={styles.container}>
    <Stack.Navigator>
-   {/* <Stack.Screen 
-       name="EventDetails" 
-       component={EventDetails}
-       options={{ headerShown: false }}
-       />  */}
+   {/* 
 {/*     
       <Stack.Screen 
        name="Login" 
@@ -73,7 +69,7 @@ const App = () => {
         headerShown: false, 
       }}
        />  */}
-       
+
          <Stack.Screen 
        name="Login" 
        component={Login}
