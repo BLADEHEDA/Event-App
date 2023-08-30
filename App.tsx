@@ -46,7 +46,7 @@ export function HomeStack() {
        options={{ headerShown: false }}
        />
 
-                <Stack.Screen 
+        <Stack.Screen 
        name="EventDetails" 
        component={EventDetails}
        options={{ headerShown: false }}
@@ -60,34 +60,19 @@ const App = () => {
   
     <NavigationContainer style={styles.container}>
    <Stack.Navigator>
-    
    {/* <Stack.Screen 
-       name="createEvent" 
-        component={CreateEvemt}
-       options={{ headerShown: false }}
-       /> 
-   <Stack.Screen 
-       name="Member" 
-       component={Member}
-       options={{ headerShown: false }}
-       /> */}
-         {/* <Stack.Screen 
-       name="Event" 
-       component={Event}
+       name="EventDetails" 
+       component={EventDetails}
        options={{ headerShown: false }}
        />  */}
-       <Stack.Screen 
-       name="createEvent" 
-        component={CreateEvemt}
-       options={{ headerShown: false }}
-       /> 
-          <Stack.Screen 
+{/*     
+      <Stack.Screen 
        name="Login" 
        component={Login}
        options={{ 
         headerShown: false, 
       }}
-       /> 
+       />  */}
            <Stack.Screen 
        name="Navigation" 
        component={Navigation}
