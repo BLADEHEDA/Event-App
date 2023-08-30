@@ -10,7 +10,6 @@ const Event = ({navigation}) => {
     const [event,setEvent]=useState([])
     const [loading,setLoading] = useState(false)
   const handlenavigate =()=>{
-    // navigation.navigate('CreateEvent')
     navigation.navigate('createEvent')
   }
   // fetch the evnts from the store 
@@ -68,6 +67,7 @@ const Event = ({navigation}) => {
         description={event.description}
         participant={event.participant}
         Number_of_participants={event.Number_of_participants}
+        id={event.id}
         onPress={() => {
           navigation.navigate('EventDetails', { event }); // Navigate with event data
         }}

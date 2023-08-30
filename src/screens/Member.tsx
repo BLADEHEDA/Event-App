@@ -6,28 +6,52 @@ import MemeberComponent from '../component/shared/MemeberComponent';
 import Navigation from '../component/shared/Navigation';
 import firestore from '@react-native-firebase/firestore';
 
-const Member = ({ navigation }) => {
+
+
+const Member = ({ navigation,route}) => {
+
   const search = require('../Assets/search.png');
+  const memberId = route.params?.memberId; // Use the correct parameter name
+
 // fetch data from the store 
   const [members, setMembers] = useState([]); 
 
+
   const handleFetch = async () => {
+    // alert(memberId);
+    
     try {
       const memberCollection = await firestore().collection('Member').get();
-      const memberData = memberCollection.docs.map((doc) => doc.data());
+      const memberData = memberCollection.docs.map((doc) => ({
+        id: doc.id, // Set the document ID
+        ...doc.data(), // Include other data
+      }));
       console.log(memberData);
       
       setMembers(memberData); 
-      console.log(members);
-      
     } catch (error) {
       console.log(error);
     }
   };
-
+  
   useEffect( ()=>{
     handleFetch()
   },[])
+
+  // delete the data
+    const handleDelete = async (id) => {
+      try {
+        const updatedMembers = members.filter((member) => member.id !== id);
+        setMembers(updatedMembers);
+    
+        // Delete member from Firestore using the document ID
+        await firestore().collection('Member').doc(id).delete();
+        console.log('Member deleted!');
+      } catch (error) {
+        console.log('Error deleting member:', error);
+      }
+    };
+    
 
   return (
     <View style={styles.container}>
@@ -50,12 +74,16 @@ const Member = ({ navigation }) => {
         </View>
           {/* render the data  */}
           <View style={styles.events}>
-          {members.map((member, index) => (
+          {/* {members.map((member, index) => ( */}
+          {members.map((member) => (
             <MemeberComponent
-              key={index}
+              // key={index}
+              key={member.id}
+              id={member.id}
               name={member.name} 
               email={member.email}
               person={member.selectedImage}
+              onPress={()=>handleDelete(member.id)}
             />
           ))}
         </View>

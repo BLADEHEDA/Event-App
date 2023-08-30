@@ -83,18 +83,31 @@ console.log(selectedImage);
                             selectedImage :url,
                         };
                         // uploaded the members to the firestore 
-                        firestore()
-                        .collection('Member')
-                        .add(newMember)
-                        .then(() => {
-                            alert('member added')
-                        });
-                            setLoading(false)
+                        // firestore()
+                        // .collection('Member')
+                        // .add(newMember)
+                        // .then(() => {
+                        //     alert('member added')
+                        // });
+                        //     setLoading(false)
                                          
+                        // const addmewMemebr = [...members,newMember]
+                        // setMembers(addmewMemebr);          
+                        // console.log(members);
+                        // navigation.navigate('Members')
+
+                        // upload alternative 
+                        const docRef = await firestore().collection('Member').add(newMember);
+                        const memberId = docRef.id; // Get the ID of the added document
+                  
+                        console.log('Member added successfully with ID:', memberId);
+                        setLoading(false);
                         const addmewMemebr = [...members,newMember]
-                        setMembers(addmewMemebr);          
-                        console.log(members);
-                        navigation.navigate('Members')
+                       setMembers(addmewMemebr);  
+                       console.log(members); 
+                        navigation.navigate('Members', { memberId :memberId  });
+                        // navigation.navigate('Members', { memberId: newMemberId })
+
                         }
                     } catch (error) {
                         console.error('Error uploading image:', error);

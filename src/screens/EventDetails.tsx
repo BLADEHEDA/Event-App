@@ -4,11 +4,22 @@ import BtnPlus from '../component/shared/BtnPlus';
 import MemberComponent from '../component/shared/MemeberComponent';
 import Navigation from '../component/shared/Navigation';
 
+const MemberComponents=(props)=>{
+  return(
+    <View style={styles.main}>
+    <View style={styles.text}>
+      <Text style={styles.text}>{props.name} yo</Text>
+      <Text style={styles.text}>{props.email}</Text>
+    </View>
+  </View>
+  )
+
+}
+
 const EventDetails = ({ route,navigation }) => {
   const image = require('../Assets/backarrow.png');
   const persons = require('../Assets/multiple.png');
-  const { title, startDate, endDate,description,participant,Number_of_participants } = route.params.event;
-  console.log('particpants ',participant);
+  const { title, startDate, endDate,description,participant,Number_of_participants,id } = route.params.event;
   
   return (
     <View style={styles.container}>
@@ -19,6 +30,7 @@ const EventDetails = ({ route,navigation }) => {
           <Image source={image} style={styles.image} />
         </TouchableOpacity>
         <View style={styles.Eventdetails} >
+        <Text style={styles.texts}>- {id}</Text>
       <Text style={styles.texts}>- {title}</Text>
       <Text style={styles.texts}>- End Date:{startDate.toDate().toLocaleString()}</Text>
     <Text style={styles.texts}>- Start Date:{endDate.toDate().toLocaleString()} </Text>
@@ -31,13 +43,11 @@ const EventDetails = ({ route,navigation }) => {
         <View style={styles.texts2}><BtnPlus/></View>
     </View>
         <View>
-          {/* sybjected to changes */}
           { participant.map((participant,index)=>(
-           <MemberComponent
+           <MemberComponents
            key={index}
            name={participant.name} 
            email={participant.email}
-          //  person={member.selectedImage}
          />
           ))
           }
@@ -97,11 +107,8 @@ marginTop:-3
 textcontainer:{
     flexDirection:'row',
     justifyContent:'space-between',
-    // borderWidth:1,
-    // borderColor:'black',
     marginBottom:5,
 },
-
   navigationContainer: {
     position: 'absolute',
     left: 0,
@@ -112,5 +119,19 @@ textcontainer:{
     backgroundColor: 'white',
     zIndex: 999,
   },
+// subjected to changes 
+main: {
+  backgroundColor: '#1E319D',
+  paddingHorizontal: 10,
+  paddingVertical: 7,
+  borderRadius: 8,
+  marginBottom: 10,
+  flexDirection: 'row',
+},
+text: {
+  color: 'white',
+  fontSize: 15,
+},
+
   
 });
