@@ -17,11 +17,7 @@ const CreateMember = ({navigation}) => {
     const [errors, setErrors] = useState({});
     const [members,setMembers]= useState([])
     const [loading,setLoading] = useState(false)
-    // const [memberId,setMemberId] = useState('')
 
-
-
- 
 // handle the upload of the image 
     const handleImagePicker = async () => {
         try {
@@ -87,36 +83,14 @@ const CreateMember = ({navigation}) => {
                             phone,
                             selectedImage :url,
                         };
-                        // uploaded the members to the firestore 
-                        // firestore()
-                        // .collection('Member')
-                        // .add(newMember)
-                        // .then(() => {
-                        //     alert('member added')
-                        // });
-                        //     setLoading(false)
-                                         
-                        // const addmewMemebr = [...members,newMember]
-                        // setMembers(addmewMemebr);          
-                        // console.log(members);
-                        // navigation.navigate('Members')
-
-                        // upload alternative 
-                        // const docRef = await firestore().collection('Member').add(newMember);
+                        // post the data to firestore and define the collection id
                        firestore().collection('Member').doc(id.toString()).set(newMember)
-                    //    console.log(docRef);
-                       
-                        // const id = docRef.id; // Get the ID of the added document
-                        // setMemberId(id)
-                        // console.log('Member added successfully with ID staets :',memberId );
                         console.log('Member added successfully with ID value:',id);
                         setLoading(false);
                         const addmewMemebr = [...members,newMember]
                        setMembers(addmewMemebr);  
                     //    console.log(members); 
                     navigation.navigate('Members')
-                        // navigation.navigate('Members', { memberId :memberId  });
-                        // navigation.navigate('Members', { memberId: newMemberId })
 
                         }
                     } catch (error) {
@@ -127,11 +101,6 @@ const CreateMember = ({navigation}) => {
         }
 
     };
-
-         // Log memberId whenever it changes
-//   useEffect(() => {
-//     console.log('Member ID:', memberId);
-//   }, [memberId]);
 
     return (
         <View style={styles.container}>
