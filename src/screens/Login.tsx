@@ -48,11 +48,15 @@ const Login = ({ navigation }) => {
                 navigation.navigate('Navigation');
                 console.log('User account created & signed in!');
                 setLoading(false)
+                
+                setEmail('');
+                setPassword('');
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
                     console.log('That email address is already in use!');
                     alert('That email address is already in use!');
+                    
                 }
 
                 if (error.code === 'auth/invalid-email') {
@@ -65,8 +69,7 @@ const Login = ({ navigation }) => {
             });
 
         // Clear email and password
-        setEmail('');
-        setPassword('');
+     
     };
 
     return (

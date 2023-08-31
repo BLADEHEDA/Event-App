@@ -17,7 +17,7 @@ const MemberComponent: React.FC<MemberComponentProps> = (props) => {
         <Image style={styles.image} source={{ uri: props.person }} />
       </View>
       <View style={styles.texts}>
-      <Text style={styles.text}>{props.id}</Text>  
+      {/* <Text style={styles.text}>{props.id}</Text>   */}
         <Text style={styles.text}>{props.name} yo</Text>
         <Text style={styles.text}>{props.email}</Text>
       </View>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
   image1:{
     marginTop: 7,
-    tintColor: 'white' 
+    tintColor: 'white',
   },
   cont1:{
     flexDirection: 'row',

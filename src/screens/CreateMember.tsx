@@ -17,6 +17,10 @@ const CreateMember = ({navigation}) => {
     const [errors, setErrors] = useState({});
     const [members,setMembers]= useState([])
     const [loading,setLoading] = useState(false)
+    // const [memberId,setMemberId] = useState('')
+
+
+
  
 // handle the upload of the image 
     const handleImagePicker = async () => {
@@ -57,7 +61,7 @@ const CreateMember = ({navigation}) => {
             if(!selectedImage){
                 newErrors.selectedImage='Choose an Image'
             }
-console.log(selectedImage);
+// console.log(selectedImage);
 
         setErrors(newErrors);
 
@@ -73,10 +77,11 @@ console.log(selectedImage);
                 const reference = storage().ref(`Avatar/${filename}`);
                 await reference.putFile(selectedImage.path);
                 const url = await reference.getDownloadURL();
+                 const id = Math.floor(Math.random() * 1000) ;
 
                              // define a meeber object 
                             const newMember ={
-                            id: Math.floor(Math.random() * 1000),
+                            id:id,
                             name, 
                             email,
                             phone,
@@ -97,26 +102,36 @@ console.log(selectedImage);
                         // navigation.navigate('Members')
 
                         // upload alternative 
-                        const docRef = await firestore().collection('Member').add(newMember);
-                        const memberId = docRef.id; // Get the ID of the added document
-                  
-                        console.log('Member added successfully with ID:', memberId);
+                        // const docRef = await firestore().collection('Member').add(newMember);
+                       firestore().collection('Member').doc(id.toString()).set(newMember)
+                    //    console.log(docRef);
+                       
+                        // const id = docRef.id; // Get the ID of the added document
+                        // setMemberId(id)
+                        // console.log('Member added successfully with ID staets :',memberId );
+                        console.log('Member added successfully with ID value:',id);
                         setLoading(false);
                         const addmewMemebr = [...members,newMember]
                        setMembers(addmewMemebr);  
-                       console.log(members); 
-                        navigation.navigate('Members', { memberId :memberId  });
+                    //    console.log(members); 
+                    navigation.navigate('Members')
+                        // navigation.navigate('Members', { memberId :memberId  });
                         // navigation.navigate('Members', { memberId: newMemberId })
 
                         }
                     } catch (error) {
-                        console.error('Error uploading image:', error);
+                        console.error('Error', error);
                         alert('yo bro it is not going  ')
                         setLoading(false)
                     }
         }
 
     };
+
+         // Log memberId whenever it changes
+//   useEffect(() => {
+//     console.log('Member ID:', memberId);
+//   }, [memberId]);
 
     return (
         <View style={styles.container}>
