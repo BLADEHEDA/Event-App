@@ -43,20 +43,7 @@ console.log('Event deleted!');
   handleFetch()
  },[])
 
-// //  to changes r
-// const handleDelee = async (id) => {
-//   try {
-//     const updatedMembers = members.filter((member) => member.id !== id);
-//     setMembers(updatedMembers);
-
-//     // Delete member from Firestore using the document ID
-//     await firestore().collection('Event').doc(id.toString()).delete();
-//     console.log('Member deleted!');
-//   } catch (error) {
-//     console.log('Error deleting member:', error);
-//   }
-// };
-// // ebd 
+// handle Edit 
 
   return (
     <View style={styles.container}>
@@ -104,13 +91,13 @@ console.log('Event deleted!');
     ))
     }
       </View> 
-    <View>
+  </View>
+  </ScrollView>
+  <View>
       <BtnPlus
       onPress={handlenavigate}
       />
     </View>
-  </View>
-  </ScrollView>
   </View>
 
   )

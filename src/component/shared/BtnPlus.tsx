@@ -18,7 +18,7 @@ export default BtnPlus;
 
 const styles = StyleSheet.create({
   btnplus: {
-    backgroundColor: '#E5E5E5',
+    backgroundColor: '#bec4c2',
     width: 50,
     height: 50,
     borderRadius: 50,
@@ -26,12 +26,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   btnText: {
-    fontSize: 30,
+    fontSize: 35,
     fontWeight: '700',
     color: 'black',
+    marginBottom:5
   },
   container: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    position:'absolute',
+    bottom:25,
+    right:5,
   },
 });

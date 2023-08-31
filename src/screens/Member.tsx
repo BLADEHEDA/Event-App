@@ -5,7 +5,7 @@ import BtnPlus from '../component/shared/BtnPlus';
 import MemeberComponent from '../component/shared/MemeberComponent';
 import Navigation from '../component/shared/Navigation';
 import firestore from '@react-native-firebase/firestore';
-
+import {BallIndicator} from 'react-native-indicators';
 
 
 const Member = ({ navigation,route}) => {
@@ -15,26 +15,29 @@ const Member = ({ navigation,route}) => {
 
 // fetch data from the store 
   const [members, setMembers] = useState([]); 
-  const handleFetch = async () => {
-  
-    
+  const [loading,setLoading] = useState(false)
+
+  // fetch data from the firestore 
+  const handleFetch = async () => {   
     try {
+      setLoading(true)
       const memberCollection = await firestore().collection('Member').get();
       const memberData = memberCollection.docs.map((doc) => ({
         id: doc.id, // Set the document ID
         ...doc.data(), // Include other data
       }));
       // console.log(memberData);
-      
       setMembers(memberData); 
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
       console.log(error);
     }
   };
   
   useEffect( ()=>{
     handleFetch()
-  },[members])
+  },[])
 
   // delete the data
     const handleDelete = async (id) => {
@@ -85,10 +88,14 @@ const Member = ({ navigation,route}) => {
             />
           ))}
         </View>
-        <View>
-          <BtnPlus />
-        </View>
+        { loading && <BallIndicator color='blue' />}
       </SafeAreaView>
+      <View>
+          <BtnPlus 
+          onPress={()=>{ navigation.navigate('CreateMember') } }
+          />
+        </View>
+        
     </View>
   );
 };
