@@ -27,8 +27,8 @@ const Member = ({ navigation,route}) => {
         ...doc.data(), // Include other data
       }));
       // console.log(memberData);
-      setLoading(false)
       setMembers(memberData); 
+      setLoading(false)
     } catch (error) {
       setLoading(false)
       console.log(error);
@@ -37,7 +37,7 @@ const Member = ({ navigation,route}) => {
   
   useEffect( ()=>{
     handleFetch()
-  },[members])
+  },[])
 
   // delete the data
     const handleDelete = async (id) => {
