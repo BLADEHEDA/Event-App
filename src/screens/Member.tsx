@@ -13,12 +13,17 @@ const Member = ({ navigation,route}) => {
   const search = require('../Assets/search.png');
   const memberId = route.params?.memberId; // Use the correct parameter name
 
+          //  // Log memberId whenever it changes
+          //  useEffect(() => {
+          //   console.log('Member ID:', memberId);
+          // }, [memberId]);
+
 // fetch data from the store 
   const [members, setMembers] = useState([]); 
 
-
+  // alert(memberId);
   const handleFetch = async () => {
-    // alert(memberId);
+  
     
     try {
       const memberCollection = await firestore().collection('Member').get();
@@ -26,7 +31,7 @@ const Member = ({ navigation,route}) => {
         id: doc.id, // Set the document ID
         ...doc.data(), // Include other data
       }));
-      console.log(memberData);
+      // console.log(memberData);
       
       setMembers(memberData); 
     } catch (error) {
@@ -36,7 +41,7 @@ const Member = ({ navigation,route}) => {
   
   useEffect( ()=>{
     handleFetch()
-  },[])
+  },[members])
 
   // delete the data
     const handleDelete = async (id) => {
@@ -45,7 +50,7 @@ const Member = ({ navigation,route}) => {
         setMembers(updatedMembers);
     
         // Delete member from Firestore using the document ID
-        await firestore().collection('Member').doc(id).delete();
+        await firestore().collection('Member').doc(id.toString()).delete();
         console.log('Member deleted!');
       } catch (error) {
         console.log('Error deleting member:', error);

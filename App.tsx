@@ -60,23 +60,14 @@ const App = () => {
   
     <NavigationContainer style={styles.container}>
    <Stack.Navigator>
-   {/* 
-{/*     
-      <Stack.Screen 
-       name="Login" 
-       component={Login}
-       options={{ 
-        headerShown: false, 
-      }}
-       />  */}
 
-         <Stack.Screen 
+         {/* <Stack.Screen 
        name="Login" 
        component={Login}
        options={{ 
         headerShown: false, 
       }}
-       />
+       /> */}
            <Stack.Screen 
        name="Navigation" 
        component={Navigation}
