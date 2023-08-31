@@ -110,9 +110,10 @@ console.log(Object.keys(newErrors).length);
     setErrors(newErrors);
     return;
   }
+  const id = Math.floor(Math.random() * 1000).toString();
 
   const newEvent = {
-    id: Math.floor(Math.random() * 1000),
+    id:id,
     title,
     Number_of_participants: count,
     description,
@@ -124,7 +125,7 @@ console.log(Object.keys(newErrors).length);
   try {
     setLoading1(true)
     // Use a Promise and a timeout to handle potential errors
-    const uploadPromise = firestore().collection('Event').add(newEvent);
+    const uploadPromise = firestore().collection('Event').doc(id).set(newEvent)
     const timeoutPromise = new Promise((resolve, reject) => {
       setTimeout(() => reject('Upload timed out'), 10000); // Timeout after 10 seconds
     });

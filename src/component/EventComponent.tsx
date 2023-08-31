@@ -1,21 +1,32 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
 
 interface EventComponentProps {
   name: string;
   email: string;
 }
 
+
 const EventComponent: React.FC<EventComponentProps> = (props) => {
+  const deleteIcon: ImagesourcePropType = require('../Assets/delete.png');
+
+
   return (
-    <TouchableOpacity onPress={props.onPress}  >
-    <View style={styles.main}>
-      <Text style={styles.text}>{props.title}</Text>
-      <Text style={styles.text}>Event-StartDate: {props.startDate}</Text>
-      <Text style={styles.text}>Event-EndDate: {props.endDate}</Text>
-      <Text style={styles.text}>Number of participants: {props.Number_of_participants}</Text> 
+    <View  style={styles.main}>
+      <View style={styles.left}>
+        <TouchableOpacity onPress={props.onPress} >
+          <Text style={styles.text}>{props.title}</Text>
+          <Text style={styles.text}>StartDate: {props.startDate}</Text>
+          <Text style={styles.text}>EndDate: {props.endDate}</Text>
+          <Text style={styles.text}>Number of participants: {props.Number_of_participants}</Text> 
+        </TouchableOpacity>
     </View>
-    </TouchableOpacity>
+    <View style={styles.right}>
+      <TouchableOpacity onPress={props.onDelete}>  
+      <Image style={styles.image} source={deleteIcon}/>
+      </TouchableOpacity>
+    </View>
+    </View>
   );
 };
 
@@ -28,9 +39,15 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     borderRadius: 8,
     marginBottom: 10,
+    flexDirection:'row',
+    justifyContent:'space-between'
   },
   text: {
     color: 'white',
     fontSize: 15,
   },
+  image:{
+    tintColor:'white',
+  }
+  
 });
