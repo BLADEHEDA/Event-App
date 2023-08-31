@@ -18,7 +18,7 @@ const MemberComponent: React.FC<MemberComponentProps> = (props) => {
       </View>
       <View style={styles.texts}>
       {/* <Text style={styles.text}>{props.id}</Text>   */}
-        <Text style={styles.text}>{props.name} yo</Text>
+        <Text style={styles.text}>{props.name}</Text>
         <Text style={styles.text}>{props.email}</Text>
       </View>
       </View>

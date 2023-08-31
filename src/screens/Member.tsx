@@ -13,15 +13,8 @@ const Member = ({ navigation,route}) => {
   const search = require('../Assets/search.png');
   const memberId = route.params?.memberId; // Use the correct parameter name
 
-          //  // Log memberId whenever it changes
-          //  useEffect(() => {
-          //   console.log('Member ID:', memberId);
-          // }, [memberId]);
-
 // fetch data from the store 
   const [members, setMembers] = useState([]); 
-
-  // alert(memberId);
   const handleFetch = async () => {
   
     
