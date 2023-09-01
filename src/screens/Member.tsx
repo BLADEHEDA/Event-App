@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, Image, TextInput } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TextInput, ScrollView } from 'react-native';
 import EventComponent from '../component/EventComponent';
 import BtnPlus from '../component/shared/BtnPlus';
 import MemeberComponent from '../component/shared/MemeberComponent';
@@ -56,7 +56,7 @@ const Member = ({ navigation,route}) => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView style={styles.safeAreaContainer}>
+      <ScrollView style={styles.safeAreaContainer}>
         <View style={styles.main}>
           <View>
             <Text style={styles.mainText}>Members</Text>
@@ -89,7 +89,7 @@ const Member = ({ navigation,route}) => {
           ))}
         </View>
         { loading && <BallIndicator color='blue' />}
-      </SafeAreaView>
+      </ScrollView>
       <View>
           <BtnPlus 
           onPress={()=>{ navigation.navigate('CreateMember') } }
