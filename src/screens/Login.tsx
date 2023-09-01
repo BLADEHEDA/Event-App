@@ -128,7 +128,7 @@ const Login = ({ navigation }) => {
                 text='Sign in' 
                 style={{ 
                     marginTop: 7,
-                    marginBottom:90,
+                    marginBottom:100,
                     
                  }} />
             </View>
