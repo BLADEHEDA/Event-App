@@ -1,12 +1,11 @@
 import React, { useEffect,useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, Image, TextInput, ScrollView } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import EventComponent from '../component/EventComponent';
 import BtnPlus from '../component/shared/BtnPlus';
 import MemeberComponent from '../component/shared/MemeberComponent';
 import Navigation from '../component/shared/Navigation';
 import firestore from '@react-native-firebase/firestore';
 import {BallIndicator} from 'react-native-indicators';
-
 
 const Member = ({ navigation,route}) => {
 
@@ -16,6 +15,8 @@ const Member = ({ navigation,route}) => {
 // fetch data from the store 
   const [members, setMembers] = useState([]); 
   const [loading,setLoading] = useState(false)
+  const [searchInput , setSearchInput]= useState('')
+  const [showtextField, setShowtextField ] =  useState(false)
 
   // fetch data from the firestore 
   const handleFetch = async () => {   
@@ -39,6 +40,7 @@ const Member = ({ navigation,route}) => {
     handleFetch()
   },[])
 
+
   // delete the data
     const handleDelete = async (id) => {
       try {
@@ -52,6 +54,23 @@ const Member = ({ navigation,route}) => {
         console.log('Error deleting member:', error);
       }
     };
+
+    // filter the data from the seacr input   
+    const handleSearch = (text) => {
+      setSearchInput(text);
+    
+      if (text === '') {
+        // If the search input is empty,it refetches the original list 
+        handleFetch();
+      } else {
+        // Filter members based on the entered text
+        const searchedList = members.filter((member) =>
+          member.name.toLowerCase().includes(text.toLowerCase()) ||
+          member.email.toLowerCase().includes(text.toLowerCase())
+        );
+        setMembers(searchedList);
+      }
+    };
     
 
   return (
@@ -61,26 +80,29 @@ const Member = ({ navigation,route}) => {
           <View>
             <Text style={styles.mainText}>Members</Text>
           </View>
-          <View>
+          <TouchableOpacity 
+          onPress={()=>{setShowtextField(!showtextField)} }
+          >
             <Image source={search} style={styles.search} />
-          </View>
+          </TouchableOpacity>
         </View>
-        <View style={styles.show}>
+
+   { showtextField &&     <View style={styles.show}>
           <TextInput
             style={styles.textInput}
             placeholder="Enter Text to search"
             placeholderTextColor="gray"
             autoCapitalize="none"
+            value={searchInput}
+            onChangeText={handleSearch}
           />
-        </View>
+        </View>}
+
           {/* render the data  */}
           <View style={styles.events}>
-          {/* {members.map((member, index) => ( */}
-          {members.map((member) => (
+          {members.map((member, index) => (
             <MemeberComponent
-              // key={index}
-              key={member.id}
-              // id={member.id}
+              key={index}
               name={member.name} 
               email={member.email}
               person={member.selectedImage}
