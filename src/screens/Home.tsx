@@ -1,10 +1,11 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '../component/shared/Button'
 import Login from './Login'
 import Logo from '../component/shared/Logo'
 
 const Home = ({navigation}) => {
+  const [hidememberbutton, setHidemeberbutton] = useState(true)
   // navigate to the createEvent page 
   const handleEvent=()=>{
     navigation.navigate('createEvent')
@@ -12,6 +13,7 @@ const Home = ({navigation}) => {
   // Navigate to the createMemebrs page 
   const handleMembrs=()=>{
     navigation.navigate('CreateMember')
+    setHidemeberbutton(false)
   }
   return (   
     <View style={styles.container}>
@@ -32,13 +34,16 @@ const Home = ({navigation}) => {
         { marginTop:10 }  
         }
     />
-        <Button
-        onPress={handleMembrs}
-      text="Add Members"
-      style={
-        { marginTop:10 }  
-        }
-    />
+    {hidememberbutton &&
+            <Button
+            onPress={handleMembrs}
+          text="Add Members"
+          style={
+            { marginTop:10 }  
+            }
+        />
+    }
+
  </View>
   )
 }

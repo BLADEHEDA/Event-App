@@ -98,11 +98,12 @@ texts:{
 texts1:{
     color:'black', 
     fontSize:25,
-    fontWeight:'600'   
+    fontWeight:'600'  ,
+    // textAlign:'center' ,
+    marginRight:45,
 },
 texts2:{
-marginTop:-3
-
+marginTop:73
 },
 textcontainer:{
     flexDirection:'row',
