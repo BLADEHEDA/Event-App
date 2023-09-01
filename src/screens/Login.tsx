@@ -143,15 +143,7 @@ const styles = StyleSheet.create({
         paddingTop: 70,
         paddingHorizontal: 15,
         backgroundColor: 'white',
-        // height:'100%',
-        // marginBottom: 170,
     },
-    // formcontainer:{
-    //     // marginBottom: 150, 
-    //     backgroundColor: 'white',
-    //     // paddingBottom:200,
-    // },
-
     logo: {
         marginBottom: 70,
     },

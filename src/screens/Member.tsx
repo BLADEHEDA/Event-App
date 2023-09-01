@@ -6,6 +6,8 @@ import MemeberComponent from '../component/shared/MemeberComponent';
 import Navigation from '../component/shared/Navigation';
 import firestore from '@react-native-firebase/firestore';
 import {BallIndicator} from 'react-native-indicators';
+import EditMember from '../component/shared/EditMember';
+
 
 const Member = ({ navigation,route}) => {
 
@@ -17,6 +19,8 @@ const Member = ({ navigation,route}) => {
   const [loading,setLoading] = useState(false)
   const [searchInput , setSearchInput]= useState('')
   const [showtextField, setShowtextField ] =  useState(false)
+  const [edited,setEdited ] = useState([])
+  const [hiddenForm, setHiddemForm ] = useState(false)
 
   // fetch data from the firestore 
   const handleFetch = async () => {   
@@ -56,7 +60,7 @@ const Member = ({ navigation,route}) => {
       }
     };
 
-    // filter the data from the seacr input   
+    // filter the data from the seacrh input   
     const handleSearch = (text) => {
       setSearchInput(text);
     
@@ -73,6 +77,17 @@ const Member = ({ navigation,route}) => {
       }
     };
     
+    // edit the data 
+    const handleEdit=(id)=>{
+    // Find the member object with the matching ID
+  const memberToEdit = members.find((member) => member.id === id);
+  console.log(memberToEdit);
+  setEdited(memberToEdit)
+    } 
+    useEffect( ()=>{
+    
+    },[edited])
+ 
 
   return (
     <View style={styles.container}>
@@ -104,14 +119,19 @@ const Member = ({ navigation,route}) => {
           {members.map((member, index) => (
             <MemeberComponent
               key={index}
+              id={member.id}
               name={member.name} 
               email={member.email}
               person={member.selectedImage}
               onPress={()=>handleDelete(member.id)}
+              onEdit={()=>{handleEdit(member.id)} }
             />
           ))}
         </View>
         { loading && <BallIndicator color='blue' />}
+
+    {  <EditMember editedData={edited} />}
+    
       </ScrollView>
       <View>
           <BtnPlus 

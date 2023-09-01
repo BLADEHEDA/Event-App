@@ -12,6 +12,7 @@ import CreateMember from './src/screens/CreateMember';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Loginedit from './src/component/shared/EditMember';
 
 
 const Stack = createNativeStackNavigator();
@@ -59,10 +60,11 @@ const App = () => {
   return (
   
     <NavigationContainer style={styles.container}>
-   <Stack.Navigator>
+          {/* <Loginedit/> */}
 
+    <Stack.Navigator> 
 
-         {/* <Stack.Screen 
+  {/* <Stack.Screen 
        name="Login" 
        component={Login}
        options={{ 
@@ -77,6 +79,7 @@ const App = () => {
       }}
        />  
   </Stack.Navigator>
+  
   </NavigationContainer>
 
 
