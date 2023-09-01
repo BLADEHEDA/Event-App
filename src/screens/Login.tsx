@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View, TouchableOpacity,Image } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity,Image, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 import Logo from '../component/shared/Logo';
 import Button from '../component/shared/Button';
@@ -73,11 +73,11 @@ const Login = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <View style={styles.logo}>
                 <Logo />
             </View>
-            <View>
+            <View  style={styles.formcontainer}>
                 <Text style={styles.text1}>Login to your Account</Text>
                 <View style={[styles.form, errors.email && styles.inputError]}>
                     <Text style={styles.text2}>Email :</Text>
@@ -123,9 +123,16 @@ const Login = ({ navigation }) => {
                 <BallIndicator color='blue' />
                 </View>
                    }
-                <Button onPress={handleSubmit} text='Sign in' style={{ marginTop: 7 }} />
+                <Button 
+                onPress={handleSubmit} 
+                text='Sign in' 
+                style={{ 
+                    marginTop: 7,
+                    marginBottom:90,
+                    
+                 }} />
             </View>
-        </View>
+        </ScrollView>
     );
 };
 
@@ -136,7 +143,15 @@ const styles = StyleSheet.create({
         paddingTop: 70,
         paddingHorizontal: 15,
         backgroundColor: 'white',
+        // height:'100%',
+        // marginBottom: 170,
     },
+    // formcontainer:{
+    //     // marginBottom: 150, 
+    //     backgroundColor: 'white',
+    //     // paddingBottom:200,
+    // },
+
     logo: {
         marginBottom: 70,
     },
