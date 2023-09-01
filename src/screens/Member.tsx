@@ -16,7 +16,9 @@ const Member = ({ navigation,route}) => {
 // fetch data from the store 
   const [members, setMembers] = useState([]); 
   const [loading,setLoading] = useState(false)
+  const [searchInput , setSearchInput]= useState('')
 
+  
   // fetch data from the firestore 
   const handleFetch = async () => {   
     try {
@@ -39,6 +41,7 @@ const Member = ({ navigation,route}) => {
     handleFetch()
   },[])
 
+
   // delete the data
     const handleDelete = async (id) => {
       try {
@@ -52,7 +55,20 @@ const Member = ({ navigation,route}) => {
         console.log('Error deleting member:', error);
       }
     };
-    
+    // filter the data from the seacr input 
+    const handleSearch = (text) => {
+      setSearchInput(text);
+      const searchedList = members.filter((member) =>
+        member.name.toLowerCase().includes(text.toLowerCase()) ||
+        member.email.toLowerCase().includes(text.toLowerCase())
+      );
+      setMembers(searchedList);
+    };
+
+    useEffect(() => {
+      // console.log(searchInput);
+    }, [searchInput,members]);
+  
 
   return (
     <View style={styles.container}>
@@ -71,6 +87,8 @@ const Member = ({ navigation,route}) => {
             placeholder="Enter Text to search"
             placeholderTextColor="gray"
             autoCapitalize="none"
+            value={searchInput}
+            onChangeText={handleSearch}
           />
         </View>
           {/* render the data  */}
