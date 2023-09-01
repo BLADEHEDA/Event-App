@@ -18,7 +18,7 @@ const MemberComponent: React.FC<MemberComponentProps> = (props) => {
         <Image style={styles.image} source={{ uri: props.person }} />
       </View>
       <View style={styles.texts}>
-      <Text style={styles.text}>{props.id}</Text>  
+      {/* <Text style={styles.text}>{props.id}</Text>   */}
         <Text style={styles.text}>{props.name}</Text>
         <Text style={styles.text}>{props.email}</Text>
       </View>

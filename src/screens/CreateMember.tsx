@@ -17,6 +17,7 @@ const CreateMember = ({navigation}) => {
     const [errors, setErrors] = useState({});
     const [members,setMembers]= useState([])
     const [loading,setLoading] = useState(false)
+    const [hiddenForm, setHiddenForm] = useState(true);
 
 // handle the upload of the image 
     const handleImagePicker = async () => {
@@ -90,8 +91,8 @@ const CreateMember = ({navigation}) => {
                         const addmewMemebr = [...members,newMember]
                        setMembers(addmewMemebr);  
                     //    console.log(members); 
-                    navigation.navigate('Members')
-
+                    // navigation.navigate('Members')
+                    hideForm()
                         }
                     } catch (error) {
                         console.error('Error', error);

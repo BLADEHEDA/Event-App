@@ -9,7 +9,7 @@ import {BallIndicator} from 'react-native-indicators';
 import Button from './Button';
 
 
-const EditMember = ({editedData}) => {
+const EditMember = ({editedData, onClose}) => {
     const imageUpload = require("../../Assets/upload.png");
     const [selectedImage, setSelectedImage] = useState();
     const [name, setName] = useState('');
@@ -101,7 +101,7 @@ const EditMember = ({editedData}) => {
                         setLoading(false);
                         const addmewMemebr = [...members,newMember]
                        setMembers(addmewMemebr);       
-                    
+                       onClose()
                     // navigation.navigate('Members')
                         }
                     } catch (error) {
@@ -167,7 +167,7 @@ const EditMember = ({editedData}) => {
             </View>):
         
                 <View style={styles.imagePreviewContainer}>
-                    <Image source={{ uri: selectedImage.path }} style={styles.imagePreview} />
+                    <Image source={{ uri: selectedImage.path || selectedImage }} style={styles.imagePreview} />
                 </View>
           
            }     

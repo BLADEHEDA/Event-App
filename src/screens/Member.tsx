@@ -79,14 +79,14 @@ const Member = ({ navigation,route}) => {
     
     // edit the data 
     const handleEdit=(id)=>{
+      setHiddemForm(true)
     // Find the member object with the matching ID
   const memberToEdit = members.find((member) => member.id === id);
   console.log(memberToEdit);
   setEdited(memberToEdit)
     } 
     useEffect( ()=>{
-    
-    },[edited])
+    },[edited,members])
  
 
   return (
@@ -130,7 +130,11 @@ const Member = ({ navigation,route}) => {
         </View>
         { loading && <BallIndicator color='blue' />}
 
-    {  <EditMember editedData={edited} />}
+    {hiddenForm &&  
+    <EditMember 
+    editedData={edited}
+    onClose={()=>setHiddemForm(false) }
+    />}
     
       </ScrollView>
       <View>
