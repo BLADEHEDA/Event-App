@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View,Image, TextInput,ScrollView } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View,Image, TextInput,ScrollView,TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import EventComponent from '../component/EventComponent'
 import BtnPlus from '../component/shared/BtnPlus'
@@ -9,6 +9,9 @@ const Event = ({navigation}) => {
     const search = require('../Assets/search.png')
     const [event,setEvent]=useState([])
     const [loading,setLoading] = useState(false)
+    const [searchInput , setSearchInput]= useState('')
+    const [showtextField, setShowtextField ] =  useState(false)
+
   const handlenavigate =()=>{
     navigation.navigate('createEvent')
   }
@@ -43,7 +46,25 @@ console.log('Event deleted!');
   handleFetch()
  },[])
 
-// handle Edit 
+// fetch data from the store 
+    const handleSearch = (text) => {
+      setSearchInput(text);
+    
+      if (text === '') {
+        // If the search input is empty, reset the list to the complete events data
+        handleFetch();
+      } else {
+        // Filter events based on the entered text
+        const searchedList = event.filter((event) =>
+          event.title.toLowerCase().includes(text.toLowerCase()) ||
+          event.startDate.toDate().toLocaleString().toLowerCase().includes(text.toLowerCase()) ||
+          event.endDate.toDate().toLocaleString().toLowerCase().includes(text.toLowerCase()) ||
+          event.description.toLowerCase().includes(text.toLowerCase())
+        );
+        setEvent(searchedList);
+      }
+    };
+    
 
   return (
     <View style={styles.container}>
@@ -52,19 +73,24 @@ console.log('Event deleted!');
       <View style={styles.main} >
 
       <View><Text style={styles.mainText}>Events</Text></View>
-      <View>
+        <TouchableOpacity 
+          onPress={()=>{setShowtextField(!showtextField)} }
+          >
           <Image source={search} style={styles.search} />
-      </View>
+      </TouchableOpacity>
       </View>
       {/* this is meant to be hidden  */}
-      <View style={styles.show}> 
-             <TextInput 
-                style={styles.textInput}
-                placeholder='Enter Text to search'
-                placeholderTextColor="gray"
-                autoCapitalize="none"
-                ></TextInput>
-         </View>
+            { showtextField &&     
+            <View style={styles.show}>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Enter Text to search"
+            placeholderTextColor="gray"
+            autoCapitalize="none"
+            value={searchInput}
+            onChangeText={handleSearch}
+          />
+        </View>}
          { loading &&         
                 <View style={styles.loader} >  
                 <BallIndicator color='blue' />
