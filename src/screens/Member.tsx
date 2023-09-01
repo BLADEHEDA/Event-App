@@ -44,6 +44,7 @@ const Member = ({ navigation,route}) => {
   // delete the data
     const handleDelete = async (id) => {
       try {
+        // delte the data locally 
         const updatedMembers = members.filter((member) => member.id !== id);
         setMembers(updatedMembers);
     
