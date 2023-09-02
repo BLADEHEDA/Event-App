@@ -71,8 +71,6 @@ const styles = StyleSheet.create({
     width: 20,
     height: 18,
     marginTop:10,
-
-
   },
   cont1:{
     flexDirection: 'row',

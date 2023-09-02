@@ -9,7 +9,7 @@ interface EventComponentProps {
 
 const EventComponent: React.FC<EventComponentProps> = (props) => {
   const deleteIcon: ImagesourcePropType = require('../Assets/delete.png');
-
+  const pencilIcon: ImagesourcePropType = require('../Assets/pencil.png')
 
   return (
     <View  style={styles.main}>
@@ -22,6 +22,9 @@ const EventComponent: React.FC<EventComponentProps> = (props) => {
         </TouchableOpacity>
     </View>
     <View style={styles.right}>
+    <TouchableOpacity onPress={props.onEdit}  > 
+        <Image style={styles.image2} source={pencilIcon} />
+        </TouchableOpacity>
       <TouchableOpacity onPress={props.onDelete}>  
       <Image style={styles.image} source={deleteIcon}/>
       </TouchableOpacity>
@@ -48,6 +51,16 @@ const styles = StyleSheet.create({
   },
   image:{
     tintColor:'white',
+  },
+  image2:{
+    tintColor: 'white',
+    width: 20,
+    height: 18,
+    marginTop:3,
+    marginRight:7
+  },
+  right:{
+    flexDirection: 'row',
   }
   
 });

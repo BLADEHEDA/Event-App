@@ -1,16 +1,15 @@
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import Button from '../component/shared/Button'
-import Person from '../component/Person'
+import Button from './Button';
 import DatePicker from 'react-native-date-picker'
 import moment from 'moment'; // Import the moment library
-import Navigation from '../component/shared/Navigation'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import firestore from '@react-native-firebase/firestore';
 import {BallIndicator} from 'react-native-indicators';
+import Person from '../Person';
 
 
-const CreateEvemt = ({navigation} ) => {   
+
+const EditEvents = ({navigation} ) => {   
   const [startDate, setStartDate] = useState(new Date()) 
   const [open, setOpen] = useState(false)
   const [show,setShow]= useState(false)
@@ -148,12 +147,9 @@ console.log(Object.keys(newErrors).length);
 };
 
   return (
-    
-    <View  style={styles.container1}>      
+        
     <ScrollView style={styles.container}>   
       <Text style={styles.head}>Create an Event</Text>  
-      <Text style={styles.text}>create events and get your participants joined on time 
-    </Text>  
     {/* form  */}
     <View>
     <View style={styles.textinput}>
@@ -165,7 +161,6 @@ console.log(Object.keys(newErrors).length);
             ></TextInput>
             {errors.title && <Text style={styles.error}>{errors.title} </Text> }
         </View>
-
         <View style={styles.textinput}>
             <Text style={styles.text1}>Description :</Text>
         <TextInput
@@ -283,28 +278,22 @@ console.log(Object.keys(newErrors).length);
     text="Create Event"
     style={
     { marginTop:7,
-      marginBottom:20,
+        marginBottom:20,
     }  
     }
     />
     </View>
     </ScrollView>
-    </View>
   )
 }
 
-export default CreateEvemt
+export default EditEvents
 
 const styles = StyleSheet.create({
     container:{
         paddingHorizontal:15,
-        // marginBottom:20,
-        backgroundColor:'white',
+        backgroundColor:'white'
     },
-    container1:{
-      // marginBottom:50,
-      backgroundColor:'white'
-  },
     head:{
         color:'black',
         fontWeight:'700',
@@ -317,14 +306,6 @@ const styles = StyleSheet.create({
         color:'black',
         fontWeight:'400',
         fontSize:20,
-    },
-    text:{
-        color:'black',
-        fontWeight:'400',
-        fontSize:20,
-        textAlign:'center',
-        paddingHorizontal:60,
-        marginBottom:20
     },
 input:{
     color:'black',
