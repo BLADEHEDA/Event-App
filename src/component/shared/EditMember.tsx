@@ -30,6 +30,39 @@ const EditMember = ({editedData, onClose}) => {
         setSelectedImage(editedData.selectedImage)
       }, [editedData]);
 // handle the upload of the image 
+    // const handleImagePicker = async () => {
+    //     try {
+    //         const image = await ImagePicker.openPicker({
+    //             width: 400,
+    //             height: 400,
+    //             cropping: false,
+    //             mediaType: 'photo',
+    //         });
+    //         setToggleImage(false)
+    //         setSelectedImage(image);
+    //     } catch (error) {
+    //         console.log("Image picker error:", error);
+    //     }
+    // };
+
+    // const handleImagePicker = async () => {
+    //     try {
+    //         const image = await ImagePicker.openPicker({
+    //             width: 400,
+    //             height: 400,
+    //             cropping: false,
+    //             mediaType: 'photo',
+    //         });
+            
+    //         if (image) {
+    //             setToggleImage(false);
+    //             setSelectedImage(image);
+    //         }
+    //     } catch (error) {
+    //         console.log("Image picker error:", error);
+    //     }
+    // };
+    
     const handleImagePicker = async () => {
         try {
             const image = await ImagePicker.openPicker({
@@ -38,80 +71,154 @@ const EditMember = ({editedData, onClose}) => {
                 cropping: false,
                 mediaType: 'photo',
             });
-            setToggleImage(false)
-            setSelectedImage(image);
+    
+            console.log('Selected image:', image);
+    
+            if (image) {
+                setToggleImage(false);
+                setSelectedImage(image);
+            }
         } catch (error) {
             console.log("Image picker error:", error);
         }
     };
+    
 
-    const handleSubmit = async () => {
-        const newErrors = {};
+//     const handleSubmit = async () => {
+//         const newErrors = {};
 
-        // Validate Name
-        if (!name.trim()) {
-            newErrors.name = 'Enter name';
+//         // Validate Name
+//         if (!name.trim()) {
+//             newErrors.name = 'Enter name';
+//         }
+
+//         // Validate Email
+//         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+//         if (!emailRegex.test(email)) {
+//             newErrors.email = 'Invalid email';
+//         }
+
+//         // Validate Phone
+//         const phoneRegex = /^\d+$/; // Numeric input validation
+//         if (!phoneRegex.test(phone)) {
+//             newErrors.phone = 'Enter a valid phone number';
+//         }
+//         // validate the image and ensure an imaghe is choosen
+//             if(!selectedImage){
+//                 newErrors.selectedImage='Choose an Image'
+//             }
+// // console.log(selectedImage);
+
+//         setErrors(newErrors);
+//     // Determine the image URL to upload
+//     let imageUrlToUpload = editedData.selectedImage;
+//         // Add image to cloud storage 
+//         if (Object.keys(newErrors).length === 0) {
+//                     try {
+//                         if (selectedImage) {  
+//                             setLoading(true)
+
+//                 const timestamp = Math.floor(Date.now() / 1000);
+//                 const filename = `${timestamp}_${selectedImage.filename}`;
+
+//                 const reference = storage().ref(`Avatar/${filename}`);
+//                 await reference.putFile(selectedImage.path);
+//                 // const url = await reference.getDownloadURL();
+//                 imageUrlToUpload = await reference.getDownloadURL();
+//                 // provide the old id such that it would override the data 
+//                  const id = editedData.id;
+//                 // const firebaseUrl: 
+//                              // define a meeber object 
+//                             const newMember ={
+//                             id:id,
+//                             name, 
+//                             email,
+//                             phone,
+//                             selectedImage: imageUrlToUpload,
+//                         };
+//                         // post the data to firestore and define the collection id
+//                        firestore().collection('Member').doc(id.toString()).set(newMember)
+//                         console.log('Member added successfully with ID value:',id);
+//                         setLoading(false);
+//                         const addmewMemebr = [...members,newMember]
+//                        setMembers(addmewMemebr);       
+//                        onClose()
+//                     // navigation.navigate('Members')
+//                         }
+//                     } catch (error) {
+//                         console.error('Error', error);
+//                         alert('yo bro it is not going  ')
+//                         setLoading(false)
+//                     }
+//         }
+//         console.log(' members state variables' , members); 
+//     };
+// to change
+const handleSubmit = async () => {
+    const newErrors = {};
+
+    // Validate Name
+    if (!name.trim()) {
+        newErrors.name = 'Enter name';
+    }
+
+    // Validate Email
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+        newErrors.email = 'Invalid email';
+    }
+
+    // Validate Phone
+    const phoneRegex = /^\d+$/; // Numeric input validation
+    if (!phoneRegex.test(phone)) {
+        newErrors.phone = 'Enter a valid phone number';
+    }
+
+    setErrors(newErrors);
+
+    // Determine the image URL to upload
+    let imageUrlToUpload = editedData.selectedImage;
+    // check if the image was choosen locally , if notupload the previous one 
+    if (selectedImage.path) {
+
+        try {
+            setLoading(true);
+
+            const timestamp = Math.floor(Date.now() / 1000);
+            const filename = `${timestamp}_${selectedImage.filename}`;
+
+            const reference = storage().ref(`Avatar/${filename}`);
+            await reference.putFile(selectedImage.path);
+            imageUrlToUpload = await reference.getDownloadURL();
+            setLoading(false);
+        } catch (error) {
+            console.error('Error uploading image', error);
+            setLoading(false);
+            return;
         }
+    }
 
-        // Validate Email
-        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        if (!emailRegex.test(email)) {
-            newErrors.email = 'Invalid email';
-        }
-
-        // Validate Phone
-        const phoneRegex = /^\d+$/; // Numeric input validation
-        if (!phoneRegex.test(phone)) {
-            newErrors.phone = 'Enter a valid phone number';
-        }
-        // validate the image and ensure an imaghe is choosen
-            if(!selectedImage){
-                newErrors.selectedImage='Choose an Image'
-            }
-// console.log(selectedImage);
-
-        setErrors(newErrors);
-
-        // Add image to cloud storage 
-        if (Object.keys(newErrors).length === 0) {
-                    try {
-                        if (selectedImage) {  
-                            setLoading(true)
-
-                const timestamp = Math.floor(Date.now() / 1000);
-                const filename = `${timestamp}_${selectedImage.filename}`;
-
-                const reference = storage().ref(`Avatar/${filename}`);
-                await reference.putFile(selectedImage.path);
-                const url = await reference.getDownloadURL();
-                // provide the old id such that it would override the data 
-                 const id = editedData.id;
-
-                             // define a meeber object 
-                            const newMember ={
-                            id:id,
-                            name, 
-                            email,
-                            phone,
-                            selectedImage :url,
-                        };
-                        // post the data to firestore and define the collection id
-                       firestore().collection('Member').doc(id.toString()).set(newMember)
-                        console.log('Member added successfully with ID value:',id);
-                        setLoading(false);
-                        const addmewMemebr = [...members,newMember]
-                       setMembers(addmewMemebr);       
-                       onClose()
-                    // navigation.navigate('Members')
-                        }
-                    } catch (error) {
-                        console.error('Error', error);
-                        alert('yo bro it is not going  ')
-                        setLoading(false)
-                    }
-        }
-        console.log(' members state variables' , members); 
+    // Define the member object
+    const newMember = {
+        id: editedData.id,
+        name,
+        email,
+        phone,
+        selectedImage: imageUrlToUpload,
     };
+
+    // Update the data in Firestore
+    try {
+        await firestore().collection('Member').doc(editedData.id.toString()).set(newMember);
+        alert('uploaded successfully ');
+        onClose(); // Close the modal
+    } catch (error) {
+        console.error('Error updating member in Firestore', error);
+        alert('Error updating member in Firestore');
+    }
+};
+
+// end of the changes 
 
   return (
     <View style={styles.container}>
@@ -160,7 +267,7 @@ const EditMember = ({editedData, onClose}) => {
                 </View>
             </View>
             {errors.selectedImage && <Text style={styles.error}>{errors.selectedImage}</Text>}
-
+            {/* preview the the image */}
             {toggleimage ? 
             (<View style={styles.imagePreviewContainer}>
             <Image source={{ uri: selectedImage }} style={styles.imagePreview} />
