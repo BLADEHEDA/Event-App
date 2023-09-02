@@ -6,6 +6,8 @@ import MemeberComponent from '../component/shared/MemeberComponent';
 import Navigation from '../component/shared/Navigation';
 import firestore from '@react-native-firebase/firestore';
 import {BallIndicator} from 'react-native-indicators';
+import EditMember from '../component/shared/EditMember';
+
 
 const Member = ({ navigation,route}) => {
 
@@ -17,11 +19,13 @@ const Member = ({ navigation,route}) => {
   const [loading,setLoading] = useState(false)
   const [searchInput , setSearchInput]= useState('')
   const [showtextField, setShowtextField ] =  useState(false)
+  const [edited,setEdited ] = useState([])
+  const [hiddenForm, setHiddemForm ] = useState(false)
 
   // fetch data from the firestore 
   const handleFetch = async () => {   
     try {
-      setLoading(true)
+      // setLoading(true)
       const memberCollection = await firestore().collection('Member').get();
       const memberData = memberCollection.docs.map((doc) => ({
         id: doc.id, // Set the document ID
@@ -29,16 +33,16 @@ const Member = ({ navigation,route}) => {
       }));
       // console.log(memberData);
       setMembers(memberData); 
-      setLoading(false)
+      // setLoading(false)
     } catch (error) {
-      setLoading(false)
+      // setLoading(false)
       console.log(error);
     }
   };
   
   useEffect( ()=>{
     handleFetch()
-  },[])
+  },[members])
 
 
   // delete the data
@@ -56,7 +60,7 @@ const Member = ({ navigation,route}) => {
       }
     };
 
-    // filter the data from the seacr input   
+    // filter the data from the seacrh input   
     const handleSearch = (text) => {
       setSearchInput(text);
     
@@ -73,6 +77,24 @@ const Member = ({ navigation,route}) => {
       }
     };
     
+    // edit the data 
+    const handleEdit=(id)=>{
+      setHiddemForm(true)
+    // Find the member object with the matching ID
+  const memberToEdit = members.find((member) => member.id === id);
+  console.log(memberToEdit);
+  setEdited(memberToEdit)
+    } 
+    useEffect( ()=>{
+    },[members])
+
+ if(members.length===0){
+  return(
+<View>
+<BallIndicator color='blue' />
+</View>
+  )
+ }
 
   return (
     <View style={styles.container}>
@@ -104,14 +126,23 @@ const Member = ({ navigation,route}) => {
           {members.map((member, index) => (
             <MemeberComponent
               key={index}
+              id={member.id}
               name={member.name} 
               email={member.email}
               person={member.selectedImage}
               onPress={()=>handleDelete(member.id)}
+              onEdit={()=>{handleEdit(member.id)} }
             />
           ))}
         </View>
-        { loading && <BallIndicator color='blue' />}
+        {/* { loading && <BallIndicator color='blue' />} */}
+
+    {hiddenForm &&  
+    <EditMember 
+    editedData={edited}
+    onClose={()=>setHiddemForm(false) }
+    />}
+    
       </ScrollView>
       <View>
           <BtnPlus 

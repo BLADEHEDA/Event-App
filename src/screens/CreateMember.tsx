@@ -89,9 +89,7 @@ const CreateMember = ({navigation}) => {
                         setLoading(false);
                         const addmewMemebr = [...members,newMember]
                        setMembers(addmewMemebr);  
-                    //    console.log(members); 
                     navigation.navigate('Members')
-
                         }
                     } catch (error) {
                         console.error('Error', error);

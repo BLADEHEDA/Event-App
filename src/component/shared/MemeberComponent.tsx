@@ -8,7 +8,8 @@ interface MemberComponentProps {
 
 const MemberComponent: React.FC<MemberComponentProps> = (props) => {
   const person: ImageSourcePropType = require('../../Assets/person.jpg');
-  const deleteIcon: ImagesourcePropType = require('../../Assets/delete.png')
+  const deleteIcon: ImagesourcePropType = require('../../Assets/delete.png')  
+  const pencilIcon: ImagesourcePropType = require('../../Assets/pencil.png')
 
   return (
     <View style={styles.main}>
@@ -23,6 +24,9 @@ const MemberComponent: React.FC<MemberComponentProps> = (props) => {
       </View>
       </View>
       <View style={styles.cont2}>
+        <TouchableOpacity onPress={props.onEdit}  > 
+        <Image style={styles.image2} source={pencilIcon} />
+        </TouchableOpacity>
         <TouchableOpacity onPress={props.onPress}  > 
         <Image style={styles.image1} source={deleteIcon} />
         </TouchableOpacity>
@@ -60,10 +64,23 @@ const styles = StyleSheet.create({
   image1:{
     marginTop: 7,
     tintColor: 'white',
+    marginLeft:10,
+  },
+  image2:{
+    tintColor: 'white',
+    width: 20,
+    height: 18,
+    marginTop:10,
+
+
   },
   cont1:{
     flexDirection: 'row',
     justifyContent:'space-between',
+  },
+  cont2:{
+    flexDirection: 'row',
+    // justifyContent:'space-between',
   },
   
 });
