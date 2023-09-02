@@ -4,6 +4,7 @@ import EventComponent from '../component/EventComponent'
 import BtnPlus from '../component/shared/BtnPlus'
 import firestore from '@react-native-firebase/firestore';
 import {BallIndicator} from 'react-native-indicators';
+import EditEvents from '../component/shared/EditEvents';
 
 const Event = ({navigation}) => {
     const search = require('../Assets/search.png')
@@ -11,7 +12,8 @@ const Event = ({navigation}) => {
     const [loading,setLoading] = useState(false)
     const [searchInput , setSearchInput]= useState('')
     const [showtextField, setShowtextField ] =  useState(false)
-
+    const [show, setShow] = useState(false)
+    const [editEvent,setEditEvent]=useState([])
   const handlenavigate =()=>{
     navigation.navigate('createEvent')
   }
@@ -65,7 +67,13 @@ console.log('Event deleted!');
       }
     };
     
-
+// Edit mebers 
+const handleEdit=(id)=>{
+  setShow(true)
+  const EventToEdit = event.find((event) => event.id === id);
+  setEditEvent(EventToEdit)
+  
+}
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -113,11 +121,17 @@ console.log('Event deleted!');
           navigation.navigate('EventDetails', { event }); // Navigate with event data
         }}
         onDelete={ ()=>handleDelete(event.id)  }
+        onEdit={()=>{handleEdit(event.id)}}
         />
     ))
     }
       </View> 
   </View>
+{ show &&
+ <EditEvents
+ editedEventData={editEvent}
+ />
+ }
   </ScrollView>
   <View>
       <BtnPlus
@@ -175,5 +189,8 @@ const styles = StyleSheet.create({
         borderColor:'black',
         borderWidth:1,
         marginBottom:10
+    },
+    events:{
+      marginBottom:10
     }
 })

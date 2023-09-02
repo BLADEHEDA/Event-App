@@ -10,7 +10,6 @@ interface EventComponentProps {
 const EventComponent: React.FC<EventComponentProps> = (props) => {
   const deleteIcon: ImagesourcePropType = require('../Assets/delete.png');
   const pencilIcon: ImagesourcePropType = require('../Assets/pencil.png')
-
   return (
     <View  style={styles.main}>
       <View style={styles.left}>
@@ -29,6 +28,7 @@ const EventComponent: React.FC<EventComponentProps> = (props) => {
       <Image style={styles.image} source={deleteIcon}/>
       </TouchableOpacity>
     </View>
+
     </View>
   );
 };

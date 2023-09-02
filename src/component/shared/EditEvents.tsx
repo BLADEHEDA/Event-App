@@ -9,7 +9,7 @@ import Person from '../Person';
 
 
 
-const EditEvents = ({navigation} ) => {   
+const EditEvents = ({ editedEventData } ) => {   
   const [startDate, setStartDate] = useState(new Date()) 
   const [open, setOpen] = useState(false)
   const [show,setShow]= useState(false)
@@ -35,6 +35,13 @@ const EditEvents = ({navigation} ) => {
   const [eventList, setEventList] = useState([]);
   const [checkedParticipants, setCheckedParticipants] = useState([]);
 
+  console.log('passed to chile ', editedEventData);
+  useEffect(()=>{
+    setTitle(editedEventData.title)
+    setDescription(editedEventData.description)
+  },[ editedEventData] )
+  
+editedEventData
   // hide and show the modal 
   const showpersorn =async()=>{
 // display the participants 
@@ -134,7 +141,6 @@ console.log(Object.keys(newErrors).length);
     console.log('Event added successfully');
     setErrors({});
     alert('Event created');
-    navigation.navigate('Event');
   
     setLoading1(false)
   } catch (error) {
@@ -299,7 +305,6 @@ const styles = StyleSheet.create({
         fontWeight:'700',
         fontSize:22,
         textAlign:'center',
-        marginTop:50,
         marginBottom:20
     },
     text1:{
