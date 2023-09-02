@@ -90,7 +90,17 @@ const Member = ({ navigation,route}) => {
 
  if(members.length===0){
   return(
-<View>
+<View style={styles.loader}>
+<View style={styles.main}>
+          <View>
+            <Text style={styles.mainText}>Members</Text>
+          </View>
+          <TouchableOpacity 
+          onPress={()=>{setShowtextField(!showtextField)} }
+          >
+            <Image source={search} style={styles.search} />
+          </TouchableOpacity>
+        </View>
 <BallIndicator color='blue' />
 </View>
   )
@@ -201,5 +211,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
   },
+  loader:{
+    marginTop: 25,
+    paddingHorizontal: 15,
+  }
 
 });
