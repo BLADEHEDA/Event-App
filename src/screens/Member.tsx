@@ -25,7 +25,7 @@ const Member = ({ navigation,route}) => {
   // fetch data from the firestore 
   const handleFetch = async () => {   
     try {
-      setLoading(true)
+      // setLoading(true)
       const memberCollection = await firestore().collection('Member').get();
       const memberData = memberCollection.docs.map((doc) => ({
         id: doc.id, // Set the document ID
@@ -33,16 +33,16 @@ const Member = ({ navigation,route}) => {
       }));
       // console.log(memberData);
       setMembers(memberData); 
-      setLoading(false)
+      // setLoading(false)
     } catch (error) {
-      setLoading(false)
+      // setLoading(false)
       console.log(error);
     }
   };
   
   useEffect( ()=>{
     handleFetch()
-  },[])
+  },[members])
 
 
   // delete the data
@@ -86,8 +86,15 @@ const Member = ({ navigation,route}) => {
   setEdited(memberToEdit)
     } 
     useEffect( ()=>{
-    },[edited,members])
- 
+    },[members])
+
+ if(members.length===0){
+  return(
+<View>
+<BallIndicator color='blue' />
+</View>
+  )
+ }
 
   return (
     <View style={styles.container}>
@@ -128,7 +135,7 @@ const Member = ({ navigation,route}) => {
             />
           ))}
         </View>
-        { loading && <BallIndicator color='blue' />}
+        {/* { loading && <BallIndicator color='blue' />} */}
 
     {hiddenForm &&  
     <EditMember 

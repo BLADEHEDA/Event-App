@@ -117,14 +117,10 @@ const handleSubmit = async () => {
     }
 };
 
-// end of the changes 
-
   return (
     <View style={styles.container}>
     <ScrollView style={styles.scrollView}>
         <View style={styles.container}>
-            {/* <Text style={styles.head}>Create Members</Text>
-            <Text style={styles.text}>Create members to take part in your events</Text> */}
             <View>
                 <View style={styles.textinput}>
                     <Text style={styles.text1}>Name :</Text>
